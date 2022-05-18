@@ -21,10 +21,10 @@
                 <hr width="50%">
                 <div class="channels-list">
                     <button class="channelbtn">
-                        <a href="a"># Home page</a>
+                        <a href="/"># Home page</a>
                     </button>
                     <button class="channelbtn">
-                        <a href="a"># About me</a>
+                        <a href="/about"># About me</a>
                     </button>
                 </div>
             </details>
