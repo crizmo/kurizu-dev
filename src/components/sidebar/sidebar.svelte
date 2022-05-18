@@ -1,0 +1,167 @@
+<!-- make a sidebar like discord application -->
+<script>
+    const serverWidth = "50px";
+</script>
+
+<main>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-header-logo">
+                <img
+                    src="https://media.discordapp.net/attachments/952764969638834228/969830435444097054/Criz.png"
+                    alt=""
+                    width={serverWidth}
+                />
+            </div>
+            <hr>
+        </div>
+        <div class="sidebar-content">
+            <div class="sidebar-content-servers">
+                <div class="sidebar-content-servers-list">
+                    <div class="sidebar-content-servers-list-item">
+                        <div class="sidebar-content-servers-list-item-icon">
+                            <img
+                                src="https://media.discordapp.net/attachments/952764969638834228/969830435444097054/Criz.png"
+                                alt=""
+                                width={serverWidth}
+                            />
+                            <h3 class="hovertext">Kurizu</h3>
+                            <div class="sidebar-content-servers-list-item-name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sidebar-content-servers-list-item">
+                        <div class="sidebar-content-servers-list-item-icon">
+                            <img
+                                src="https://media.discordapp.net/attachments/952764969638834228/969830435444097054/Criz.png"
+                                alt=""
+                                width={serverWidth}
+                            />
+                            <h3 class="hovertext">Discord</h3>
+                            <div class="sidebar-content-servers-list-item-name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sidebar-content-servers-list-item">
+                        <div class="sidebar-content-servers-list-item-icon">
+                            <img
+                                src="https://media.discordapp.net/attachments/952764969638834228/969830435444097054/Criz.png"
+                                alt=""
+                                width={serverWidth}
+                            />
+                            <h3 class="hovertext">Discord</h3>
+                            <div class="sidebar-content-servers-list-item-name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sidebar-content-servers-list-item">
+                        <div class="sidebar-content-servers-list-item-icon">
+                            <img
+                                src="https://media.discordapp.net/attachments/952764969638834228/969830435444097054/Criz.png"
+                                alt=""
+                                width={serverWidth}
+                            />
+                            <h3 class="hovertext">Discord</h3>
+                            <div class="sidebar-content-servers-list-item-name">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<style>
+    .sidebar {
+        width: 90px;
+        height: 100%;
+        background-color: #2f3136;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        overflow-x: hidden;
+    }
+
+    .sidebar-header-logo {
+        padding-top: 10px
+    }
+
+    .sidebar-content {
+        height: calc(100% - 60px);
+        background-color: #2f3136;
+        padding: 0;
+        margin: 0;
+    }
+
+    .sidebar-content-servers-list-item-icon {
+        position: relative;
+        display: inline-block;
+        z-index: 2;
+        margin: 5px;
+    }
+
+    .sidebar-content-servers-list-item-icon .hovertext {
+        visibility: hidden;
+        width: 120px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        top: -5px;
+        left: 110%;
+        transition: opacity 0.3s;
+        z-index: 2;
+    }
+
+    .sidebar-content-servers-list-item-icon .hovertext::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 100%;
+        margin-top: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent black transparent transparent;
+        z-index: 2;
+    }
+    .sidebar-content-servers-list-item-icon:hover .hovertext {
+        visibility: visible;
+        z-index: 2;
+    }
+
+    .sidebar-content-servers-list-item-icon .hovertext:hover {
+        opacity: 1;
+        z-index: 2;
+    }
+
+    .sidebar-content-servers-list-item-icon img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    .sidebar-content-servers-list-item-icon img:hover {
+        border-radius: 10%;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .sidebar-header-logo img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+
+    .sidebar-header-logo img:hover {
+        border-radius: 10%;
+        transition: all 0.3s ease-in-out;
+    }
+
+    
+</style>
