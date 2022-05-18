@@ -1,17 +1,24 @@
 <script>
-	export let name;
+	import {Route} from 'tinro'; 
+
 	import Sidebar from './components/sidebar/sidebar.svelte';
 	import Channels from './components/channels/channels.svelte';
-	import Layout from './components/content/layout.svelte';
+
+	import Home from './components/content/home/home.svelte';
+	import About from './components/content/home/about.svelte';
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-
 	<Sidebar/>
 	<Channels/>
-	<Layout/>
+
+	<Route path="/">
+		<Home/>
+	</Route>
+	
+	<Route path="/about">
+		<About/>
+	</Route>
 </main>
 
 <style>
@@ -20,13 +27,6 @@
 		padding: 1em;
 		max-width: 240px;
 		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
 	}
 
 	@media (min-width: 640px) {
