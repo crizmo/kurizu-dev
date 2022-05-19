@@ -62,6 +62,7 @@
                                 If you want to check out some of my projects click on the channels respectively <br> <br>
                                 Thanks for checking out my page ! <br> <br>
                                 <img src="https://images.hdqwalls.com/download/child-of-earth-on-journey-5t-2560x1440.jpg" alt="homepgimg" height="300px" width="auto">
+                                <img src="https://images.hdqwalls.com/download/child-of-earth-on-journey-5t-2560x1440.jpg" alt="homepgimg" height="300px" width="auto">
                             </p>
                         </div>
                     </div>
@@ -82,6 +83,8 @@
         top: 0%;
         color: rgb(255, 255, 255);
         z-index: 1;
+        /* overflow: hidden; */
+        overflow: scroll;
     }
 
     .top-nav {
@@ -120,6 +123,7 @@
         top: 6.2%;
         color: rgb(255, 255, 255);
         z-index: 1;
+        overflow: scroll;
     }
 
     .chat-body-messages {

@@ -68,6 +68,7 @@
         top: 0%;
         color: rgb(255, 255, 255);
         z-index: 2;
+        overflow: scroll;
     }
 
     .top-nav {
@@ -106,6 +107,7 @@
         top: 6.2%;
         color: rgb(255, 255, 255);
         z-index: 1;
+        overflow: scroll;
     }
 
     .chat-body-messages {
