@@ -54,7 +54,7 @@
                     </div>
                     <div class="sidebar-content-servers-list-item">
                         <div class="sidebar-content-servers-list-item-icon">
-                            <a href="https://www.instagram.com/criz_595/">
+                            <a href="https://www.instagram.com/criz_595/" target="_blank">
                                 <img
                                     src="https://image.similarpng.com/very-thumbnail/2020/05/Glossy-Instagram-logo-PNG.png"
                                     alt=""
