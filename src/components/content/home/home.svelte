@@ -26,7 +26,9 @@
                         </div>
                         <div class="chat-body-messages-item-content-body">
                             <p>
-                                
+                                Welcome to my page! This website is basically a clone of how discord application looks ! <br>
+                                Currently the css for mobile view is broken and so is for different pc sizes ! <br> 
+                                I am working on it and will update you soon ! <br>
                             </p>
                         </div>
                     </div>
@@ -65,7 +67,7 @@
         background-color: #2a2c2e;
         top: 0%;
         color: rgb(255, 255, 255);
-        z-index: 1;
+        z-index: 2;
     }
 
     .top-nav {
