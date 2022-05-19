@@ -9,6 +9,8 @@
 
 	import Home from './components/content/home/home.svelte';
 	import About from './components/content/home/about.svelte';
+
+	import Anyanime from './components/content/projects/anyanime.svelte'
 </script>
 
 <main>
@@ -28,8 +30,9 @@
 	</Route>
 
 	<!-- Projects -->
-	<Route path="/projects">
-		<h1>Projects</h1>
+	<Route path="/anyanime">
+		<!-- <AnyanimeCn /> -->
+		<Anyanime />
 	</Route>
 </main>
 
