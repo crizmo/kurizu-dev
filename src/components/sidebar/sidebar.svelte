@@ -21,49 +21,47 @@
                     <div class="sidebar-content-servers-list-item">
                         <div class="sidebar-content-servers-list-item-icon">
                             <img
-                                src="https://media.discordapp.net/attachments/952764969638834228/969830435444097054/Criz.png"
+                                src="https://cdn.discordapp.com/avatars/784141856426033233/2b71440eb154c1c2897e956f1f0da7b7.webp"
                                 alt=""
                                 width={serverWidth}
                             />
                             <h3 class="hovertext">Kurizu</h3>
-                            <div class="sidebar-content-servers-list-item-name">
-                            </div>
                         </div>
                     </div>
                     <div class="sidebar-content-servers-list-item">
                         <div class="sidebar-content-servers-list-item-icon">
-                            <img
-                                src="https://media.discordapp.net/attachments/952764969638834228/969830435444097054/Criz.png"
-                                alt=""
-                                width={serverWidth}
-                            />
-                            <h3 class="hovertext">Discord</h3>
-                            <div class="sidebar-content-servers-list-item-name">
-                            </div>
+                            <a href="https://github.com/crizmo" target="_blank">
+                                <img
+                                    src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
+                                    alt=""
+                                    width={serverWidth}
+                                />
+                            </a>
+                            <h3 class="hovertext">Github</h3>
                         </div>
                     </div>
                     <div class="sidebar-content-servers-list-item">
                         <div class="sidebar-content-servers-list-item-icon">
-                            <img
-                                src="https://media.discordapp.net/attachments/952764969638834228/969830435444097054/Criz.png"
-                                alt=""
-                                width={serverWidth}
-                            />
+                            <a href="https://discord.gg/VcMPV8vc2x" target="_blank">
+                                <img
+                                    src="https://logodownload.org/wp-content/uploads/2017/11/discord-logo-4-1.png"
+                                    alt=""
+                                    width={serverWidth}
+                                />
+                            </a>
                             <h3 class="hovertext">Discord</h3>
-                            <div class="sidebar-content-servers-list-item-name">
-                            </div>
                         </div>
                     </div>
                     <div class="sidebar-content-servers-list-item">
                         <div class="sidebar-content-servers-list-item-icon">
-                            <img
-                                src="https://media.discordapp.net/attachments/952764969638834228/969830435444097054/Criz.png"
-                                alt=""
-                                width={serverWidth}
-                            />
-                            <h3 class="hovertext">Discord</h3>
-                            <div class="sidebar-content-servers-list-item-name">
-                            </div>
+                            <a href="https://www.instagram.com/criz_595/">
+                                <img
+                                    src="https://image.similarpng.com/very-thumbnail/2020/05/Glossy-Instagram-logo-PNG.png"
+                                    alt=""
+                                    width={serverWidth}
+                                />
+                            </a>
+                            <h3 class="hovertext">Instagram</h3>
                         </div>
                     </div>
                 </div>
@@ -75,13 +73,13 @@
 <style>
     .sidebar {
         width: 90px;
-        height: 100%;
+        height: 97.7%;
         background-color: #2f3136;
         position: absolute;
         top: 0;
         left: 0;
         z-index: 1;
-        overflow-x: hidden;
+        /* overflow-x: hidden; */
     }
 
     .sidebar-header-logo {
@@ -105,7 +103,7 @@
     .sidebar-content-servers-list-item-icon .hovertext {
         visibility: hidden;
         width: 120px;
-        background-color: black;
+        background-color: rgb(61, 60, 60);
         color: #fff;
         text-align: center;
         border-radius: 6px;
@@ -113,8 +111,8 @@
         position: absolute;
         top: -5px;
         left: 110%;
-        transition: opacity 0.3s;
-        z-index: 2;
+        /* transition: opacity 0.3s; */
+        z-index: 1;
     }
 
     .sidebar-content-servers-list-item-icon .hovertext::after {
