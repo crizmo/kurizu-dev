@@ -125,5 +125,11 @@
         transition: all 0.3s ease-in-out;
     }
 
+    @media screen and (max-width: 1500px) {
+        .sidebar-content-servers-list-item-icon img {
+            width: 40px;
+            height: 40px;
+        }
+    }
     
 </style>

@@ -31,11 +31,16 @@
         margin-right: 10px;
     }
 
-
     .sidebar-header-logo img:hover {
         border-radius: 10%;
         transition: all 0.3s ease-in-out;
     }
 
+    @media screen and (max-width: 1500px) {
+        .sidebar-header-logo img {
+            width: 45px;
+            height: 45px;
+        }
+    }
     
 </style>
