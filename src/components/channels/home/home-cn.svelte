@@ -41,15 +41,14 @@
 <style>
     .channels {
         position: absolute;
-        width: 15%;
+        width: 14.1%;
         height: 100%;
         /* text-align: left; */
-        margin-left: 65px;
+        margin-left: 82px;
         background-color: #2c2d30;
         top: 0%;
         color: rgb(255, 255, 255);
         z-index: 0;
-        /* overflow-x: hidden; */
     }
 
     .server-template-icon {
