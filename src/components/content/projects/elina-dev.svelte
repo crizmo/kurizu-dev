@@ -5,9 +5,9 @@
 <main>
     <div class="mainarea">
         <div class="top-nav">
-            <h3 class="channel-name"># AnyAnime</h3>
+            <h3 class="channel-name"># Elina</h3>
             <div class="vl" />
-            <p class="channel-info">Anyanime Npm package + AnyAnime API</p>
+            <p class="channel-info">Elina :- yet another multipurpoe discord bot</p>
         </div>
         <hr>
         <div class="chat-body">
@@ -26,42 +26,20 @@
                         </div>
                         <div class="chat-body-messages-item-content-body">
                             <p>
-                                AnyAnime is a NPM package that helps you get random anime pfp / images on use . <br>
-                                It can be used in a discord bot or on a website or anywhere else.  <br>
+                                Elina is a open source multipurpose discord bot made using discord.js ! <br> <br>
+                                <img src="https://cdn.discordapp.com/attachments/970974481768149012/977098454251757598/elina-cmd.png" alt="homepgimg" height="300px" width="auto" style="border-radius: 8px;">
                                 <br>
-                                To add more flexibility to the package i later made a API similar to the NPM package <br>
-                                I would appreciate contributions to the API or the Npm package <br> <br>
-                                Here's a link to the Npm package : <br>
-                                <a href="https://www.npmjs.com/package/anyanime">NPM</a>
-                                <a href="https://github.com/crizmo/AnyAnime">Github</a>
+                                Wish i could put that embed in this website but i dont have the time to do that lol. <br>
+                                Anyways i hope you enjoy using Elina. ! <br> <br>
+
+                                Elina's Links :- <br>
+                                <a href="https://github.com/crizmo/Elina-dev" target="_blank">Github</a> <br>
+                                <a href="https://elina-bot.netlify.app/" target="_blank">Website</a>
+
                                 <br> <br>
-                                Here's a link to the API : <br>
-                                <a href="https://rapidapi.com/Kurizu/api/any-anime/">API</a>
-                                <a href="https://github.com/crizmo/AnyAnime_api">Github</a>
-                                <br> <br>
-                                Website explaning the pkg + api :- <a href="https://anyanime-npm.netlify.app/">AnyAnime Docs</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="chat-body-messages-item">
-                    <div class="chat-body-messages-item-avatar">
-                        <img
-                            src="https://media.discordapp.net/attachments/952764969638834228/969830435444097054/Criz.png"
-                            alt=""
-                            width={serverWidth}
-                        />
-                    </div>
-                    <div class="chat-body-messages-item-content">
-                        <div class="chat-body-messages-item-content-header">
-                            <h3 class="chat-body-messages-item-content-header-name">Kurizu</h3>
-                        </div>
-                        <div class="chat-body-messages-item-content-body">
-                            <p>
-                                Basic functions of the package : <br> <br>
-                                <img src="https://cdn.discordapp.com/attachments/970974362184343582/977082767978430544/Anyanime.png" alt="homepgimg" height="300px" width="auto" style="border-radius: 10px;">
-                                <br>
-                                Thanks for reading! If you have any questions or suggestions feel free to contact me on discord <br>
+                                The website has all the commands and info you need to know about Elina. <br>
+                                Enjoy ! <br> <br>
+                                <img src="https://cdn.discordapp.com/attachments/912537423160942593/912537520150020156/elina_info.jpg" alt="homepgimg" height="150px" width="auto" style="border-radius: 8px;">
                             </p>
                         </div>
                     </div>
