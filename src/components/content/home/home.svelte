@@ -60,7 +60,7 @@
 <style>
     .mainarea {
         position: absolute;
-        width: 80.4%;
+        width: 81.3%;
         height: 100%;
         /* text-align: left; */
         margin-left: 352px;
