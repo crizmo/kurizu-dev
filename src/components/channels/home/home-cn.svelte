@@ -1,10 +1,11 @@
 <script>
-    import Projects from '../categories/projects.svelte'
-    import Links from '../categories/links.svelte'
+    import Projects from "../categories/projects.svelte";
+    import Links from "../categories/links.svelte";
 </script>
 
 <main>
-    <div class="channels">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <div class="channels" id="mySidenav">
         <div>
             <div class="server-template-icon">
                 <img
@@ -23,7 +24,7 @@
                 <hr width="50%" />
                 <div class="channels-list">
                     <button class="channelbtn">
-                        <a class="home-cn" href="/"># Home page </a>
+                        <a class="home-cn" href="/"># Home</a>
                     </button>
                     <button class="channelbtn">
                         <a class="about-cn" href="/about"># About me</a>
@@ -129,5 +130,22 @@
         border-radius: 3px;
         padding: 3px;
         color: rgb(255, 255, 255);
+    }
+
+    @media screen and (max-width: 1000px) {
+        .channels {
+            position: absolute;
+            width: 23.7%;
+            height: 100%;
+            margin-left: 57px;
+            background-color: #2c2d30;
+            top: 0%;
+            color: rgb(255, 255, 255);
+            z-index: 1;
+            overflow: scroll;
+
+            font-size: small;
+            display: none;
+        }
     }
 </style>
