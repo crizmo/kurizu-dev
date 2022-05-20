@@ -3,6 +3,8 @@
 
 	import Sidebar from './components/sidebar/sidebar.svelte';
 
+	import AllPro from './components/content/projects/all-pro.svelte';
+
 	import Channels from './components/channels/channels.svelte';
 	import HomeCn from './components/channels/home/home-cn.svelte';
 	import AboutCn from './components/channels/home/about-cn.svelte';
@@ -10,11 +12,11 @@
 	import Home from './components/content/home/home.svelte';
 	import About from './components/content/home/about.svelte';
 
-	import Anyanime from './components/content/projects/anyanime.svelte'
 </script>
 
 <main>
 	<Sidebar/>
+	<!-- <Sidebar serimg = {"https://cdn.discordapp.com/avatars/784141856426033233/2b71440eb154c1c2897e956f1f0da7b7.webp"} /> -->
 	
 	<!-- Home -->
 	<Route path="/">
@@ -30,23 +32,9 @@
 	</Route>
 
 	<!-- Projects -->
-	<Route path="/anyanime">
-		<!-- <AnyanimeCn /> -->
-		<Anyanime />
-	</Route>
+	<AllPro />
 </main>
 
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
+	
 </style>
