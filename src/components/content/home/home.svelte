@@ -9,7 +9,7 @@
             <div class="vl" />
             <p class="channel-info">Kurizu Home page</p>
         </div>
-        <hr>
+        <hr />
         <div class="chat-body">
             <div class="chat-body-messages">
                 <div class="chat-body-messages-item">
@@ -22,13 +22,20 @@
                     </div>
                     <div class="chat-body-messages-item-content">
                         <div class="chat-body-messages-item-content-header">
-                            <h3 class="chat-body-messages-item-content-header-name">Kurizu</h3>
+                            <h3
+                                class="chat-body-messages-item-content-header-name"
+                            >
+                                Kurizu
+                            </h3>
                         </div>
                         <div class="chat-body-messages-item-content-body">
                             <p>
-                                Welcome to my page! This website is basically a clone of how discord application looks ! <br>
-                                Currently the css for mobile view is broken and so is for different pc sizes ! <br> 
-                                I am working on it and will update you soon ! <br>
+                                Welcome to my page! This website is basically a
+                                clone of how discord application looks ! <br />
+                                Currently the css for mobile view is broken and so
+                                is for different pc sizes ! <br />
+                                I am working on it and will update you soon !
+                                <br />
                             </p>
                         </div>
                     </div>
@@ -43,12 +50,14 @@
                     </div>
                     <div class="chat-body-messages-item-content">
                         <div class="chat-body-messages-item-content-header">
-                            <h3 class="chat-body-messages-item-content-header-name">Kurizu</h3>
+                            <h3
+                                class="chat-body-messages-item-content-header-name"
+                            >
+                                Kurizu
+                            </h3>
                         </div>
                         <div class="chat-body-messages-item-content-body">
-                            <p>
-                                
-                            </p>
+                            <p />
                         </div>
                     </div>
                 </div>
@@ -116,7 +125,7 @@
         z-index: 1;
         top: 2%;
     }
-    
+
     .chat-body-messages-item-avatar {
         margin-left: 20px;
         position: absolute;
@@ -134,7 +143,7 @@
     .chat-body-messages-item-content-header {
         color: rgb(255, 255, 255);
         z-index: 1;
-        text-align: left;
+        /* text-align: left; */
         margin-left: 80px;
     }
 
@@ -143,7 +152,59 @@
         z-index: 1;
         text-align: left;
         margin-left: 80px;
-        margin-right: 500px;
+        margin-right: 50px;
     }
 
+    @media screen and (max-width: 1500px) {
+        .mainarea {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            /* text-align: left; */
+            margin-left: 55px;
+            background-color: #2a2c2e;
+            top: 0%;
+            color: rgb(255, 255, 255);
+            z-index: 0;
+            overflow: scroll;
+
+            font-size: small;
+        }
+
+        .top-nav {
+            align-items: left;
+            text-align: left;
+            margin-left: 0px;
+            margin-top: 60px;
+            background-color: aqua;
+        }
+
+        .vl {
+            border-left: 2px solid gray;
+            height: 25px;
+            position: absolute;
+            left: 35%;
+            top: 1.7%;
+        }
+
+        .channel-name {
+            top: 0%;
+            left: 5%;
+            position: absolute;
+        }
+
+        .channel-info {
+            position: absolute;
+            top: 0.5%;
+            left: 44%;
+        }
+
+        .chat-body-messages-item-content-body {
+            color: rgb(255, 255, 255);
+            z-index: 1;
+            text-align: left;
+            margin-left: 80px;
+            margin-right: 70px;
+        }
+    }
 </style>
