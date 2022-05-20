@@ -12,7 +12,7 @@
                         <a class="anyanime-cn" href="/anyanime"># AnyAnime</a>
                     </button>
                     <button class="channelbtn">
-                        <a class="elina-cn" href="/elina-dev"># Elina-dev</a>
+                        <a class="elina-cn" href="/elina"># Elina-dev</a>
                     </button>
                     <button class="channelbtn">
                         <a class="stream-savers-cn" href="/stream-savers"># Stream-Savers</a>
