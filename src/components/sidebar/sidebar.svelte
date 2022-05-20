@@ -18,8 +18,14 @@
         position: absolute;
         top: 0;
         left: 0;
-        z-index: 1;
+        z-index: 2;
         /* overflow-x: hidden; */
+    }
+
+    @media screen and (max-width: 1500px) {
+        .sidebar {
+            width: 65px;
+        }
     }
     
 </style>
