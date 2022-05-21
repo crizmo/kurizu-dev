@@ -40,12 +40,9 @@
                         </div>
                         <div class="chat-body-messages-item-content-body">
                             <p>
-                                Welcome to my page! This website is basically a
-                                clone of how discord application looks ! <br />
-                                Currently the css for mobile view is broken and so
-                                is for different pc sizes ! <br />
-                                I am working on it and will update you soon !
-                                <br />
+                                Oi mate ! I'm Kurizu and this is my website showcasing my projects and links to my social media accounts ! <br>
+                                As you might have already noticed this website is looks similar to the discord application and thats what i was aiming for. <br>
+                                It is made completely using svelte and is work in progress. <br> <br>
                             </p>
                         </div>
                     </div>
@@ -53,21 +50,21 @@
                 <div class="chat-body-messages-item">
                     <div class="chat-body-messages-item-avatar">
                         <img
-                            src="https://media.discordapp.net/attachments/952764969638834228/969830435444097054/Criz.png"
+                        src="https://media.discordapp.net/attachments/952764969638834228/969830435444097054/Criz.png"
                             alt=""
                             width={serverWidth}
-                        />
-                    </div>
+                            />
+                        </div>
                     <div class="chat-body-messages-item-content">
                         <div class="chat-body-messages-item-content-header">
-                            <h3
-                                class="chat-body-messages-item-content-header-name"
-                            >
-                                Kurizu
-                            </h3>
+                            <h3 class="chat-body-messages-item-content-header-name">Kurizu</h3>
                         </div>
                         <div class="chat-body-messages-item-content-body">
-                            <p />
+                            <p>
+                                Click on the channels if u want to see some of my projects or check out my social media accounts ! <br>
+                                I hope you enjoy it and if you have any suggestions or feedback feel free to contact me on discord / instagram / github !   <br>
+                                Thank you for checking out my website ! 
+                            </p>
                         </div>
                     </div>
                 </div>
