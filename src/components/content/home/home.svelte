@@ -4,6 +4,11 @@
     function openNav() {
         document.getElementById("mySidenav").style.width = null;
     }
+
+    if (window.innerWidth === 1800) {
+        openNav();
+    } 
+    
 </script>
 
 <main>
@@ -114,13 +119,13 @@
     }
 
     .open-btn {
-        position: absolute;
+        /* position: absolute;
         top: 1.5%;
         left: 95%;
         font-size: 25px;
         cursor: pointer;
-        color: orangered;
-        /* display: none; */
+        color: orangered; */
+        display: none;
     }
 
     .chat-body {
@@ -168,6 +173,21 @@
         text-align: left;
         margin-left: 80px;
         margin-right: 50px;
+    }
+
+    @media screen and (max-width: 1910px) {
+        .mainarea {
+            position: absolute;
+            width: 81.3%;
+            height: 100%;
+            /* text-align: left; */
+            margin-left: 315px;
+            background-color: #2a2c2e;
+            top: 0%;
+            color: rgb(255, 255, 255);
+            z-index: 2;
+            overflow: scroll;
+        }
     }
 
     @media screen and (max-width: 1500px) {
@@ -221,7 +241,11 @@
             font-size: 20px;
             cursor: pointer;
             color: orangered;
-            /* display: block; */
+            display: block;
+        }
+
+        .chat-body-messages-item-avatar img {
+            width: 45px;
         }
 
         .chat-body-messages-item-content-body {

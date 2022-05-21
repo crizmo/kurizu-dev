@@ -1,5 +1,9 @@
 <script>
     const serverWidth = "50px";
+
+    function openNav() {
+        document.getElementById("mySidenav").style.width = null;
+    }
 </script>
 
 <main>
@@ -7,7 +11,8 @@
         <div class="top-nav">
             <h3 class="channel-name"># About Me</h3>
             <div class="vl" />
-            <p class="channel-info">Website showcasing criz's creations</p>
+            <p class="channel-info">Little about criz</p>
+            <span class="open-btn" on:click="{openNav}">&#9776;</span>
         </div>
         <hr>
         <div class="chat-body">
@@ -61,7 +66,7 @@
                                 Hi again ! <br>
                                 If you want to check out some of my projects click on the channels respectively <br> <br>
                                 Thanks for checking out my page ! <br> <br>
-                                <img src="https://images.hdqwalls.com/download/child-of-earth-on-journey-5t-2560x1440.jpg" alt="homepgimg" height="300px" width="auto">
+                                <img class="msg-img" src="https://images.hdqwalls.com/download/child-of-earth-on-journey-5t-2560x1440.jpg" alt="homepgimg" height="300px" width="auto">
                                 <!-- <img src="https://images.hdqwalls.com/download/child-of-earth-on-journey-5t-2560x1440.jpg" alt="homepgimg" height="300px" width="auto"> -->
                             </p>
                         </div>
@@ -82,7 +87,7 @@
         background-color: #2a2c2e;
         top: 0%;
         color: rgb(255, 255, 255);
-        z-index: 1;
+        z-index: 2;
         /* overflow: hidden; */
         overflow: scroll;
     }
@@ -115,6 +120,16 @@
         left: 14%;
     }
 
+    .open-btn {
+        /* position: absolute;
+        top: 1.5%;
+        left: 95%;
+        font-size: 25px;
+        cursor: pointer;
+        color: orangered; */
+        display: none;
+    }
+
     .chat-body {
         position: absolute;
         width: 100%;
@@ -143,14 +158,14 @@
     .chat-body-messages-item-content {
         color: rgb(255, 255, 255);
         z-index: 1;
-        /* text-align: left;
-        margin-left: 80px; */
+        /* text-align: left; */
+        /* margin-left: 80px;  */
     }
 
     .chat-body-messages-item-content-header {
         color: rgb(255, 255, 255);
         z-index: 1;
-        text-align: left;
+        /* text-align: left; */
         margin-left: 80px;
     }
 
@@ -160,6 +175,79 @@
         text-align: left;
         margin-left: 80px;
         margin-right: 500px;
+    }
+
+    @media screen and (max-width: 1500px) {
+        .mainarea {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            /* text-align: left; */
+            margin-left: 55px;
+            background-color: #2a2c2e;
+            top: 0%;
+            color: rgb(255, 255, 255);
+            z-index: 0;
+            overflow: scroll;
+
+            font-size: small;
+        }
+
+        .top-nav {
+            align-items: left;
+            text-align: left;
+            margin-left: 0px;
+            margin-top: 60px;
+            background-color: aqua;
+        }
+
+        .vl {
+            border-left: 2px solid gray;
+            height: 25px;
+            position: absolute;
+            left: 25%;
+            top: 1.7%;
+        }
+
+        .channel-name {
+            top: 0%;
+            left: 2%;
+            position: absolute;
+        }
+
+        .channel-info {
+            position: absolute;
+            top: 0.5%;
+            left: 34%;
+        }
+
+        .open-btn {
+            position: absolute;
+            top: 1.7%;
+            left: 80%;
+            font-size: 20px;
+            cursor: pointer;
+            color: orangered;
+            display: block;
+        }
+
+        .msg-img {
+            width: 100%;
+            height: auto;
+            max-width: 300px;
+        }
+
+        .chat-body-messages-item-avatar img {
+            width: 45px;
+        }
+
+        .chat-body-messages-item-content-body {
+            color: rgb(255, 255, 255);
+            z-index: 1;
+            text-align: left;
+            margin-left: 80px;
+            margin-right: 70px;
+        }
     }
 
 </style>
