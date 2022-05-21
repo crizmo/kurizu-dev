@@ -43,8 +43,8 @@
                             </p>
                             <hr>
                             <p>
-                                I am proficient with a lot of programming languages such as HTML/CSS/JS , Java , C , Python, etc <br>
-                                Primarily, I use JS as my main lang and am familiar with technologies such as Node.js, React, Svelte and also with database technologies such as MongoDB, etc.
+                                I am proficient with a lot of programming languages such as HTML/CSS , Javascript , Java , C , Python, etc <br>
+                                Primarily, I use JS as my main language and I am familiar with technologies such as Node.js, React, Svelte and also with database technologies such as MongoDB, etc.
                             </p>
                         </div>
                     </div>
