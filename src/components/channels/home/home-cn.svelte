@@ -148,6 +148,23 @@
         color: rgb(255, 255, 255);
     }
 
+    @media screen and (max-width: 1910px) {
+        .channels {
+            position: absolute;
+            width: 15.7%;
+            height: 100%;
+            margin-left: 82px;
+            background-color: #2c2d30;
+            top: 0%;
+            color: rgb(255, 255, 255);
+            z-index: 1;
+            overflow: scroll;
+
+            font-size: small;
+            /* display: none; */
+        }
+    }
+
     @media screen and (max-width: 1500px) {
         .channels {
             position: absolute;
@@ -173,8 +190,6 @@
             color: orangered;
             display: block;
         }
-
-
     }
 
     @media screen and (max-width: 1000px) {

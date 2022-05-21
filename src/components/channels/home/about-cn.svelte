@@ -1,10 +1,16 @@
 <script>
-    import Projects from '../categories/projects.svelte'
-    import Links from '../categories/links.svelte'
+    import Projects from '../categories/projects.svelte';
+    import Links from '../categories/links.svelte';
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
 </script>
 
 <main>
-    <div class="channels">
+    <script src="https://kit.fontawesome.com/8dc570c5d4.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <div class="channels" id="mySidenav">
         <div>
             <div class="server-template-icon">
                 <img
@@ -14,6 +20,7 @@
                     height="100%"
                 />
                 <h3 class="server-name-on-template">Kurizu</h3>
+                <span class="close-btn" on:click="{closeNav}">&times;</span>
             </div>
             <hr />
         </div>
@@ -64,6 +71,16 @@
         position: absolute;
         top: 3px;
         left: 20px;
+    }
+
+    .close-btn {
+        /* position: absolute;
+        top: 5%;
+        left: 80%;
+        font-size: 40px;
+        cursor: pointer;
+        color: orangered; */
+        display: none;
     }
 
     .categories {
@@ -139,5 +156,78 @@
         border-radius: 3px;
         padding: 3px;
         color: rgb(255, 255, 255);
+    }
+
+    @media screen and (max-width: 1910px) {
+        .channels {
+            position: absolute;
+            width: 15.7%;
+            height: 100%;
+            margin-left: 82px;
+            background-color: #2c2d30;
+            top: 0%;
+            color: rgb(255, 255, 255);
+            z-index: 1;
+            overflow: scroll;
+
+            font-size: small;
+            /* display: none; */
+        }
+    }
+
+    @media screen and (max-width: 1500px) {
+        .channels {
+            position: absolute;
+            width: 20%;
+            height: 100%;
+            margin-left: 57px;
+            background-color: #2c2d30;
+            top: 0%;
+            color: rgb(255, 255, 255);
+            z-index: 1;
+            overflow: scroll;
+
+            font-size: small;
+            /* display: none; */
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 5%;
+            left: 80%;
+            font-size: 35px;
+            cursor: pointer;
+            color: orangered;
+            display: block;
+        }
+
+
+    }
+
+    @media screen and (max-width: 1000px) {
+        .channels {
+            position: absolute;
+            width: 40%;
+            height: 100%;
+            margin-left: 57px;
+            background-color: #2c2d30;
+            top: 0%;
+            color: rgb(255, 255, 255);
+            z-index: 1;
+            overflow: scroll;
+
+            font-size: small;
+            /* display: none; */
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 5%;
+            left: 80%;
+            font-size: 35px;
+            cursor: pointer;
+            color: orangered;
+            display: block;
+        }
     }
 </style>
