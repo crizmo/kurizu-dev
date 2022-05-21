@@ -1,5 +1,9 @@
 <script>
     const serverWidth = "50px";
+
+    function openNav() {
+        document.getElementById("mySidenav").style.width = null;
+    }
 </script>
 
 <main>
@@ -8,6 +12,7 @@
             <h3 class="channel-name"># Kurizu's Page</h3>
             <div class="vl" />
             <p class="channel-info">Kurizu Home page</p>
+            <span class="open-btn" on:click="{openNav}">&#9776;</span>
         </div>
         <hr />
         <div class="chat-body">
@@ -108,6 +113,16 @@
         left: 14%;
     }
 
+    .open-btn {
+        position: absolute;
+        top: 1.5%;
+        left: 95%;
+        font-size: 25px;
+        cursor: pointer;
+        color: orangered;
+        /* display: none; */
+    }
+
     .chat-body {
         position: absolute;
         width: 100%;
@@ -197,6 +212,16 @@
             position: absolute;
             top: 0.5%;
             left: 44%;
+        }
+
+        .open-btn {
+            position: absolute;
+            top: 1.7%;
+            left: 80%;
+            font-size: 20px;
+            cursor: pointer;
+            color: orangered;
+            /* display: block; */
         }
 
         .chat-body-messages-item-content-body {
