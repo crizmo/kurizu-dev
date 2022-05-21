@@ -1,5 +1,9 @@
 <script>
     const serverWidth = "50px";
+
+    function openNav() {
+        document.getElementById("mySidenav").style.width = null;
+    }
 </script>
 
 <main>
@@ -10,6 +14,7 @@
                     src="https://media.discordapp.net/attachments/952764969638834228/969830435444097054/Criz.png"
                     alt=""
                     width={serverWidth}
+                    on:click="{openNav}"
                 />
             </div>
             <hr>
@@ -40,6 +45,7 @@
         .sidebar-header-logo img {
             width: 45px;
             height: 45px;
+            margin-right: 5px;
         }
     }
     

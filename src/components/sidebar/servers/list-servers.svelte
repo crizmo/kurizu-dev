@@ -1,6 +1,9 @@
 <script>
     const serverWidth = "50px";
-    // export let serimg
+    
+    function openNav() {
+        document.getElementById("mySidenav").style.width = null;
+    }
 </script>
 
 <main>
@@ -14,6 +17,7 @@
                                 src="https://cdn.discordapp.com/avatars/784141856426033233/2b71440eb154c1c2897e956f1f0da7b7.webp"
                                 alt=""
                                 width={serverWidth}
+                                on:click="{openNav}"
                             />
                             <h3 class="hovertext">Kurizu</h3>
                         </div>
@@ -64,7 +68,7 @@
 
     .sidebar-content {
         height: calc(100% - 60px);
-        background-color: #2f3136;
+        /* background-color: #2f3136; */
         padding: 0;
         margin: 0;
         text-align: center;
@@ -126,9 +130,17 @@
     }
 
     @media screen and (max-width: 1500px) {
+
+        .sidebar-content-servers-list-item-icon .hovertext {
+            width: 70px;
+            padding: 5px 0;
+            font-size: small;
+        }
+
         .sidebar-content-servers-list-item-icon img {
             width: 40px;
             height: 40px;
+            margin-right: 5px;
         }
     }
     
