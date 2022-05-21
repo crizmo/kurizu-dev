@@ -175,10 +175,6 @@
         margin-right: 50px;
     }
 
-    .msg-img {
-        border-style: outset;
-    }
-
     @media screen and (max-width: 1910px) {
         .mainarea {
             position: absolute;
