@@ -1,9 +1,14 @@
 <script>
     import Projects from "../categories/projects.svelte";
     import Links from "../categories/links.svelte";
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
 </script>
 
 <main>
+    <script src="https://kit.fontawesome.com/8dc570c5d4.js" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <div class="channels" id="mySidenav">
         <div>
@@ -15,11 +20,12 @@
                     height="100%"
                 />
                 <h3 class="server-name-on-template">Kurizu</h3>
+                <span class="close-btn" on:click="{closeNav}">&times;</span>
             </div>
             <hr />
         </div>
         <div class="categories">
-            <details class="home" open>
+            <details class="home" open> 
                 <summary>Home</summary>
                 <hr width="50%" />
                 <div class="channels-list">
@@ -65,6 +71,16 @@
         position: absolute;
         top: 3px;
         left: 20px;
+    }
+
+    .close-btn {
+        /* position: absolute;
+        top: 5%;
+        left: 80%;
+        font-size: 40px;
+        cursor: pointer;
+        color: orangered; */
+        display: none;
     }
 
     .categories {
@@ -132,10 +148,10 @@
         color: rgb(255, 255, 255);
     }
 
-    @media screen and (max-width: 1000px) {
+    @media screen and (max-width: 1500px) {
         .channels {
             position: absolute;
-            width: 23.7%;
+            width: 20%;
             height: 100%;
             margin-left: 57px;
             background-color: #2c2d30;
@@ -145,7 +161,46 @@
             overflow: scroll;
 
             font-size: small;
-            display: none;
+            /* display: none; */
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 5%;
+            left: 80%;
+            font-size: 35px;
+            cursor: pointer;
+            color: orangered;
+            display: block;
+        }
+
+
+    }
+
+    @media screen and (max-width: 1000px) {
+        .channels {
+            position: absolute;
+            width: 40%;
+            height: 100%;
+            margin-left: 57px;
+            background-color: #2c2d30;
+            top: 0%;
+            color: rgb(255, 255, 255);
+            z-index: 1;
+            overflow: scroll;
+
+            font-size: small;
+            /* display: none; */
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 5%;
+            left: 80%;
+            font-size: 35px;
+            cursor: pointer;
+            color: orangered;
+            display: block;
         }
     }
 </style>
