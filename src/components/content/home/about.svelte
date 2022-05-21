@@ -66,8 +66,7 @@
                                 Hi again ! <br>
                                 If you want to check out some of my projects click on the channels respectively <br> <br>
                                 Thanks for checking out my page ! <br> <br>
-                                <img class="msg-img" src="https://images.hdqwalls.com/download/child-of-earth-on-journey-5t-2560x1440.jpg" alt="homepgimg" height="300px" width="auto">
-                                <!-- <img src="https://images.hdqwalls.com/download/child-of-earth-on-journey-5t-2560x1440.jpg" alt="homepgimg" height="300px" width="auto"> -->
+                                <img class="msg-img" src="https://images.hdqwalls.com/download/child-of-earth-on-journey-5t-2560x1440.jpg" style="border-radius: 10px;" alt="homepgimg" height="300px" width="auto">
                             </p>
                         </div>
                     </div>
