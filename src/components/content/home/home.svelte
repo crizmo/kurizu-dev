@@ -41,8 +41,9 @@
                         <div class="chat-body-messages-item-content-body">
                             <p>
                                 Oi mate ! I'm Kurizu and this is my website showcasing my projects and links to my social media accounts ! <br>
-                                As you might have already noticed this website is looks similar to the discord application and thats what i was aiming for. <br>
-                                It is made completely using svelte and is work in progress ! <br> <br>
+                                As you might have already noticed this website looks similar to the discord application and thats what i was aiming for. <br> <br>
+                                It is completely made using svelte ! <br>
+                                The site has a lot of unfinished features but we will get there soon ! <br>
                             </p>
                         </div>
                     </div>
@@ -61,8 +62,10 @@
                         </div>
                         <div class="chat-body-messages-item-content-body">
                             <p>
-                                Click on the channels if u want to see some of my projects or check out my social media accounts ! <br>
-                                I hope you enjoy it and if you have any suggestions or feedback feel free to contact me on discord / instagram / github !   <br>
+                                Oh btw ! <br>
+                                Click on the channels if u want to see some of my projects or check out my social media accounts ! <br> <br>
+                                <img class="msg-img" src="https://cdn.discordapp.com/attachments/970974282681307187/977618419920822302/projects.png" alt="projetc-channels" height="200px" width="auto"> <br> <br>
+                                I hope you like it and if you have any suggestions or feedback feel free to contact me on discord / instagram / github !   <br>
                                 Thank you for checking out my website ! 
                             </p>
                         </div>
@@ -172,6 +175,10 @@
         margin-right: 50px;
     }
 
+    .msg-img {
+        border-style: outset;
+    }
+
     @media screen and (max-width: 1910px) {
         .mainarea {
             position: absolute;
@@ -239,6 +246,12 @@
             cursor: pointer;
             color: orangered;
             display: block;
+        }
+
+        .msg-img {
+            width: 100%;
+            height: auto;
+            max-width: 150px;
         }
 
         .chat-body-messages-item-avatar img {
