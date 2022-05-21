@@ -42,7 +42,7 @@
                             <p>
                                 Oi mate ! I'm Kurizu and this is my website showcasing my projects and links to my social media accounts ! <br>
                                 As you might have already noticed this website is looks similar to the discord application and thats what i was aiming for. <br>
-                                It is made completely using svelte and is work in progress. <br> <br>
+                                It is made completely using svelte and is work in progress ! <br> <br>
                             </p>
                         </div>
                     </div>
