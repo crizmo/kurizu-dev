@@ -3,7 +3,7 @@
 
     import Main from './categories/main.svelte'
     import Projects from './categories/projects.svelte'
-    import Links from './categories/links.svelte'
+    import Links from './categories/other.svelte'
 </script>
 
 <main>
