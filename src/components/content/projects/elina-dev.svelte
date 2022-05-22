@@ -11,7 +11,7 @@
         <div class="top-nav">
             <h3 class="channel-name"># Elina</h3>
             <div class="vl" />
-            <p class="channel-info">Elina :- yet another multipurpoe discord bot</p>
+            <p class="channel-info">Elina :- yet another discord bot</p>
             <span class="open-btn" on:click="{openNav}">&#9776;</span>
         </div>
         <hr>
