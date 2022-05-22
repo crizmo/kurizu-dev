@@ -11,7 +11,7 @@
         <div class="top-nav">
             <h3 class="channel-name"># AnyAnime</h3>
             <div class="vl" />
-            <p class="channel-info">Anyanime Npm package + AnyAnime API</p>
+            <p class="channel-info">Anyanime Npm & API</p>
             <span class="open-btn" on:click="{openNav}">&#9776;</span>
         </div>
         <hr>
