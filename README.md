@@ -1,6 +1,6 @@
 ## Kurizu itz me
-Website showcasing my projects and other stuff.
-Its basically a clone of how discord desktop app looks but in a website 
+Discord desktop app themed portfolio website made using svelte !
+![kurizu-dev](https://user-images.githubusercontent.com/83665497/169702203-790532a2-010f-481b-b7c6-60b50d326ab8.png)
 
 ## Code
 Just clone the repo and run `npm install` to install all the dependencies
