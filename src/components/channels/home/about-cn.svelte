@@ -1,6 +1,6 @@
 <script>
     import Projects from '../categories/projects.svelte';
-    import Links from '../categories/links.svelte';
+    import Links from '../categories/other.svelte';
 
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
