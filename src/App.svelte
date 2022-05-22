@@ -4,6 +4,7 @@
 	import Sidebar from './components/sidebar/sidebar.svelte';
 
 	import AllPro from './components/content/projects/all-pro.svelte';
+	import AllOth from './components/content/other/all-oth.svelte';
 
 	import Channels from './components/channels/channels.svelte';
 	import HomeCn from './components/channels/home/home-cn.svelte';
@@ -33,6 +34,9 @@
 
 	<!-- Projects -->
 	<AllPro />
+
+	<!-- Other -->
+	<AllOth />
 </main>
 
 <style>
