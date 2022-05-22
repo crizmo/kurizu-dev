@@ -8,8 +8,8 @@ Then run `npm run dev` to start the server
 
 All the code is in the `src/components` folder under 3 main folders:
 - `channels`: contains all the channels related stuff
-- `content`: contains all the content related stuff
-- `sidebar`: contains all the sidebar related stuff
+- `content`: the main page content
+- `sidebar`: sidebar for servers 
 
 If you have any feedback / bugs / suggestions, feel free to open an issue on github or contact me on discord.
 My username is `Criz#1270`
