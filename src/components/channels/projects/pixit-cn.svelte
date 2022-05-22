@@ -1,6 +1,6 @@
 <script>
     import Projects from '../categories/projects.svelte'
-    import Links from '../categories/links.svelte'
+    import Links from '../categories/other.svelte'
     import Main from '../categories/main.svelte';
 
     function closeNav() {
