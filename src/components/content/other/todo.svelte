@@ -45,6 +45,8 @@
                                 2 ] Add more channels
                                 <br />
                                 3 ] Git posts 
+                                <br>
+                                4 ] Change color to original app color
                             </p>
                         </div>
                     </div>
