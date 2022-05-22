@@ -3,7 +3,7 @@
 
     import Main from './categories/main.svelte'
     import Projects from './categories/projects.svelte'
-    import Links from './categories/other.svelte'
+    import Other from './categories/other.svelte'
 </script>
 
 <main>
@@ -14,7 +14,7 @@
             <br>
             <Projects />
             <br>
-            <Links />
+            <Other />
         </div>
     </div>
 </main>
