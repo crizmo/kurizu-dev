@@ -18,7 +18,7 @@
 
 <MetaTags
   title="Kurizu"
-  titleTemplate="%s | Discord themed website"
+  titleTemplate=""
   description="Kurizu's website | Discord themed website"
   canonical="https://www.canonical.ie/"
   openGraph={{
