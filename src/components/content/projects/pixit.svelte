@@ -31,7 +31,7 @@
                         </div>
                         <div class="chat-body-messages-item-content-body">
                             <p>
-                                Pixet is a simple pixel art website made using ejs and nodejs. <br>
+                                Pixit is a simple pixel art website made using ejs and nodejs. <br>
                                 Check it out if u want : <a href="https://pixit.kurizu.repl.co/">https://pixit.kurizu.repl.co/</a>
                                 <br><br>
                                 <img class="msg-img" src="https://cdn.discordapp.com/attachments/970974497941368873/977193997267271690/unknown.png" alt="homepgimg" height="300px" width="auto" style="border-radius: 10px;">
