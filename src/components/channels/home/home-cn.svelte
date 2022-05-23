@@ -163,6 +163,10 @@
             font-size: small;
             /* display: none; */
         }
+
+        .channelbtn {
+            width: 75%;
+        }
     }
 
     @media screen and (max-width: 1500px) {
@@ -179,6 +183,10 @@
 
             font-size: small;
             /* display: none; */
+        }
+
+        .channelbtn {
+            width: 100%;
         }
 
         .close-btn {
@@ -216,6 +224,10 @@
             cursor: pointer;
             color: orangered;
             display: block;
+        }
+
+        .channelbtn {
+            width: 100%;
         }
     }
 </style>
