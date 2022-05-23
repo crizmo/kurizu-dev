@@ -12,7 +12,7 @@
             <h3 class="channel-name"># Elina</h3>
             <div class="vl" />
             <p class="channel-info">Elina :- yet another discord bot</p>
-            <span class="open-btn" on:click="{openNav}">&#9776;</span>
+            <!-- <span class="open-btn" on:click="{openNav}">&#9776;</span> -->
         </div>
         <hr>
         <div class="chat-body">
@@ -102,15 +102,9 @@
         left: 14%;
     }
 
-    .open-btn {
-        /* position: absolute;
-        top: 1.5%;
-        left: 95%;
-        font-size: 25px;
-        cursor: pointer;
-        color: orangered; */
+    /* .open-btn {
         display: none;
-    }
+    } */
 
     .chat-body {
         position: absolute;
@@ -218,7 +212,7 @@
             left: 25%;
         }
 
-        .open-btn {
+        /* .open-btn {
             position: absolute;
             top: 1.7%;
             left: 80%;
@@ -226,7 +220,7 @@
             cursor: pointer;
             color: orangered;
             display: block;
-        }
+        } */
 
         .msg-img {
             width: 100%;
