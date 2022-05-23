@@ -1,7 +1,7 @@
 ## Kurizu itz me
 Discord desktop app themed portfolio website made using svelte ! 
 
-![Kurizu-dev](https://user-images.githubusercontent.com/83665497/169702262-63007d65-3672-47a4-bb28-d54d437f78d4.png)
+![Kurizu-dev](https://user-images.githubusercontent.com/83665497/169778924-813ed87e-4d33-42c7-a89d-677cda1830a4.png)
 
 ## Code
 Just clone the repo and run `npm install` to install all the dependencies
