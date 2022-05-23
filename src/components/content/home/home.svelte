@@ -175,7 +175,7 @@
     @media screen and (max-width: 1910px) {
         .mainarea {
             position: absolute;
-            width: 81.3%;
+            width: 91.3%;
             height: 100%;
             /* text-align: left; */
             margin-left: 315px;
