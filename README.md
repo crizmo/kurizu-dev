@@ -12,8 +12,10 @@ All the code is in the `src/components` folder under 3 main folders:
 - `content`: the main page content
 - `sidebar`: sidebar for servers 
 
+If you want to use this project to make your own website feel free to do so just credit me in the footer :) 
+
 If you have any feedback / bugs / suggestions, feel free to open an issue on github or contact me on discord.
-My username is `Criz#1270`
+My discord username is `Criz#1270` !
 
 ## Links 
 - [Site](https://kurizu.vercel.app/)
