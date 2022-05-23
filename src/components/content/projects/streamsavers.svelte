@@ -32,8 +32,52 @@
                         <div class="chat-body-messages-item-content-body">
                             <p>
                                 Stream Savers is a free, open-source and easy-to-use service to loop stream 24/7 to YouTube <br>
-                                Me and my friend <a href="https://coding398.dev/">coding398</a> <br>
-                                It helped me learn a lot of new things during my time working on this project. <br>
+                                Me and my friend <a href="https://coding398.dev/">coding398</a> made the service. <br> <br>
+
+                                Some words from coding398 : <br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-body-messages-item">
+                    <div class="chat-body-messages-item-avatar">
+                        <img
+                            src="https://cdn.discordapp.com/avatars/626618189450838027/bfb3228d1a394361af00c0aa9a7de14b.webp"
+                            alt=""
+                            width={serverWidth}
+                        />
+                    </div>
+                    <div class="chat-body-messages-item-content">
+                        <div class="chat-body-messages-item-content-header">
+                            <h3 class="chat-body-messages-item-content-header-name">Coding398</h3>
+                        </div>
+                        <div class="chat-body-messages-item-content-body">
+                            <p>
+                                Ohbubble and other services can go to hell, charging people for things that you can do with a simple FFMPEG command. <br>
+                                That's why I loved making stream savers and watching people use it.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-body-messages-item">
+                    <div class="chat-body-messages-item-avatar">
+                        <img
+                            src="https://cdn.discordapp.com/avatars/784141856426033233/2b71440eb154c1c2897e956f1f0da7b7.webp"
+                            alt=""
+                            width={serverWidth}
+                        />
+                    </div>
+                    <div class="chat-body-messages-item-content">
+                        <div class="chat-body-messages-item-content-header">
+                            <h3 class="chat-body-messages-item-content-header-name">Kurizu</h3>
+                        </div>
+                        <div class="chat-body-messages-item-content-body">
+                            <p>
+                                Thanks coding <br>
+
+                                Back to me ! <br> 
+                                Working on streamsavers was and will be fun cause delivering free service makes us hapi !. <br> <br>
+                                Major thanks to replit for the help with the server setup and the hosting. <br>
                                 I hope you will enjoy it ! <br><br>
 
                                 Stream Savers Links :- <br>
