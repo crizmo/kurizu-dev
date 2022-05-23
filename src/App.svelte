@@ -15,7 +15,7 @@
 
 </script>
 
-<head>
+<svelte:head>
 	<meta property="og:title" content="Kurizu" />
     <meta property="og:url" content="https://discord.gg/Ecy6WpEZsD" />
     <meta property="og:image"
@@ -23,7 +23,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:description"
         content="A discord themed portfolio / website made using svelte" />
-</head>
+</svelte:head>
 
 <main>
 	<Sidebar/>
