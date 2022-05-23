@@ -25,7 +25,7 @@
                 <div class="chat-body-messages-item">
                     <div class="chat-body-messages-item-avatar">
                         <img
-                            src="https://media.discordapp.net/attachments/952764969638834228/969830435444097054/Criz.png"
+                            src="https://cdn.discordapp.com/avatars/784141856426033233/2b71440eb154c1c2897e956f1f0da7b7.webp"
                             alt=""
                             width={serverWidth}
                         />
@@ -62,7 +62,7 @@
         height: 100%;
         /* text-align: left; */
         margin-left: 352px;
-        background-color: #36393f;
+        background-color: #282a2e;
         top: 0%;
         color: rgb(255, 255, 255);
         z-index: 2;
@@ -128,8 +128,10 @@
     .chat-body-messages-item-avatar {
         margin-left: 20px;
         position: absolute;
-        border-radius: 100px;
         overflow: hidden;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
     }
 
     .chat-body-messages-item-content {
@@ -161,7 +163,6 @@
             height: 100%;
             /* text-align: left; */
             margin-left: 315px;
-            background-color: #36393f;
             top: 0%;
             color: rgb(255, 255, 255);
             z-index: 2;
@@ -176,7 +177,6 @@
             height: 100%;
             /* text-align: left; */
             margin-left: 55px;
-            background-color: #36393f;
             top: 0%;
             color: rgb(255, 255, 255);
             z-index: 0;
@@ -231,6 +231,8 @@
 
         .chat-body-messages-item-avatar img {
             width: 45px;
+            height: 45px;
+            border-radius: 50%;
         }
 
         .chat-body-messages-item-content-body {
