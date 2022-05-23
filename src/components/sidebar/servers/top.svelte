@@ -3,6 +3,7 @@
 
     function openNav() {
         document.getElementById("mySidenav").style.width = null;
+        document.getElementById("mySidenav").style.transition = "width 0.5s";
     }
 </script>
 
