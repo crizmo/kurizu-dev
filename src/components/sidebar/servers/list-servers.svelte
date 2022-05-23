@@ -6,16 +6,6 @@
         document.getElementById("mySidenav").style.transition = "width 0.5s";
     }
 
-    document.getElementById("mySidenav").addEventListener("swipe", function(e) {
-        if (e.direction == "right") {
-            document.getElementById("mySidenav").style.width = null;
-        }
-
-        if (e.direction == "left") {
-            document.getElementById("mySidenav").style.width = "0";
-        }
-    });
-
 </script>
 
 <main>
