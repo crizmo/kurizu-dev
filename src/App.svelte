@@ -15,16 +15,6 @@
 
 </script>
 
-<svelte:head>
-	<meta property="og:title" content="Kurizu" />
-    <meta property="og:url" content="https://discord.gg/Ecy6WpEZsD" />
-    <meta property="og:image"
-        content="" />
-    <meta property="og:type" content="website" />
-    <meta property="og:description"
-        content="A discord themed portfolio / website made using svelte" />
-</svelte:head>
-
 <main>
 	<Sidebar/>
 	<!-- <Sidebar serimg = {"https://cdn.discordapp.com/avatars/784141856426033233/2b71440eb154c1c2897e956f1f0da7b7.webp"} /> -->
