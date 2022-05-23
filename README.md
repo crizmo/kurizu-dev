@@ -1,4 +1,5 @@
-## Kurizu itz me
+## Discord-theme portfolio / website 
+
 Discord desktop app themed portfolio website made using svelte ! 
 
 ![Kurizu-dev](https://user-images.githubusercontent.com/83665497/169778924-813ed87e-4d33-42c7-a89d-677cda1830a4.png)
