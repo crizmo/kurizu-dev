@@ -31,7 +31,7 @@
                         </div>
                         <div class="chat-body-messages-item-content-body">
                             <p>
-                                Yo ! I'm Kurizu , a average guy who likes to code ! <br> I often end up doing frontend even if i like backend lol <br> <br>
+                                Yo ! I'm Kurizu , An average guy who likes to code ! <br> I often end up doing frontend even if i like backend lol <br> <br>
                                 Currently learning Node.js and Svelte <br>
                                 Give me project ideas ! <br> <br>
 
