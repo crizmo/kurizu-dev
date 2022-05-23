@@ -61,7 +61,7 @@
                                 Oh btw ! <br>
                                 Click on the channels if u want to see some of my projects or check out my social media accounts ! <br> <br>
                                 <img class="msg-img" src="https://cdn.discordapp.com/attachments/970974282681307187/977618419920822302/projects.png" alt="projetc-channels" height="200px" width="auto"> <br> <br>
-                                I hope you like it and if you have any suggestions or feedback feel free to contact me on discord / instagram / github !   <br>
+                                I hope you like it and if you have any suggestions or feedback feel free to contact me on discord / instagram / github <br>
                                 Thank you for checking out my website ! 
                             </p>
                         </div>
