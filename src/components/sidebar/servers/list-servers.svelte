@@ -60,6 +60,18 @@
                             <h3 class="hovertext">Instagram</h3>
                         </div>
                     </div>
+                    <div class="sidebar-content-servers-list-item">
+                        <div class="sidebar-content-servers-list-item-icon">
+                            <a href="https://twitter.com/Criz_595" target="_blank">
+                                <img
+                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV-iD_ebE82snC0KxQGcRWNcse8CBocN6BFv4LbCb-Gu7lLYcfmePRDFe1_y3pRTjsc-s&usqp=CAU"
+                                    alt=""
+                                    width={serverWidth}
+                                />
+                            </a>
+                            <h3 class="hovertext">Twitter</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
