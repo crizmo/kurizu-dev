@@ -57,7 +57,8 @@
                                 <a href="https://github.com/crizmo/Pixit">Github</a> <br>
                                 <a href="https://replit.com/@kurizu/pixit#index.js">Replit</a> <br>
                                 <a href="https://pixit.kurizu.repl.co/">Website</a> <br>
-                                <br>
+                                <br> <br>
+                                If you want to see some of my other projects, check out my github page : <a href="https://github.com/crizmo">Github</a>
                             </p>
                         </div>
                     </div>
@@ -68,6 +69,10 @@
 </main>
 
 <style>
+    main a {
+        color: #38b9ec;
+    }
+
     .mainarea {
         position: absolute;
         width: 81.3%;

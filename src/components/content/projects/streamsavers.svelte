@@ -52,6 +52,11 @@
 </main>
 
 <style>
+
+    main a {
+        color: #38b9ec;
+    }
+
     .mainarea {
         position: absolute;
         width: 81.3%;

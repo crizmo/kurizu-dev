@@ -37,11 +37,11 @@
                                 To add more flexibility to the package i later made a API similar to the NPM package <br>
                                 I would appreciate contributions to the API or the Npm package <br> <br>
                                 Here's a link to the Npm package : <br>
-                                <a href="https://www.npmjs.com/package/anyanime">NPM</a>
+                                <a href="https://www.npmjs.com/package/anyanime">NPM</a> |
                                 <a href="https://github.com/crizmo/AnyAnime">Github</a>
                                 <br> <br>
                                 Here's a link to the API : <br>
-                                <a href="https://rapidapi.com/Kurizu/api/any-anime/">API</a>
+                                <a href="https://rapidapi.com/Kurizu/api/any-anime/">API</a> |
                                 <a href="https://github.com/crizmo/AnyAnime_api">Github</a>
                                 <br> <br>
                                 Website explaning the pkg + api :- <a href="https://anyanime-npm.netlify.app/">AnyAnime Docs</a>
@@ -77,6 +77,11 @@
 </main>
 
 <style>
+
+    main a {
+        color: #38b9ec;
+    }
+
     .mainarea {
         position: absolute;
         width: 81.3%;
