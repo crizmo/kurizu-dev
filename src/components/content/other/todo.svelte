@@ -12,6 +12,7 @@
 </script>
 
 <main>
+    <script src="https://kit.fontawesome.com/8dc570c5d4.js" crossorigin="anonymous"></script>
     <div class="mainarea">
         <div class="top-nav">
             <h3 class="channel-name"># Kurizu's Page</h3>
@@ -40,13 +41,13 @@
                         </div>
                         <div class="chat-body-messages-item-content-body">
                             <p>
-                                1 ] More better view for mobile devices
+                                <i class="fas fa-solid fa-square"></i> | More better view for mobile devices
                                 <br />
-                                2 ] Add more channels
+                                <i class="fas fa-solid fa-square"></i> | Add more channels
                                 <br />
-                                3 ] Git posts 
+                                <i class="fas fa-solid fa-square"></i> | Git posts 
                                 <br>
-                                4 ] Change color to original app color
+                                <i class="fas fa-solid fa-check"></i> | Change color to original app color 
                             </p>
                         </div>
                     </div>
@@ -63,7 +64,7 @@
         height: 100%;
         /* text-align: left; */
         margin-left: 352px;
-        background-color: #2a2c2e;
+        background-color: #36393f;
         top: 0%;
         color: rgb(255, 255, 255);
         z-index: 2;
@@ -112,7 +113,7 @@
         position: absolute;
         width: 100%;
         height: 93%;
-        background-color: #313233;
+        background-color: #36393f;
         top: 6.2%;
         color: rgb(255, 255, 255);
         z-index: 1;
@@ -162,7 +163,7 @@
             height: 100%;
             /* text-align: left; */
             margin-left: 315px;
-            background-color: #2a2c2e;
+            background-color: #36393f;
             top: 0%;
             color: rgb(255, 255, 255);
             z-index: 2;
@@ -177,7 +178,7 @@
             height: 100%;
             /* text-align: left; */
             margin-left: 55px;
-            background-color: #2a2c2e;
+            background-color: #36393f;
             top: 0%;
             color: rgb(255, 255, 255);
             z-index: 0;

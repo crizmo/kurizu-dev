@@ -66,7 +66,7 @@
                                 Basic functions of the package : <br> <br>
                                 <img class="msg-img" src="https://cdn.discordapp.com/attachments/970974362184343582/977082767978430544/Anyanime.png" alt="homepgimg" height="300px" width="auto" style="border-radius: 10px;">
                                 <br>
-                                Thanks for reading! If you have any questions or suggestions feel free to contact me on discord <br>
+                                Thanks for reading! If you have any questions or suggestions feel free to contact me on discord / instagram <br>
                             </p>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
         height: 100%;
         /* text-align: left; */
         margin-left: 352px;
-        background-color: #2a2c2e;
+        background-color: #36393f;
         top: 0%;
         color: rgb(255, 255, 255);
         z-index: 2;
@@ -133,7 +133,7 @@
         position: absolute;
         width: 100%;
         height: 93%;
-        background-color: #313233;
+        background-color: #36393f;
         top: 6.2%;
         color: rgb(255, 255, 255);
         z-index: 1;
@@ -183,7 +183,7 @@
             height: 100%;
             /* text-align: left; */
             margin-left: 315px;
-            background-color: #2a2c2e;
+            background-color: #36393f;
             top: 0%;
             color: rgb(255, 255, 255);
             z-index: 2;
@@ -198,7 +198,7 @@
             height: 100%;
             /* text-align: left; */
             margin-left: 55px;
-            background-color: #2a2c2e;
+            background-color: #36393f;
             top: 0%;
             color: rgb(255, 255, 255);
             z-index: 0;

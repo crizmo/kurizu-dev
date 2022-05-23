@@ -57,7 +57,7 @@
         height: 100%;
         /* text-align: left; */
         margin-left: 352px;
-        background-color: #2a2c2e;
+        background-color: #36393f;
         top: 0%;
         color: rgb(255, 255, 255);
         z-index: 2;
@@ -106,7 +106,7 @@
         position: absolute;
         width: 100%;
         height: 93%;
-        background-color: #313233;
+        background-color: #36393f;
         top: 6.2%;
         color: rgb(255, 255, 255);
         z-index: 1;
@@ -156,7 +156,7 @@
             height: 100%;
             /* text-align: left; */
             margin-left: 315px;
-            background-color: #2a2c2e;
+            background-color: #36393f;
             top: 0%;
             color: rgb(255, 255, 255);
             z-index: 2;
@@ -171,7 +171,7 @@
             height: 100%;
             /* text-align: left; */
             margin-left: 55px;
-            background-color: #2a2c2e;
+            background-color: #36393f;
             top: 0%;
             color: rgb(255, 255, 255);
             z-index: 0;

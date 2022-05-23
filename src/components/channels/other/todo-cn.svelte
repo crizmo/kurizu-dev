@@ -52,7 +52,7 @@
         height: 100%;
         /* text-align: left; */
         margin-left: 82px;
-        background-color: #2c2d30;
+        background-color: #2f3136;
         top: 0%;
         color: rgb(255, 255, 255);
         z-index: 0;
@@ -62,7 +62,7 @@
         position: relative;
         width: 100%;
         height: 100%;
-        background-color: #2c2d30;
+        background-color: #2f3136;
         border-radius: 10px;
         overflow: hidden;
     }
@@ -94,7 +94,7 @@
     }
 
     .channelbtn {
-        background-color: #2c2d30;
+        background-color: #2f3136;
         color: rgb(255, 255, 255);
         border-radius: 10px;
         width: 100%;
@@ -154,7 +154,7 @@
             width: 15.7%;
             height: 100%;
             margin-left: 82px;
-            background-color: #2c2d30;
+            background-color: #2f3136;
             top: 0%;
             color: rgb(255, 255, 255);
             z-index: 1;
@@ -171,7 +171,7 @@
             width: 20%;
             height: 100%;
             margin-left: 57px;
-            background-color: #2c2d30;
+            background-color: #2f3136;
             top: 0%;
             color: rgb(255, 255, 255);
             z-index: 1;
@@ -198,7 +198,7 @@
             width: 40%;
             height: 100%;
             margin-left: 57px;
-            background-color: #2c2d30;
+            background-color: #2f3136;
             top: 0%;
             color: rgb(255, 255, 255);
             z-index: 1;

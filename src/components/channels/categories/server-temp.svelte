@@ -24,7 +24,7 @@
         position: relative;
         width: 100%;
         height: 100%;
-        background-color: #2c2d30;
+        background-color: #2f3136;
         border-radius: 10px;
         overflow: hidden;
     }

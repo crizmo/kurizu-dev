@@ -28,7 +28,7 @@
     }
 
     .channelbtn {
-        background-color: #2c2d30;
+        background-color: #2f3136;
         color: rgb(255, 255, 255);
         border-radius: 10px;
         width: 100%;

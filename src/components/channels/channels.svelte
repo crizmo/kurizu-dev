@@ -26,7 +26,7 @@
         height: 100%;
         /* text-align: left; */
         margin-left: 65px;
-        background-color: #2c2d30;
+        background-color: #2f3136;
         top: 0%;
         color: rgb(255, 255, 255);
         z-index: 1;
