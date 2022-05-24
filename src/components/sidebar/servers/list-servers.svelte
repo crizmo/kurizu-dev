@@ -28,7 +28,7 @@
                         <div class="sidebar-content-servers-list-item-icon">
                             <a href="https://github.com/crizmo" target="_blank">
                                 <img
-                                    src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
+                                    src="https://cdn3.iconfinder.com/data/icons/inficons/512/github.png"
                                     alt=""
                                     width={serverWidth}
                                 />
@@ -40,7 +40,7 @@
                         <div class="sidebar-content-servers-list-item-icon">
                             <a href="https://discord.gg/VcMPV8vc2x" target="_blank">
                                 <img
-                                    src="https://logodownload.org/wp-content/uploads/2017/11/discord-logo-4-1.png"
+                                    src="https://storage.googleapis.com/tuna-sounds-images/a7b53e77-8cc6-4f9c-aee0-c9b928c721a6-1641838438809.jpg"
                                     alt=""
                                     width={serverWidth}
                                 />
@@ -70,6 +70,18 @@
                                 />
                             </a>
                             <h3 class="hovertext">Twitter</h3>
+                        </div>
+                    </div>
+                    <div class="sidebar-content-servers-list-item">
+                        <div class="sidebar-content-servers-list-item-icon">
+                            <a href="https://hashnode.com/@Kurizu" target="_blank">
+                                <img
+                                    src="https://www.finsmes.com/wp-content/uploads/2021/08/hashnode.jpg"
+                                    alt=""
+                                    width={serverWidth}
+                                />
+                            </a>
+                            <h3 class="hovertext">Hashnode</h3>
                         </div>
                     </div>
                 </div>
