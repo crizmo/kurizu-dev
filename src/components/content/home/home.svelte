@@ -59,8 +59,7 @@
                         <div class="chat-body-messages-item-content-body">
                             <p>
                                 Oh btw ! <br>
-                                Click on the channels if u want to see some of my projects or check out my social media accounts ! <br> <br>
-                                <img class="msg-img" src="https://cdn.discordapp.com/attachments/970974282681307187/977618419920822302/projects.png" alt="projetc-channels" height="200px" width="auto"> <br> <br>
+                                Click on the respective channels if u want to see some of my projects or just random blogs ! <br> <br>
 
                                 If you want the code for this website here's the link :- <a href="https://github.com/crizmo/kurizu-dev">https://github.com/crizmo/kurizu-dev</a> <br> <br>
                                 I hope you like it and if you have any suggestions or feedback feel free to contact me on discord / instagram / github <br>
@@ -241,11 +240,11 @@
             display: block;
         } */
 
-        .msg-img {
+        /* .msg-img {
             width: 100%;
             height: auto;
             max-width: 150px;
-        }
+        } */
 
         .chat-body-messages-item-avatar img {
             width: 45px;
