@@ -1,5 +1,6 @@
 <script>
     const serverWidth = "50px";
+    import User from '../../-comp/user.svelte';
 
     function openNav() {
         document.getElementById("mySidenav").style.width = null;
@@ -18,26 +19,48 @@
         <div class="chat-body">
             <div class="chat-body-messages">
                 <div class="chat-body-messages-item">
-                    <div class="chat-body-messages-item-avatar">
-                        <img
-                            src="https://cdn.discordapp.com/avatars/784141856426033233/2b71440eb154c1c2897e956f1f0da7b7.webp"
-                            alt=""
-                            width={serverWidth}
-                        />
-                    </div>
+                    <User />
                     <div class="chat-body-messages-item-content">
                         <div class="chat-body-messages-item-content-header">
                             <h3 class="chat-body-messages-item-content-header-name">Kurizu</h3>
                         </div>
                         <div class="chat-body-messages-item-content-body">
                             <p>
-                                Elina is a open source multipurpose discord bot made using discord.js ! <br> <br>
-                                <img class="msg-img" src="https://cdn.discordapp.com/attachments/970974481768149012/977098454251757598/elina-cmd.png" alt="homepgimg" height="300px" width="auto" style="border-radius: 8px;">
+                                Elina is a multipurpose discord bot made using discord.js ! <br> <br>
+                                Elina offers a lot of features, mainly games , genshin stats , chatbot and many more commands. <br>
+                                You can find more about it on <a href="https://elina-bot.netlify.app/commands.html">Elina's website</a> <br>
                                 <br>
-                                Wish i could put that embed in this website but i dont have the time to do that lol. <br>
-                                Anyways i hope you enjoy using Elina. ! <br> <br>
-
-                                Elina's Links :- <br>
+                                Oh here she is ...  <br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-body-messages-item">
+                    <User pfp="https://cdn.discordapp.com/avatars/842397001954230303/557d99168d42b845750241d8d7cd0f5b.webp" />
+                    <div class="chat-body-messages-item-content">
+                        <div class="chat-body-messages-item-content-header">
+                            <h3 class="chat-body-messages-item-content-header-name">Elina</h3>
+                        </div>
+                        <div class="chat-body-messages-item-content-body">
+                            <p>
+                                Hi i am Elina ! <br>
+                                One more to the millions of multipurpose discord bots on discord. <br>
+                                There's nothing too different that i do compared to all the major discord bots out there lol <br> <br>
+                                <img class="msg-img" src="https://cdn.discordapp.com/attachments/939799133177384993/978893594125561916/commands.png" alt="homepgimg" height="300px" width="auto" style="border-radius: 8px;">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-body-messages-item">
+                    <User />
+                    <div class="chat-body-messages-item-content">
+                        <div class="chat-body-messages-item-content-header">
+                            <h3 class="chat-body-messages-item-content-header-name">Kurizu</h3>
+                        </div>
+                        <div class="chat-body-messages-item-content-body">
+                            <p>
+                                Oh and elina is open source too ! <br>
+                                You can find the source code form links below : <br>
                                 <a href="https://github.com/crizmo/Elina-dev" target="_blank">Github</a> <br>
                                 <a href="https://elina-bot.netlify.app/" target="_blank">Website</a>
 
@@ -122,15 +145,6 @@
         color: rgb(255, 255, 255);
         z-index: 1;
         top: 2%;
-    }
-    
-    .chat-body-messages-item-avatar {
-        margin-left: 20px;
-        position: absolute;
-        overflow: hidden;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
     }
 
     .chat-body-messages-item-content {
@@ -226,12 +240,6 @@
             width: 100%;
             height: auto;
             max-width: 300px;
-        }
-
-        .chat-body-messages-item-avatar img {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
         }
 
         .chat-body-messages-item-content-body {

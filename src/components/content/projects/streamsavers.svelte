@@ -1,5 +1,6 @@
 <script>
     const serverWidth = "50px";
+    import User from '../../-comp/user.svelte';
 
     function openNav() {
         document.getElementById("mySidenav").style.width = null;
@@ -18,13 +19,7 @@
         <div class="chat-body">
             <div class="chat-body-messages">
                 <div class="chat-body-messages-item">
-                    <div class="chat-body-messages-item-avatar">
-                        <img
-                            src="https://cdn.discordapp.com/avatars/784141856426033233/2b71440eb154c1c2897e956f1f0da7b7.webp"
-                            alt=""
-                            width={serverWidth}
-                        />
-                    </div>
+                    <User />
                     <div class="chat-body-messages-item-content">
                         <div class="chat-body-messages-item-content-header">
                             <h3 class="chat-body-messages-item-content-header-name">Kurizu</h3>
@@ -40,13 +35,7 @@
                     </div>
                 </div>
                 <div class="chat-body-messages-item">
-                    <div class="chat-body-messages-item-avatar">
-                        <img
-                            src="https://cdn.discordapp.com/avatars/626618189450838027/bfb3228d1a394361af00c0aa9a7de14b.webp"
-                            alt=""
-                            width={serverWidth}
-                        />
-                    </div>
+                    <User pfp = "https://cdn.discordapp.com/avatars/626618189450838027/bfb3228d1a394361af00c0aa9a7de14b.webp"/>
                     <div class="chat-body-messages-item-content">
                         <div class="chat-body-messages-item-content-header">
                             <h3 class="chat-body-messages-item-content-header-name">Coding398</h3>
@@ -60,13 +49,7 @@
                     </div>
                 </div>
                 <div class="chat-body-messages-item">
-                    <div class="chat-body-messages-item-avatar">
-                        <img
-                            src="https://cdn.discordapp.com/avatars/784141856426033233/2b71440eb154c1c2897e956f1f0da7b7.webp"
-                            alt=""
-                            width={serverWidth}
-                        />
-                    </div>
+                    <User />    
                     <div class="chat-body-messages-item-content">
                         <div class="chat-body-messages-item-content-header">
                             <h3 class="chat-body-messages-item-content-header-name">Kurizu</h3>
@@ -164,15 +147,6 @@
         z-index: 1;
         top: 2%;
     }
-    
-    .chat-body-messages-item-avatar {
-        margin-left: 20px;
-        position: absolute;
-        overflow: hidden;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-    }
 
     .chat-body-messages-item-content {
         color: rgb(255, 255, 255);
@@ -267,12 +241,6 @@
             width: 100%;
             height: auto;
             max-width: 600px;
-        }
-
-        .chat-body-messages-item-avatar img {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
         }
 
         .chat-body-messages-item-content-body {
