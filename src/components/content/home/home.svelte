@@ -1,5 +1,6 @@
 <script>
     const serverWidth = "50px";
+    import User from '../../-comp/user.svelte';
 
     function openNav() {
         document.getElementById("mySidenav").style.width = null;
@@ -19,13 +20,7 @@
         <div class="chat-body">
             <div class="chat-body-messages">
                 <div class="chat-body-messages-item">
-                    <div class="chat-body-messages-item-avatar">
-                        <img
-                            src="https://cdn.discordapp.com/avatars/784141856426033233/2b71440eb154c1c2897e956f1f0da7b7.webp"
-                            alt=""
-                            width={serverWidth}
-                        />
-                    </div>
+                    <User />
                     <div class="chat-body-messages-item-content">
                         <div class="chat-body-messages-item-content-header">
                             <h3
@@ -38,20 +33,14 @@
                             <p>
                                 Oi mate ! I'm Kurizu and this is my website showcasing my projects and links to my social media accounts ! <br>
                                 As you might have already noticed this website looks similar to the discord application and thats what i was aiming for. <br> <br>
-                                It is completely made using svelte ! <br>
+                                It is completely made using <a href="https://svelte.dev/">Svelte</a> ! <br>
                                 The site has a lot of unfinished features but we will get there soon ! <br>
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="chat-body-messages-item">
-                    <div class="chat-body-messages-item-avatar">
-                        <img
-                        src="https://cdn.discordapp.com/avatars/784141856426033233/2b71440eb154c1c2897e956f1f0da7b7.webp"
-                            alt=""
-                            width={serverWidth}
-                            />
-                        </div>
+                    <User />
                     <div class="chat-body-messages-item-content">
                         <div class="chat-body-messages-item-content-header">
                             <h3 class="chat-body-messages-item-content-header-name">Kurizu</h3>
@@ -140,15 +129,6 @@
         color: rgb(255, 255, 255);
         z-index: 1;
         top: 2%;
-    }
-
-    .chat-body-messages-item-avatar {
-        margin-left: 20px;
-        position: absolute;
-        overflow: hidden;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
     }
 
     .chat-body-messages-item-content {
@@ -245,12 +225,6 @@
             height: auto;
             max-width: 150px;
         } */
-
-        .chat-body-messages-item-avatar img {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-        }
 
         .chat-body-messages-item-content-body {
             color: rgb(255, 255, 255);
