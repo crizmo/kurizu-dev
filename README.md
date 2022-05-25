@@ -21,3 +21,8 @@ My discord username is `Criz#1270` !
 ## Links 
 - [Site](https://kurizu.vercel.app/)
 - [Discord](https://discord.gg/VcMPV8vc2x)
+
+## Assets 
+- Thanks to Pinterest for the banner and server logo images
+- Thanks to font awesome for the icons
+- And finally thanks to google images for the link logos
