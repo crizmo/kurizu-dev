@@ -1,13 +1,13 @@
 <script>
     const serverWidth = "50px";
+    import User from '../../-comp/user.svelte';
 
     function openNav() {
         document.getElementById("mySidenav").style.width = null;
     }
 
-    if (window.innerWidth === 1800) {
-        openNav();
-    } 
+    const uncheck = "fas fa-solid fa-square";
+    const check = "fas fa-solid fa-check";
     
 </script>
 
@@ -24,13 +24,7 @@
         <div class="chat-body">
             <div class="chat-body-messages">
                 <div class="chat-body-messages-item">
-                    <div class="chat-body-messages-item-avatar">
-                        <img
-                            src="https://cdn.discordapp.com/avatars/784141856426033233/2b71440eb154c1c2897e956f1f0da7b7.webp"
-                            alt=""
-                            width={serverWidth}
-                        />
-                    </div>
+                    <User />
                     <div class="chat-body-messages-item-content">
                         <div class="chat-body-messages-item-content-header">
                             <h3
@@ -40,14 +34,17 @@
                             </h3>
                         </div>
                         <div class="chat-body-messages-item-content-body">
+                            <h3 style="color: yellow;">Plans / To-do regarding this site</h3>
                             <p>
-                                <i class="fas fa-solid fa-square"></i> | More better view for mobile devices
+                                <i class="{check}"></i> | More better view for mobile devices
                                 <br />
-                                <i class="fas fa-solid fa-square"></i> | Add more channels
+                                <i class="{uncheck}"></i> | Add more channels
                                 <br />
-                                <i class="fas fa-solid fa-square"></i> | Git posts 
+                                <i class="{check}"></i> | Git posts 
                                 <br>
-                                <i class="fas fa-solid fa-check"></i> | Change color to original app color 
+                                <i class="{check}"></i> | Change color to original app color 
+                                <br>
+                                <i class="{uncheck}"></i> | Add elina user in /elina-bot
                             </p>
                         </div>
                     </div>
@@ -229,12 +226,6 @@
             height: auto;
             max-width: 150px;
         } */
-
-        .chat-body-messages-item-avatar img {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-        }
 
         .chat-body-messages-item-content-body {
             color: rgb(255, 255, 255);
