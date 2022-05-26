@@ -84,6 +84,18 @@
                             <h3 class="hovertext">Hashnode</h3>
                         </div>
                     </div>
+                    <div class="sidebar-content-servers-list-item">
+                        <div class="sidebar-content-servers-list-item-icon">
+                            <a href="https://ko-fi.com/kurizu" target="_blank">
+                                <img
+                                    src="https://matthewdaish.files.wordpress.com/2020/12/kofi.jpg"
+                                    alt=""
+                                    width={serverWidth}
+                                />
+                            </a>
+                            <h3 class="hovertext">Kofi</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
