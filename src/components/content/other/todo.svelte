@@ -44,7 +44,7 @@
                                 <br>
                                 <i class="{check}"></i> | Change color to original app color 
                                 <br>
-                                <i class="{uncheck}"></i> | Add elina user in /elina-bot
+                                <i class="{check}"></i> | Add elina user in /elina-bot
                             </p>
                         </div>
                     </div>
