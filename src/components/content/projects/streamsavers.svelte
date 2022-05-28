@@ -68,7 +68,7 @@
                                 <a href="https://github.com/crizmo/Stream-Savers">Github</a> <br> <br>
 
                                 Stream Savers : <br>
-                                <img class="msg-img" src="https://cdn.discordapp.com/attachments/970974581944885268/977185629509136444/streamsavers.png" alt="homepgimg" height="300px" width="auto" style="border-radius: 10px;">
+                                <img class="msg-img" src="https://cdn.discordapp.com/attachments/970974581944885268/980031303967703040/stream-savers.png" alt="homepgimg" height="300px" width="auto" style="border-radius: 10px;">
                             </p>
                         </div>
                     </div>
