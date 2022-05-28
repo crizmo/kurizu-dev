@@ -31,7 +31,7 @@
                         </div>
                         <div class="chat-body-messages-item-content-body">
                             <p>
-                                Oi mate ! I'm Kurizu and this is my website showcasing my projects and links to my social media accounts ! <br>
+                                Oi mate ! I'm <span style="color: aqua;">Kurizu</span> and this is my website showcasing my projects and links to my social media accounts ! <br>
                                 As you might have already noticed this website looks similar to the discord application and thats what i was aiming for. <br> <br>
                                 It is completely made using <a href="https://svelte.dev/">Svelte</a> ! <br>
                                 The site has a lot of unfinished features but we will get there soon ! <br>
@@ -52,7 +52,8 @@
 
                                 If you want the code for this website here's the link :- <a href="https://github.com/crizmo/kurizu-dev">https://github.com/crizmo/kurizu-dev</a> <br> <br>
                                 I hope you like it and if you have any suggestions or feedback feel free to contact me on discord / instagram / github <br>
-                                Thank you for checking out my website ! 
+                                Thank you for checking out my website ! <br> <br>
+                                <img class="show-img" src="https://cdn.discordapp.com/attachments/970974282681307187/980030164719263754/green-grass.jpg" alt="hi" width="60%" height="auto">
                             </p>
                         </div>
                     </div>
@@ -112,6 +113,10 @@
     /* .open-btn {
         display: none;
     } */
+
+    .show-img {
+        border-radius: 10px;
+    }
 
     .chat-body {
         position: absolute;
