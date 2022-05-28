@@ -28,6 +28,7 @@
                             <p>
                                 AnyAnime is a NPM package that helps you get random anime pfp / images on use . <br>
                                 It can be used in a discord bot or on a website or anywhere else.  <br>
+                                Currently AnyAnime pkg and api has a database of over 500 unique anime pfps. <br>
                                 <br>
                                 To add more flexibility to the package i later made a API similar to the NPM package <br>
                                 I would appreciate contributions to the API or the Npm package <br> <br>
