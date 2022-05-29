@@ -1,11 +1,10 @@
 <script>
     const serverWidth = "50px";
-    import User from '../../-comp/user.svelte';
+    import User from "../../-comp/user.svelte";
 
     function openNav() {
         document.getElementById("mySidenav").style.width = null;
     }
-
 </script>
 
 <main>
@@ -31,10 +30,19 @@
                         </div>
                         <div class="chat-body-messages-item-content-body">
                             <p>
-                                Oi mate ! I'm <span style="color: aqua;">Kurizu</span> and this is my website showcasing my projects and links to my social media accounts ! <br>
-                                As you might have already noticed this website looks similar to the discord application and thats what i was aiming for. <br> <br>
-                                It is completely made using <a href="https://svelte.dev/">Svelte</a> ! <br>
-                                The site has a lot of unfinished features but we will get there soon ! <br>
+                                Oi mate ! I'm <span style="color: aqua;"
+                                    >Kurizu</span
+                                >
+                                and this is my website showcasing my projects
+                                and links to my social media accounts ! <br />
+                                As you might have already noticed this website looks
+                                similar to the discord application and thats what
+                                i was aiming for. <br /> <br />
+                                It is completely made using
+                                <a href="https://svelte.dev/">Svelte</a>
+                                ! <br />
+                                The site has a lot of unfinished features but we
+                                will get there soon ! <br />
                             </p>
                         </div>
                     </div>
@@ -43,17 +51,36 @@
                     <User />
                     <div class="chat-body-messages-item-content">
                         <div class="chat-body-messages-item-content-header">
-                            <h3 class="chat-body-messages-item-content-header-name">Kurizu</h3>
+                            <h3
+                                class="chat-body-messages-item-content-header-name"
+                            >
+                                Kurizu
+                            </h3>
                         </div>
                         <div class="chat-body-messages-item-content-body">
                             <p>
-                                Oh btw ! <br>
-                                Click on the respective channels if u want to see some of my projects or just random blogs ! <br> <br>
+                                Oh btw ! <br />
+                                Click on the respective channels if u want to see
+                                some of my projects or just random blogs !
+                                <br /> <br />
 
-                                If you want the code for this website here's the link :- <a href="https://github.com/crizmo/kurizu-dev">https://github.com/crizmo/kurizu-dev</a> <br> <br>
-                                I hope you like it and if you have any suggestions or feedback feel free to contact me on discord / instagram / github <br>
-                                Thank you for checking out my website ! <br> <br>
-                                <img class="show-img" src="https://cdn.discordapp.com/attachments/970974282681307187/980030164719263754/green-grass.jpg" alt="hi" width="60%" height="auto">
+                                If you want the code for this website here's the
+                                link :-
+                                <a href="https://github.com/crizmo/kurizu-dev"
+                                    >https://github.com/crizmo/kurizu-dev</a
+                                > <br /> <br />
+                                I hope you like it and if you have any suggestions
+                                or feedback feel free to contact me on discord /
+                                instagram / github <br />
+                                Thank you for checking out my website ! <br />
+                                <br />
+                                <img
+                                    class="show-img"
+                                    src="https://cdn.discordapp.com/attachments/970974282681307187/980030164719263754/green-grass.jpg"
+                                    alt="hi"
+                                    width="60%"
+                                    height="auto"
+                                />
                             </p>
                         </div>
                     </div>
@@ -65,13 +92,25 @@
 
 <style>
 
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #888; 
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555; 
+    }
+
     main a {
         color: #38b9ec;
     }
 
     .mainarea {
         position: absolute;
-        width: 81.3%;
+        width: 81.25%;
         height: 100%;
         /* text-align: left; */
         margin-left: 352px;
