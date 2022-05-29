@@ -59,6 +59,7 @@
 </main>
 
 <style>
+
     main a {
         color: #38b9ec;
     }
@@ -74,7 +75,7 @@
     ::-webkit-scrollbar-thumb:hover {
         background: #555; 
     }
-
+    
     .mainarea {
         position: absolute;
         width: 81.25%;
@@ -168,7 +169,6 @@
             height: 100%;
             /* text-align: left; */
             margin-left: 315px;
-            background-color: #36393f;
             top: 0%;
             color: rgb(255, 255, 255);
             z-index: 2;
@@ -183,7 +183,6 @@
             height: 100%;
             /* text-align: left; */
             margin-left: 55px;
-            background-color: #36393f;
             top: 0%;
             color: rgb(255, 255, 255);
             z-index: 0;
