@@ -84,9 +84,21 @@
         color: #38b9ec;
     }
 
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #888; 
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555; 
+    }
+
     .mainarea {
         position: absolute;
-        width: 81.3%;
+        width: 81.25%;
         height: 100%;
         /* text-align: left; */
         margin-left: 352px;

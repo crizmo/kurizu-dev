@@ -11,6 +11,7 @@
 </main>
 
 <style>
+    
     .sidebar {
         width: 90px;
         height: 100%;
@@ -19,7 +20,6 @@
         top: 0;
         left: 0;
         z-index: 2;
-        /* overflow-x: hidden; */
     }
 
     @media screen and (max-width: 1500px) {
