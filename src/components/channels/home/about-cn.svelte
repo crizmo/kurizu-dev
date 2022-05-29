@@ -46,6 +46,19 @@
 </main>
 
 <style>
+
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #888; 
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555; 
+    }
+
     .channels {
         position: absolute;
         width: 14.1%;
