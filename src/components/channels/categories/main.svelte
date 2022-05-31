@@ -63,15 +63,6 @@
         transform: rotate(90deg);
     }
 
-    /* .home-cn {
-        background: rgb(104, 104, 104) none repeat scroll 0 0;
-        border-right: 5px none white;
-        box-sizing: border-box;
-        display: block;
-        border-radius: 3px;
-        padding: 5px;
-    } */
-
     .home-cn:hover {
         background: rgb(104, 104, 104) none repeat scroll 0 0;
         border-right: 5px none white;
@@ -81,15 +72,6 @@
         padding: 3px;
         color: rgb(255, 255, 255);
     }
-
-    /* .about-cn {
-        background: rgb(104, 104, 104) none repeat scroll 0 0;
-        border-right: 5px none white;
-        box-sizing: border-box;
-        display: block;
-        border-radius: 3px;
-        padding: 5px;
-    } */
 
     .about-cn:hover {
         background: rgb(104, 104, 104) none repeat scroll 0 0;
