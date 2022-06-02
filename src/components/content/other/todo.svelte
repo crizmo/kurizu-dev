@@ -45,6 +45,10 @@
                                 <i class="{check}"></i> | Change color to original app color 
                                 <br>
                                 <i class="{check}"></i> | Add elina user in /elina-bot
+                                <br>
+                                <i class="{uncheck}"></i> | Add kofi links on AnyAnime npm & api
+                                <br>
+                                <i class="{uncheck}"></i> | Add kofi links on elina-site
                             </p>
                         </div>
                     </div>
