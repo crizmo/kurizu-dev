@@ -25,4 +25,4 @@ My discord username is `Criz#1270` !
 ## Assets 
 - Thanks to Pinterest for the banner and server logo images
 - Thanks to font awesome for the icons
-- And finally thanks to google images for the link logos
+- And finally thanks to google for logo images
