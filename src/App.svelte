@@ -44,18 +44,6 @@
   }}
 />
 
-<head>
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-JE7P696VHV"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-
-		gtag('config', 'G-JE7P696VHV');
-	</script>
-</head>
-
 <main>
 
 	<Sidebar/>
