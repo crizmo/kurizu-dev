@@ -40,7 +40,9 @@
                                 <a href="https://rapidapi.com/Kurizu/api/any-anime/">API</a> |
                                 <a href="https://github.com/crizmo/AnyAnime_api">Github</a>
                                 <br> <br>
-                                Website explaning the pkg + api :- <a href="https://anyanime-npm.netlify.app/">AnyAnime Docs</a>
+                                Website explaning the pkg + api :- <a href="https://anyanime-npm.netlify.app/">AnyAnime Docs</a> 
+                                <br> <br>
+                                <img alt="npm" src="https://img.shields.io/npm/dt/anyanime">
                             </p>
                         </div>
                     </div>
