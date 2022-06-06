@@ -63,7 +63,9 @@
                                 You can find the source code form links below : <br>
                                 <a href="https://github.com/crizmo/Elina-dev" target="_blank">Github</a> <br>
                                 <a href="https://elina-bot.netlify.app/" target="_blank">Website</a> <br>
-                                <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/crizmo/elina-dev?style=social">
+                                <a href="https://github.com/crizmo/Elina-dev">
+                                    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/crizmo/elina-dev?style=social">
+                                </a>
 
                                 <br> <br>
                                 The website has all the commands and info you need to know about Elina. <br>
