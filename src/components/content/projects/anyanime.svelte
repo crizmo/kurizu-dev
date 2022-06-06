@@ -42,8 +42,12 @@
                                 <br> <br>
                                 Website explaning the pkg + api :- <a href="https://anyanime-npm.netlify.app/">AnyAnime Docs</a> 
                                 <br> <br>
-                                <img alt="npm" src="https://img.shields.io/npm/dt/anyanime">
-                                <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/crizmo/AnyAnime?style=social">
+                                <a href="https://www.npmjs.com/package/anyanime">
+                                    <img alt="npm" src="https://img.shields.io/npm/dt/anyanime">
+                                </a>
+                                <a href="https://github.com/crizmo/AnyAnime">
+                                    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/crizmo/AnyAnime?style=social">
+                                </a>
                             </p>
                         </div>
                     </div>
