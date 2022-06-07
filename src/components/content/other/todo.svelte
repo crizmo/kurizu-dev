@@ -48,7 +48,7 @@
                                 <br>
                                 <i class="{uncheck}"></i> | Add kofi links on AnyAnime npm & api
                                 <br>
-                                <i class="{uncheck}"></i> | Add kofi links on elina-site
+                                <i class="{check}"></i> | Add kofi links on elina-site
                             </p>
                         </div>
                     </div>
