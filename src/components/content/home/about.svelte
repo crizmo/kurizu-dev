@@ -26,10 +26,9 @@
                         </div>
                         <div class="chat-body-messages-item-content-body">
                             <p>
-                                Yo ! I'm Kurizu , An average guy who likes to code ! <br> I often end up doing frontend even if i like backend lol <br> <br>
-                                Currently learning Node.js and Svelte <br>
-                                Give me project ideas ! <br> <br>
-
+                                Yo ! I'm Kurizu , A curious boi who likes to code ! <br> 
+                                Im not very good at social interactions , but I'm always up for a chat ! <br> 
+                                I like drawing, even tho i suck at it. <br> <br>
                                 I like to play retro games and watch anime [ Not really ] <br> 
                                 Been playing around with ascii and pixel art for a while <br> <br>
 
