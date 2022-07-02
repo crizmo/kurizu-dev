@@ -4,11 +4,13 @@
 	import AnyanimeCn from '../../channels/projects/anyanime-cn.svelte';
 	import StreamSaversCn from '../../channels/projects/streamsavers-cn.svelte';
 	import PixitCn from '../../channels/projects/pixit-cn.svelte';
+	import BreezeCn from '../../channels/projects/breeze-cn.svelte';
 
 	import Anyanime from '../projects/anyanime.svelte';
 	import ElinaDev from '../projects/elina-dev.svelte';
 	import StreamSavers from '../projects/streamsavers.svelte';
 	import Pixit from '../projects/pixit.svelte';
+	import Breeze from '../projects/breeze.svelte';
 </script>
 
 <main>
@@ -30,6 +32,11 @@
 	<Route path="/pixit">
 		<PixitCn />
 		<Pixit />
+	</Route>
+
+	<Route path="/breeze">
+		<BreezeCn />
+		<Breeze />
 	</Route>
 </main>
 
