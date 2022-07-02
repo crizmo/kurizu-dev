@@ -44,6 +44,9 @@
                     <button class="channelbtn">
                         <a class="pixit-cn" href="/pixit"># Pixit</a>
                     </button>
+                    <button class="channelbtn">
+                        <a class="breeze-cn" href="/breeze"># Breeze</a>
+                    </button>
                 </div>
             </details>
             <br />
@@ -160,7 +163,8 @@
 
     .anyanime-cn:hover ,    
     .elina-cn:hover ,
-    .stream-savers-cn:hover {
+    .stream-savers-cn:hover,
+    .breeze-cn:hover {
         background: rgb(104, 104, 104) none repeat scroll 0 0;
         border-right: 5px none white;
         box-sizing: border-box;
