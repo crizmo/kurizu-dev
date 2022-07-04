@@ -2,7 +2,7 @@
 
 Discord desktop app themed portfolio website made using svelte ! 
 
-![Kurizu-dev](https://user-images.githubusercontent.com/83665497/169778924-813ed87e-4d33-42c7-a89d-677cda1830a4.png)
+![Kurizu-dev](https://user-images.githubusercontent.com/83665497/177132064-36991c91-3c5b-4971-9cd8-785a04134d42.png)
 
 ## Code
 Just clone the repo and run `npm install` to install all the dependencies
@@ -25,4 +25,4 @@ My discord username is `Criz#1270` !
 ## Assets 
 - Thanks to Pinterest for the banner and server logo images
 - Thanks to font awesome for the icons
-- And finally thanks to google for logo images
+- And finally thanks to google for logo images !
