@@ -270,6 +270,12 @@
             max-width: 150px;
         } */
 
+        .show-img {
+            width: 100%;
+            height: auto;
+            max-width: 250px;
+        }
+
         .chat-body-messages-item-content-body {
             color: rgb(255, 255, 255);
             z-index: 1;
