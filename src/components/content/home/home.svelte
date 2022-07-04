@@ -118,7 +118,7 @@
         top: 0%;
         color: rgb(255, 255, 255);
         z-index: 2;
-        overflow: scroll;
+        overflow: fixed;
     }
 
     .top-nav {

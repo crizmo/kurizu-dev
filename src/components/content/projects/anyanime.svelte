@@ -44,9 +44,9 @@
                                 <br> <br>
                                 <a href="https://www.npmjs.com/package/anyanime">
                                     <img alt="npm" src="https://img.shields.io/npm/dt/anyanime">
-                                </a>
+                                </a> <br>
                                 <a href="https://github.com/crizmo/AnyAnime">
-                                    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/crizmo/AnyAnime?style=social">
+                                    <img alt="GitHub Repo" src="https://img.shields.io/github/stars/crizmo/AnyAnime?style=social">
                                 </a>
                             </p>
                         </div>
@@ -102,7 +102,7 @@
         color: rgb(255, 255, 255);
         z-index: 2;
         /* overflow: hidden; */
-        overflow: scroll;
+        overflow: fixed;
     }
 
     .top-nav {
