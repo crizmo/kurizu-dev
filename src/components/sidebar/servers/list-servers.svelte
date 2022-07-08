@@ -40,7 +40,7 @@
                         <div class="sidebar-content-servers-list-item-icon">
                             <a href="https://discord.gg/VcMPV8vc2x" target="_blank">
                                 <img
-                                    src="https://storage.googleapis.com/tuna-sounds-images/a7b53e77-8cc6-4f9c-aee0-c9b928c721a6-1641838438809.jpg"
+                                    src="https://static.vecteezy.com/system/resources/previews/006/892/625/original/discord-logo-icon-editorial-free-vector.jpg"
                                     alt=""
                                     width={serverWidth}
                                 />
