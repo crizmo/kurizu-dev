@@ -59,7 +59,7 @@
                         </div>
                         <div class="chat-body-messages-item-content-body">
                             <p>
-                                Oh btw ! <br />
+                                Oh btwwwwwwwwwwwwwww ! <br />
                                 Click on the respective channels if u want to see
                                 some of my projects or just random blogs !
                                 <br /> <br />
