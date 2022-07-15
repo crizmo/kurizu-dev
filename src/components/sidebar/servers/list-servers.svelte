@@ -176,8 +176,8 @@
         }
 
         .sidebar-content-servers-list-item-icon img {
-            width: 40px;
-            height: 40px;
+            width: 37px;
+            height: 37px;
             margin-right: 5px;
         }
     }

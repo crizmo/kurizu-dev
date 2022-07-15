@@ -44,8 +44,8 @@
 
     @media screen and (max-width: 1500px) {
         .sidebar-header-logo img {
-            width: 45px;
-            height: 45px;
+            width: 37px;
+            height: 37px;
             margin-right: 5px;
         }
     }
