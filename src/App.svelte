@@ -52,13 +52,11 @@
 	<!-- Home -->
 	<Route path="/">
 		<HomeCn/>
-		<!-- <Channels/> -->
 		<Home/>
 	</Route>
 	
 	<Route path="/about">
 		<AboutCn/>
-		<!-- <Channels /> -->
 		<About/>
 	</Route>
 
