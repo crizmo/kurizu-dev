@@ -52,7 +52,7 @@
                         <div class="sidebar-content-servers-list-item-icon">
                             <a href="https://www.instagram.com/criz_595/" target="_blank">
                                 <img
-                                    src="https://image.similarpng.com/very-thumbnail/2020/05/Glossy-Instagram-logo-PNG.png"
+                                    src="https://cdn.discordapp.com/attachments/977949070893125632/999254421416452176/instagram.png"
                                     alt=""
                                     width={serverWidth}
                                 />
@@ -64,7 +64,7 @@
                         <div class="sidebar-content-servers-list-item-icon">
                             <a href="https://twitter.com/Criz_595" target="_blank">
                                 <img
-                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV-iD_ebE82snC0KxQGcRWNcse8CBocN6BFv4LbCb-Gu7lLYcfmePRDFe1_y3pRTjsc-s&usqp=CAU"
+                                    src="https://cdn.discordapp.com/attachments/977949070893125632/999254025302200380/unknown.png"
                                     alt=""
                                     width={serverWidth}
                                 />
@@ -94,6 +94,18 @@
                                 />
                             </a>
                             <h3 class="hovertext">Kofi</h3>
+                        </div>
+                    </div>
+                    <div class="sidebar-content-servers-list-item">
+                        <div class="sidebar-content-servers-list-item-icon">
+                            <a href="https://replit.com/@kurizu" target="_blank">
+                                <img
+                                    src="https://media.discordapp.net/attachments/977949070893125632/999255947564285972/replit.png"
+                                    alt=""
+                                    width={serverWidth}
+                                />
+                            </a>
+                            <h3 class="hovertext">Replit</h3>
                         </div>
                     </div>
                 </div>
