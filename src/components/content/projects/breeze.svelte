@@ -2,13 +2,28 @@
     const serverWidth = "50px";
     import User from '../../-comp/user.svelte'; 
 
-    function openNav() {
-        document.getElementById("mySidenav").style.width = null;
+    import { closeNav, openNav } from "../../channels/home/home-cn.svelte";
+
+    import { swipe } from "svelte-gestures";
+    let direction;
+
+    function handler(event) {
+        direction = event.detail.direction;
+
+        console.log(direction);
+
+        if (window.innerWidth < 1500) {
+            if (direction == "left") {
+                closeNav();
+            } else if (direction == "right") {
+                openNav();
+            }
+        }
     }
 </script>
 
 <main>
-    <div class="mainarea">
+    <div class="mainarea" use:swipe={{ timeframe: 500, minSwipeDistance: 0.1 }} on:swipe={handler}>
         <div class="top-nav">
             <h3 class="channel-name"># Breeze</h3>
             <div class="vl" />
