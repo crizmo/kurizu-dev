@@ -3,15 +3,36 @@
     import Links from '../categories/other.svelte'
     import Main from '../categories/main.svelte';
 
-    function closeNav() {
+    export function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("mySidenav").style.transition = "width 0.5s";
+    }
+    
+    export function openNav() {
+        document.getElementById("mySidenav").style.width = null;
+        document.getElementById("mySidenav").style.transition = "width 0.5s";
+    }
+
+    import { swipe } from "svelte-gestures";
+    let direction;
+
+    function handler(event) {
+        direction = event.detail.direction;
+
+        if (window.innerWidth < 1500) {
+            if (direction == "left") {
+                closeNav();
+            } else if (direction == "right") {
+                openNav();
+            }
+        }
     }
 </script>
 
 <main>
     <script src="https://kit.fontawesome.com/8dc570c5d4.js" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <div class="channels" id="mySidenav">
+    <div class="channels" id="mySidenav" use:swipe={{ timeframe: 300, minSwipeDistance: 0.1 }} on:swipe={handler}>
         <div>
             <div class="server-template-icon">
                 <img
