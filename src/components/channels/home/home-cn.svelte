@@ -1,16 +1,39 @@
-<script>
+<script context="module">
     import Projects from "../categories/projects.svelte";
     import Links from "../categories/other.svelte";
 
-    function closeNav() {
+    export function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("mySidenav").style.transition = "width 0.5s";
+    }
+    
+    export function openNav() {
+        document.getElementById("mySidenav").style.width = null;
+        document.getElementById("mySidenav").style.transition = "width 0.5s";
+    }
+
+    import { swipe } from "svelte-gestures";
+    let direction;
+
+    function handler(event) {
+        direction = event.detail.direction;
+
+        if (window.innerWidth < 1500) {
+            if (direction == "left") {
+                closeNav();
+            } else if (direction == "right") {
+                openNav();
+            }
+        }
     }
 </script>
 
 <main>
-    <script src="https://kit.fontawesome.com/8dc570c5d4.js" crossorigin="anonymous"></script>
+    <script
+        src="https://kit.fontawesome.com/8dc570c5d4.js"
+        crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <div class="channels" id="mySidenav">
+    <div class="channels" id="mySidenav" use:swipe={{ timeframe: 300, minSwipeDistance: 0.1 }} on:swipe={handler}>
         <div>
             <div class="server-template-icon">
                 <img
@@ -20,12 +43,12 @@
                     height="100%"
                 />
                 <h3 class="server-name-on-template">Kurizu</h3>
-                <span class="close-btn" on:click="{closeNav}">&times;</span>
+                <span class="close-btn" on:click={closeNav}>&times;</span>
             </div>
             <hr />
         </div>
         <div class="categories">
-            <details class="home" open> 
+            <details class="home" open>
                 <summary>Home</summary>
                 <hr width="50%" />
                 <div class="channels-list">
@@ -46,17 +69,16 @@
 </main>
 
 <style>
-
     ::-webkit-scrollbar {
         width: 5px;
     }
 
     ::-webkit-scrollbar-thumb {
-        background: #888; 
+        background: #888;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        background: #555; 
+        background: #555;
     }
 
     .channels {
