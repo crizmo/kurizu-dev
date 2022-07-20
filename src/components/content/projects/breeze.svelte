@@ -10,7 +10,7 @@
     function handler(event) {
         direction = event.detail.direction;
 
-        console.log(direction);
+        
 
         if (window.innerWidth < 1500) {
             if (direction == "left") {
