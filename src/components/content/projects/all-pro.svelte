@@ -5,12 +5,14 @@
 	import StreamSaversCn from '../../channels/projects/streamsavers-cn.svelte';
 	import PixitCn from '../../channels/projects/pixit-cn.svelte';
 	import BreezeCn from '../../channels/projects/breeze-cn.svelte';
+	import MinikeyCn from '../../channels/projects/minikey-cn.svelte';
 
 	import Anyanime from '../projects/anyanime.svelte';
 	import ElinaDev from '../projects/elina-dev.svelte';
 	import StreamSavers from '../projects/streamsavers.svelte';
 	import Pixit from '../projects/pixit.svelte';
 	import Breeze from '../projects/breeze.svelte';
+	import Minikey from '../projects/minikey.svelte';
 </script>
 
 <main>
@@ -37,6 +39,11 @@
 	<Route path="/breeze">
 		<BreezeCn />
 		<Breeze />
+	</Route>
+
+	<Route path="/minikey">
+		<MinikeyCn />
+		<Minikey />
 	</Route>
 </main>
 
