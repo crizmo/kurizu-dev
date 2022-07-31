@@ -176,7 +176,7 @@
         transform: rotate(90deg);
     }
 
-    .breeze-cn {
+    .minikey-cn {
         background: rgb(104, 104, 104) none repeat scroll 0 0;
         border-right: 5px none white;
         box-sizing: border-box;
@@ -188,8 +188,8 @@
     .anyanime-cn:hover ,    
     .elina-cn:hover ,
     .stream-savers-cn:hover,
-    .pixit-cn:hover,
-    .minikey-cn:hover {
+    .breeze-cn:hover,
+    .pixit-cn:hover {
         background: rgb(104, 104, 104) none repeat scroll 0 0;
         border-right: 5px none white;
         box-sizing: border-box;
