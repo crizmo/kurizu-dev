@@ -23,6 +23,9 @@
                     <button class="channelbtn">
                         <a class="breeze-cn" href="/breeze"># Breeze</a>
                     </button>
+                    <button class="channelbtn">
+                        <a class="minikey-cn" href="/minikey"># Minikey</a>
+                    </button>
                 </div>
             </details>
         </div>
@@ -76,7 +79,8 @@
     .elina-cn:hover,
     .stream-savers-cn:hover,
     .pixit-cn:hover,
-    .breeze-cn:hover {
+    .breeze-cn:hover,
+    .minikey-cn:hover {
         background: rgb(104, 104, 104) none repeat scroll 0 0;
         border-right: 5px none white;
         box-sizing: border-box;
