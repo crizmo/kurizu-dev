@@ -15,7 +15,6 @@
 	import About from './components/content/home/about.svelte';
 
 </script>
-<meta name="google-site-verification" content="7UyFq6rH-vMnRYw_3X1Ac8Rf015Xkw0T9njJBl7CImQ" />
 
 <MetaTags
   title="Kurizu"
