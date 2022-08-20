@@ -36,7 +36,7 @@
         <div>
             <div class="server-template-icon">
                 <img
-                    src="https://cdn-cfmok.nitrocdn.com/juJsjTwdTqWjkJBaBrLnvLeovPsDevAD/assets/static/optimized/rev-b5a7330/wp-content/uploads/4K-Anime-Wallpapers-2020.jpg"
+                    src="https://cdn.discordapp.com/attachments/977949070893125632/1010593053410599064/banner.png"
                     alt=""
                     width="100%"
                     height="100%"
