@@ -16,7 +16,7 @@
                     <div class="sidebar-content-servers-list-item">
                         <div class="sidebar-content-servers-list-item-icon">
                             <img
-                                src="https://cdn.discordapp.com/avatars/784141856426033233/2b71440eb154c1c2897e956f1f0da7b7.webp"
+                                src="https://cdn.discordapp.com/attachments/977949070893125632/999254421416452176/instagram.png"
                                 alt=""
                                 width={serverWidth}
                                 on:click="{openNav}"

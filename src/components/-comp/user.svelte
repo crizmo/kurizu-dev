@@ -1,6 +1,6 @@
 <script>
     const serverWidth = "50px";
-    export let pfp = "https://cdn.discordapp.com/avatars/784141856426033233/2b71440eb154c1c2897e956f1f0da7b7.webp";
+    export let pfp = "https://cdn.discordapp.com/attachments/977949070893125632/1010592002569682994/criz.jpg";
     export let alt = "userpfp";
 </script>
 
