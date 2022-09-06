@@ -6,6 +6,7 @@
 	import PixitCn from '../../channels/projects/pixit-cn.svelte';
 	import BreezeCn from '../../channels/projects/breeze-cn.svelte';
 	import MinikeyCn from '../../channels/projects/minikey-cn.svelte';
+	import Type3dCn from '../../channels/projects/type3d-cn.svelte';
 
 	import Anyanime from '../projects/anyanime.svelte';
 	import ElinaDev from '../projects/elina-dev.svelte';
@@ -13,6 +14,7 @@
 	import Pixit from '../projects/pixit.svelte';
 	import Breeze from '../projects/breeze.svelte';
 	import Minikey from '../projects/minikey.svelte';
+	import Type3d from '../projects/type3d.svelte';
 </script>
 
 <main>
@@ -45,8 +47,9 @@
 		<MinikeyCn />
 		<Minikey />
 	</Route>
+
+	<Route path="/type3d">
+		<Type3dCn />
+		<Type3d />
+	</Route>
 </main>
-
-<style>
-
-</style>
