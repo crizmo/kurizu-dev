@@ -105,7 +105,7 @@
 <style>
 
     .sidebar-content {
-        height: calc(100% - 60px);
+        height: 100%;
         /* background-color: #2f3136; */
         padding: 0;
         margin: 0;

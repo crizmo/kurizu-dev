@@ -10,8 +10,6 @@
     function handler(event) {
         direction = event.detail.direction;
 
-        
-
         if (window.innerWidth < 1500) {
             if (direction == "left") {
                 closeNav();

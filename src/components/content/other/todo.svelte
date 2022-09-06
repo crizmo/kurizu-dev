@@ -10,8 +10,6 @@
     function handler(event) {
         direction = event.detail.direction;
 
-        
-
         if (window.innerWidth < 1500) {
             if (direction == "left") {
                 closeNav();
@@ -30,9 +28,9 @@
     <script src="https://kit.fontawesome.com/8dc570c5d4.js" crossorigin="anonymous"></script>
     <div class="mainarea" use:swipe={{ timeframe: 500, minSwipeDistance: 0.1 }} on:swipe={handler}>
         <div class="top-nav">
-            <h3 class="channel-name"># Kurizu's Page</h3>
+            <h3 class="channel-name"># Kurizu's ToDo list</h3>
             <div class="vl" />
-            <p class="channel-info">Kurizu Home page</p>
+            <p class="channel-info">To Do list</p>
             <!-- <span class="open-btn" on:click="{openNav}">&#9776;</span> -->
         </div>
         <hr />
@@ -112,7 +110,7 @@
         border-left: 2px solid gray;
         height: 25px;
         position: absolute;
-        left: 11%;
+        left: 13%;
         top: 1.7%;
     }
 
