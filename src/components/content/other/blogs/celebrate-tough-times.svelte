@@ -1,8 +1,8 @@
 <script>
     const serverWidth = "50px";
-    import User from '../../-comp/user.svelte';
+    import User from '../../../-comp/user.svelte';
 
-    import { closeNav, openNav } from "../../channels/home/home-cn.svelte";
+    import { closeNav, openNav } from "../../../channels/home/home-cn.svelte";
 
     import { swipe } from "svelte-gestures";
     let direction;
@@ -18,15 +18,19 @@
             }
         }
     }
+
+    const uncheck = "fas fa-solid fa-square";
+    const check = "fas fa-solid fa-check";
     
 </script>
 
 <main>
+    <script src="https://kit.fontawesome.com/8dc570c5d4.js" crossorigin="anonymous"></script>
     <div class="mainarea" use:swipe={{ timeframe: 500, minSwipeDistance: 0.1 }} on:swipe={handler}>
         <div class="top-nav">
-            <h3 class="channel-name"># Kurizu's Blog</h3>
+            <h3 class="channel-name"># Yeet</h3>
             <div class="vl" />
-            <p class="channel-info">Kurizu Blog</p>
+            <p class="channel-info">Celebrate though times</p>
             <!-- <span class="open-btn" on:click="{openNav}">&#9776;</span> -->
         </div>
         <hr />
@@ -43,19 +47,19 @@
                             </h3>
                         </div>
                         <div class="chat-body-messages-item-content-body">
-                            <div class="blog-box">
-                                <h3>Celebrate Tough Times</h3>
-                                <p>
-                                    <i class="fas fa-calendar-alt"></i> 2022-09-06
-                                </p>
-                                <p>
-                                    <i class="fas fa-quote-left"></i> 
-                                      It's not the load that breaks you down, it's the way you carry it.
-                                    <i class="fas fa-quote-right"></i>
-                                </p>
-                                <!-- read more a tag -->
-                                <a href="/blogs/celebrate-tough-times">Read more</a>
-                            </div>
+                            <h4>Oi matey</h4>
+                            <p>
+                                Remember to enjoy those small irritating things <br>
+                                It's the little things that make life worth living <br>
+                                It do be fun do give it a try <br>
+                                Gonna keep it short :D <br>
+                                <br>
+                                Just that tbh <br>
+                                Enjoy ! <br> <br>
+                                <img class="msg-img" src="https://cdn.discordapp.com/attachments/977949070893125632/1016670948507783208/cel.png" alt="cel">
+
+                                <a href="/blogs" class="back-btn">Back</a>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -65,10 +69,6 @@
 </main>
 
 <style>
-
-    /* main a {
-        color: #38b9ec;
-    } */
 
     ::-webkit-scrollbar {
         width: 5px;
@@ -81,6 +81,10 @@
     ::-webkit-scrollbar-thumb:hover {
         background: #555; 
     }
+
+    /* main a {
+        color: #38b9ec;
+    } */
 
     .mainarea {
         position: absolute;
@@ -107,7 +111,7 @@
         border-left: 2px solid gray;
         height: 25px;
         position: absolute;
-        left: 11%;
+        left: 13%;
         top: 1.7%;
     }
 
@@ -145,6 +149,15 @@
         top: 2%;
     }
 
+    /* .chat-body-messages-item-avatar {
+        margin-left: 20px;
+        position: absolute;
+        overflow: hidden;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    } */
+
     .chat-body-messages-item-content {
         color: rgb(255, 255, 255);
         z-index: 1;
@@ -167,30 +180,24 @@
         margin-right: 50px;
     }
 
-    .blog-box {
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-        margin: 10px;
-        background-color: #2c2c2c;
-    }
-
-    .blog-box h3 {
-        margin: 0;
-        padding: 0;
-        font-size: 20px;
-        color: #ffffff;
-    }
-
-    .blog-box p {
+    .back-btn {
+        position: absolute;
+        top: 0%;
+        right: 0%;
+        margin-right: 20px;
         margin-top: 20px;
-        padding: 0;
-        font-size: 14px;
-        color: #ffffff;
+        background-color: #5884fc;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        text-decoration: none;
     }
 
-    .blog-box a {
-        color: rgb(82, 125, 241);
+    .msg-img {
+        width: 100%;
+        height: auto;
+        max-width: 700px;
+        border-radius: 10px;
     }
 
     @media screen and (max-width: 1910px) {
@@ -204,6 +211,19 @@
             color: rgb(255, 255, 255);
             z-index: 2;
             overflow: scroll;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 0%;
+            right: 0%;
+            margin-right: 20px;
+            margin-top: 20px;
+            background-color: #5884fc;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
         }
     }
 
@@ -260,11 +280,11 @@
             display: block;
         } */
 
-        /* .msg-img {
+        .msg-img {
             width: 100%;
             height: auto;
-            max-width: 150px;
-        } */
+            max-width: 250px;
+        }
 
         .chat-body-messages-item-content-body {
             color: rgb(255, 255, 255);
@@ -274,30 +294,17 @@
             margin-right: 70px;
         }
 
-        .blog-box {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            margin: 10px;
-            background-color: #2c2c2c;
-        }
-
-        .blog-box h3 {
-            margin: 0;
-            padding: 0;
-            font-size: 20px;
-            color: #ffffff;
-        }
-
-        .blog-box p {
+        .back-btn {
+            position: absolute;
+            top: 0%;
+            right: 0%;
+            margin-right: 90px;
             margin-top: 20px;
-            padding: 0;
-            font-size: 14px;
-            color: #ffffff;
-        }
-
-        .blog-box a {
-            color: rgb(82, 125, 241);
+            background-color: #5884fc;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
         }
     }
 </style>
