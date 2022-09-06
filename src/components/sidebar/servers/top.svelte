@@ -27,7 +27,7 @@
     
     .sidebar-header-logo {
         text-align: center;
-        padding-top: 10px
+        margin-top: 10px
     }
 
     .sidebar-header-logo img {
