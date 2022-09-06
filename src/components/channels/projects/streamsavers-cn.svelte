@@ -71,6 +71,9 @@
                     <button class="channelbtn">
                         <a class="minikey-cn" href="/minikey"># Minikey</a>
                     </button>
+                    <button class="channelbtn">
+                        <a class="type3d-cn" href="/type3d"># Type3D</a>
+                    </button>
                 </div>
             </details>
             <br />
@@ -189,7 +192,8 @@
     .elina-cn:hover ,
     .pixit-cn:hover,
     .breeze-cn:hover,
-    .minikey-cn:hover {
+    .minikey-cn:hover,
+    .type3d-cn:hover {
         background: rgb(104, 104, 104) none repeat scroll 0 0;
         border-right: 5px none white;
         box-sizing: border-box;

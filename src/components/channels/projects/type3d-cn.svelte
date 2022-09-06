@@ -179,7 +179,7 @@
         transform: rotate(90deg);
     }
 
-    .pixit-cn {
+    .type3d-cn {
         background: rgb(104, 104, 104) none repeat scroll 0 0;
         border-right: 5px none white;
         box-sizing: border-box;
@@ -190,10 +190,10 @@
 
     .anyanime-cn:hover ,    
     .elina-cn:hover ,
-    .stream-savers-cn:hover,
+    .pixit-cn:hover,
     .breeze-cn:hover,
     .minikey-cn:hover,
-    .type3d-cn:hover {
+    .stream-savers-cn:hover {
         background: rgb(104, 104, 104) none repeat scroll 0 0;
         border-right: 5px none white;
         box-sizing: border-box;
