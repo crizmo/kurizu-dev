@@ -6,6 +6,7 @@
 
 	import AllPro from './components/content/projects/all-pro.svelte';
 	import AllOth from './components/content/other/all-oth.svelte';
+  import AllBlogs from './components/content/other/blogs/all-blogs.svelte';
 
 	import Channels from './components/channels/channels.svelte';
 	import HomeCn from './components/channels/home/home-cn.svelte';
@@ -65,8 +66,16 @@
 
 	<!-- Other -->
 	<AllOth />
-	
+
+  <!-- Blogs -->
+  <AllBlogs />
+  
 </main>
 
 <style>
+
+  :root {
+    background-color: #282a2e;
+  }
+
 </style>
