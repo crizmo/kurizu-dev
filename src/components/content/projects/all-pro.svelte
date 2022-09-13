@@ -7,6 +7,7 @@
 	import BreezeCn from '../../channels/projects/breeze-cn.svelte';
 	import MinikeyCn from '../../channels/projects/minikey-cn.svelte';
 	import Type3dCn from '../../channels/projects/type3d-cn.svelte';
+	import TimelyCn from '../../channels/projects/timely-cn.svelte';
 
 	import Anyanime from '../projects/anyanime.svelte';
 	import ElinaDev from '../projects/elina-dev.svelte';
@@ -15,6 +16,7 @@
 	import Breeze from '../projects/breeze.svelte';
 	import Minikey from '../projects/minikey.svelte';
 	import Type3d from '../projects/type3d.svelte';
+	import Timely from '../projects/timely.svelte';
 </script>
 
 <main>
@@ -51,5 +53,10 @@
 	<Route path="/type3d">
 		<Type3dCn />
 		<Type3d />
+	</Route>
+
+	<Route path="/timely">
+		<TimelyCn />
+		<Timely />
 	</Route>
 </main>
