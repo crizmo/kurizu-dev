@@ -1,5 +1,5 @@
 <script>
-    import Projects from '../categories/projects.svelte'
+    // import Projects from '../categories/projects.svelte'
     import Links from '../categories/other.svelte'
     import Main from '../categories/main.svelte';
 
@@ -182,7 +182,7 @@
         transform: rotate(90deg);
     }
 
-    .minikey-cn {
+    .timely-cn {
         background: rgb(104, 104, 104) none repeat scroll 0 0;
         border-right: 5px none white;
         box-sizing: border-box;
@@ -193,11 +193,11 @@
 
     .anyanime-cn:hover ,    
     .elina-cn:hover ,
-    .stream-savers-cn:hover,
-    .breeze-cn:hover,
     .pixit-cn:hover,
+    .breeze-cn:hover,
     .minikey-cn:hover,
-    .timely-cn:hover {
+    .stream-savers-cn:hover,
+    .type3d-cn:hover {
         background: rgb(104, 104, 104) none repeat scroll 0 0;
         border-right: 5px none white;
         box-sizing: border-box;

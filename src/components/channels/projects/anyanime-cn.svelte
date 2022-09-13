@@ -74,6 +74,9 @@
                     <button class="channelbtn">
                         <a class="type3d-cn" href="/type3d"># Type3D</a>
                     </button>
+                    <button class="channelbtn">
+                        <a class="timely-cn" href="/timely"># Timely</a>
+                    </button>
                 </div>
             </details>
             <br />
@@ -193,7 +196,8 @@
     .pixit-cn:hover,
     .breeze-cn:hover,
     .minikey-cn:hover,
-    .type3d-cn:hover {
+    .type3d-cn:hover,
+    .timely-cn:hover {
         background: rgb(104, 104, 104) none repeat scroll 0 0;
         border-right: 5px none white;
         box-sizing: border-box;
