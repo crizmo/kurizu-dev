@@ -75,7 +75,7 @@
                         <div class="chat-body-messages-item-content-body">
                             <p>
                                 Oh and elina is open source too ! <br>
-                                You can find the source code form links below : <br>
+                                You can find the source code from links below : <br>
                                 <a href="https://github.com/crizmo/Elina-dev" target="_blank">Github</a> <br>
                                 <a href="https://elina-bot.netlify.app/" target="_blank">Website</a> <br>
                                 <a href="https://github.com/crizmo/Elina-dev">
