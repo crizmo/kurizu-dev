@@ -19,7 +19,7 @@ If you have any feedback / bugs / suggestions, feel free to open an issue on git
 My discord username is `Criz#1270` !
 
 ## Links 
-- [Site](https://kurizu.vercel.app/)
+- [Website](https://kurizu.vercel.app/)
 - [Discord](https://discord.gg/VcMPV8vc2x)
 
 ## Assets 
