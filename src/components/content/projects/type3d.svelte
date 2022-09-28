@@ -64,6 +64,7 @@
                             <p>
                                 Type3D project links : <br>
                                 <a href="https://github.com/crizmo/Type-3d">Github</a> <br>
+                                <a href="https://crizmo.github.io/Type-3d/key.html">Website</a> <br>
                                 <a href="https://type-3d.kurizu.repl.co/">Replit</a> <br>
                                 <br>
                                 Thank you for checking out ! <br>
