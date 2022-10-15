@@ -42,7 +42,7 @@
                         <div class="chat-body-messages-item-content-body">
                             <p>
                                 Type3D is project where i used the 60% keyboard design made by schwiiiii - link to his code -> <a href="https://codepen.io/schwiiiii/pen/BarVMxq">https://codepen.io/schwiiiii/pen/BarVMxq</a> <br>
-                                I then added live keybrd input and movements to the keys and the overall keyboard<br>
+                                I then added live keyboard input and movements to the keys and the overall keyboard<br>
                                 <br>
                                 <img class="msg-img" src="https://cdn.discordapp.com/attachments/1014118117493985350/1014118195679993937/type-3d.png" alt="homepgimg" height="300px" width="auto" style="border-radius: 10px;"> <br>
                                 <br>
