@@ -60,6 +60,8 @@
                                 <i class="{check}"></i> | Change color to original app color 
                                 <br>
                                 <i class="{check}"></i> | Add elina user in /elina-bot
+                                <br>
+                                <i class="{uncheck}"></i> | Change to a better image host
                             </p>
                         </div>
                     </div>
