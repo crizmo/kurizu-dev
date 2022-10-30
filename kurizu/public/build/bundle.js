@@ -20243,7 +20243,7 @@ var app = (function () {
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[13] = list[i];
+    	child_ctx[14] = list[i];
     	return child_ctx;
     }
 
@@ -20256,19 +20256,19 @@ var app = (function () {
     	let div0;
     	let h3;
     	let p0;
-    	let t1_value = /*msgObject*/ ctx[13][0] + "";
+    	let t1_value = /*msgObject*/ ctx[14][0] + "";
     	let t1;
     	let t2;
     	let div1;
     	let p1;
-    	let t3_value = /*msgObject*/ ctx[13][2] + "";
+    	let t3_value = /*msgObject*/ ctx[14][2] + "";
     	let t3;
     	let t4;
     	let current;
 
     	user = new User({
     			props: {
-    				pfp: /*msgObject*/ ctx[13][1],
+    				pfp: /*msgObject*/ ctx[14][1],
     				alt: "userpfp"
     			},
     			$$inline: true
@@ -20289,19 +20289,19 @@ var app = (function () {
     			p1 = element("p");
     			t3 = text(t3_value);
     			t4 = space();
-    			attr_dev(p0, "class", "svelte-fjoarm");
+    			attr_dev(p0, "class", "svelte-1sfhcer");
     			add_location(p0, file$5, 121, 36, 3599);
-    			attr_dev(h3, "class", "chat-body-messages-item-content-header-name svelte-fjoarm");
+    			attr_dev(h3, "class", "chat-body-messages-item-content-header-name svelte-1sfhcer");
     			add_location(h3, file$5, 118, 32, 3437);
-    			attr_dev(div0, "class", "chat-body-messages-item-content-header svelte-fjoarm");
+    			attr_dev(div0, "class", "chat-body-messages-item-content-header svelte-1sfhcer");
     			add_location(div0, file$5, 117, 28, 3352);
-    			attr_dev(p1, "class", "svelte-fjoarm");
+    			attr_dev(p1, "class", "svelte-1sfhcer");
     			add_location(p1, file$5, 125, 32, 3805);
-    			attr_dev(div1, "class", "chat-body-messages-item-content-body svelte-fjoarm");
+    			attr_dev(div1, "class", "chat-body-messages-item-content-body svelte-1sfhcer");
     			add_location(div1, file$5, 124, 28, 3722);
-    			attr_dev(div2, "class", "chat-body-messages-item-content svelte-fjoarm");
+    			attr_dev(div2, "class", "chat-body-messages-item-content svelte-1sfhcer");
     			add_location(div2, file$5, 116, 24, 3278);
-    			attr_dev(div3, "class", "chat-body-messages-item svelte-fjoarm");
+    			attr_dev(div3, "class", "chat-body-messages-item svelte-1sfhcer");
     			add_location(div3, file$5, 114, 20, 3150);
     		},
     		m: function mount(target, anchor) {
@@ -20322,10 +20322,10 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const user_changes = {};
-    			if (dirty & /*messages*/ 1) user_changes.pfp = /*msgObject*/ ctx[13][1];
+    			if (dirty & /*messages*/ 1) user_changes.pfp = /*msgObject*/ ctx[14][1];
     			user.$set(user_changes);
-    			if ((!current || dirty & /*messages*/ 1) && t1_value !== (t1_value = /*msgObject*/ ctx[13][0] + "")) set_data_dev(t1, t1_value);
-    			if ((!current || dirty & /*messages*/ 1) && t3_value !== (t3_value = /*msgObject*/ ctx[13][2] + "")) set_data_dev(t3, t3_value);
+    			if ((!current || dirty & /*messages*/ 1) && t1_value !== (t1_value = /*msgObject*/ ctx[14][0] + "")) set_data_dev(t1, t1_value);
+    			if ((!current || dirty & /*messages*/ 1) && t3_value !== (t3_value = /*msgObject*/ ctx[14][2] + "")) set_data_dev(t3, t3_value);
     		},
     		i: function intro(local) {
     			if (current) return;
@@ -20384,6 +20384,8 @@ var app = (function () {
     	let input2;
     	let t12;
     	let button1;
+    	let t13;
+    	let button2;
     	let current;
     	let mounted;
     	let dispose;
@@ -20437,55 +20439,59 @@ var app = (function () {
     			input2 = element("input");
     			t12 = space();
     			button1 = element("button");
+    			t13 = space();
+    			button2 = element("button");
     			if (!src_url_equal(script.src, script_src_value = "https://kit.fontawesome.com/8dc570c5d4.js")) attr_dev(script, "src", script_src_value);
     			attr_dev(script, "crossorigin", "anonymous");
-    			attr_dev(script, "class", "svelte-fjoarm");
+    			attr_dev(script, "class", "svelte-1sfhcer");
     			add_location(script, file$5, 95, 4, 2499);
     			attr_dev(meta, "name", "viewport");
     			attr_dev(meta, "content", "width=device-width, initial-scale=1");
-    			attr_dev(meta, "class", "svelte-fjoarm");
+    			attr_dev(meta, "class", "svelte-1sfhcer");
     			add_location(meta, file$5, 99, 4, 2614);
-    			attr_dev(h3, "class", "channel-name  svelte-fjoarm");
+    			attr_dev(h3, "class", "channel-name  svelte-1sfhcer");
     			add_location(h3, file$5, 106, 12, 2856);
-    			attr_dev(div0, "class", "vl svelte-fjoarm");
+    			attr_dev(div0, "class", "vl svelte-1sfhcer");
     			add_location(div0, file$5, 107, 12, 2910);
-    			attr_dev(p, "class", "channel-info svelte-fjoarm");
+    			attr_dev(p, "class", "channel-info svelte-1sfhcer");
     			add_location(p, file$5, 108, 12, 2941);
-    			attr_dev(div1, "class", "top-nav svelte-fjoarm");
+    			attr_dev(div1, "class", "top-nav svelte-1sfhcer");
     			add_location(div1, file$5, 105, 8, 2822);
-    			attr_dev(hr, "class", "svelte-fjoarm");
+    			attr_dev(hr, "class", "svelte-1sfhcer");
     			add_location(hr, file$5, 110, 8, 3000);
-    			attr_dev(div2, "class", "chat-body-messages svelte-fjoarm");
+    			attr_dev(div2, "class", "chat-body-messages svelte-1sfhcer");
     			add_location(div2, file$5, 112, 12, 3051);
-    			attr_dev(input0, "class", "userinfo-input-username svelte-fjoarm");
+    			attr_dev(input0, "class", "userinfo-input-username svelte-1sfhcer");
     			attr_dev(input0, "id", "username");
     			attr_dev(input0, "type", "text");
     			attr_dev(input0, "placeholder", "Username");
     			attr_dev(input0, "maxlength", "15");
     			add_location(input0, file$5, 132, 16, 4020);
-    			attr_dev(input1, "class", "userinfo-input-pfp svelte-fjoarm");
+    			attr_dev(input1, "class", "userinfo-input-pfp svelte-1sfhcer");
     			attr_dev(input1, "id", "userpfp");
     			attr_dev(input1, "type", "text");
     			attr_dev(input1, "placeholder", "User PFP");
     			add_location(input1, file$5, 140, 16, 4300);
-    			attr_dev(button0, "class", "userinfo-input-button fa fa-check svelte-fjoarm");
+    			attr_dev(button0, "class", "userinfo-input-button fa fa-check svelte-1sfhcer");
     			add_location(button0, file$5, 147, 16, 4538);
-    			attr_dev(div3, "class", "userinfo-input svelte-fjoarm");
+    			attr_dev(div3, "class", "userinfo-input svelte-1sfhcer");
     			add_location(div3, file$5, 131, 12, 3975);
     			attr_dev(input2, "type", "text");
-    			attr_dev(input2, "class", "chat-input-text svelte-fjoarm");
+    			attr_dev(input2, "class", "chat-input-text svelte-1sfhcer");
     			attr_dev(input2, "placeholder", "Type a message");
     			attr_dev(input2, "maxlength", "50");
     			add_location(input2, file$5, 153, 16, 4738);
-    			attr_dev(button1, "class", "chat-input-send fas fa-paper-plane svelte-fjoarm");
-    			add_location(button1, file$5, 160, 16, 4981);
-    			attr_dev(div4, "class", "chat-input svelte-fjoarm");
+    			attr_dev(button1, "class", "chat-input-emotes fas fa-smile svelte-1sfhcer");
+    			add_location(button1, file$5, 161, 16, 5055);
+    			attr_dev(button2, "class", "chat-input-send fas fa-paper-plane svelte-1sfhcer");
+    			add_location(button2, file$5, 167, 16, 5274);
+    			attr_dev(div4, "class", "chat-input svelte-1sfhcer");
     			add_location(div4, file$5, 152, 12, 4697);
-    			attr_dev(div5, "class", "chat-body svelte-fjoarm");
+    			attr_dev(div5, "class", "chat-body svelte-1sfhcer");
     			add_location(div5, file$5, 111, 8, 3015);
-    			attr_dev(div6, "class", "mainarea svelte-fjoarm");
+    			attr_dev(div6, "class", "mainarea svelte-1sfhcer");
     			add_location(div6, file$5, 100, 4, 2689);
-    			attr_dev(main, "class", "svelte-fjoarm");
+    			attr_dev(main, "class", "svelte-1sfhcer");
     			add_location(main, file$5, 94, 0, 2488);
     		},
     		l: function claim(nodes) {
@@ -20529,6 +20535,8 @@ var app = (function () {
     			set_input_value(input2, /*message*/ ctx[1]);
     			append_dev(div4, t12);
     			append_dev(div4, button1);
+    			append_dev(div4, t13);
+    			append_dev(div4, button2);
     			current = true;
 
     			if (!mounted) {
@@ -20537,7 +20545,8 @@ var app = (function () {
     					listen_dev(input1, "input", /*input1_input_handler*/ ctx[8]),
     					listen_dev(button0, "click", /*setInfo*/ ctx[6], false, false, false),
     					listen_dev(input2, "input", /*input2_input_handler*/ ctx[9]),
-    					listen_dev(button1, "click", /*sendMessage*/ ctx[5], false, false, false),
+    					listen_dev(button1, "click", /*click_handler*/ ctx[10], false, false, false),
+    					listen_dev(button2, "click", /*sendMessage*/ ctx[5], false, false, false),
     					action_destroyer(swipe.call(null, div6, { timeframe: 500, minSwipeDistance: 0.5 })),
     					listen_dev(div6, "swipe", /*handler*/ ctx[4], false, false, false)
     				];
@@ -20735,6 +20744,10 @@ var app = (function () {
     		$$invalidate(1, message);
     	}
 
+    	const click_handler = () => {
+    		alert("Emotes Coming soon!");
+    	};
+
     	$$self.$capture_state = () => ({
     		serverWidth: serverWidth$2,
     		User,
@@ -20778,7 +20791,8 @@ var app = (function () {
     		setInfo,
     		input0_input_handler,
     		input1_input_handler,
-    		input2_input_handler
+    		input2_input_handler,
+    		click_handler
     	];
     }
 

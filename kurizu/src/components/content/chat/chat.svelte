@@ -158,6 +158,13 @@
                     bind:value={message}
                     maxlength="50"
                 />
+                <!-- add a button to send emotes with emoji as screen -->
+                <button 
+                    class="chat-input-emotes fas fa-smile" 
+                    on:click={() => {
+                        alert("Emotes Coming soon!");
+                    }}
+                />
                 <button
                     class="chat-input-send fas fa-paper-plane"
                     on:click={sendMessage}
@@ -300,6 +307,18 @@
         outline: none;
     }
 
+    .chat-input-emotes {
+        width: 5%;
+        height: 100%;
+        border: none;
+        border-radius: 5px;
+        background-color: #7289da;
+        color: #fff;
+        font-size: 1rem;
+        cursor: pointer;
+        outline: none;
+    }
+
     .chat-input-send {
         width: 5%;
         height: 100%;
@@ -313,8 +332,11 @@
     }
 
     .chat-input-send:hover,
+    .chat-input-emotes:hover,
     .userinfo-input-button:hover {
+        color: rgb(251, 255, 0);
         background-color: #5f73bc;
+        transition: all 0.2s ease-in-out;
     }
 
     @media screen and (max-width: 800px) {
@@ -361,7 +383,7 @@
             border-radius: 5px;
             top: 88%;
             position: fixed;
-            margin-left: 1%;
+            margin-left: 2%;
         }
 
         .userinfo-input-username {
@@ -407,16 +429,16 @@
             align-items: center;
             justify-content: space-between;
             width: 88%;
-            height: 40px;
+            height: 45px;
             border-radius: 5px;
-            top: 94.5%;
-            margin-left: 1%;
+            top: 94%;
+            margin-left: 2%;
             position: fixed;
             /* overflow: scroll; */
         }
 
         .chat-input-text {
-            width: 70%;
+            width: 90%;
             height: 100%;
             padding: 0 10px;
             border: none;
@@ -427,8 +449,20 @@
             outline: none;
         }
 
+        .chat-input-emotes {
+            width: 15%;
+            height: 100%;
+            border: none;
+            border-radius: 5px;
+            background-color: #7289da;
+            color: #fff;
+            font-size: 0.8rem;
+            cursor: pointer;
+            outline: none;
+        }
+
         .chat-input-send {
-            width: 30%;
+            width: 20%;
             height: 100%;
             border: none;
             border-radius: 5px;
