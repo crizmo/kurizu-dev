@@ -1,0 +1,4 @@
+[submodule "dev-server"]
+	path = dev-server
+	url = https://github.com/crizmo/dev-server
+	ignore = dirty
