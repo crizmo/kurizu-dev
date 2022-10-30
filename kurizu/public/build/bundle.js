@@ -20290,19 +20290,19 @@ var app = (function () {
     			t3 = text(t3_value);
     			t4 = space();
     			attr_dev(p0, "class", "svelte-fjoarm");
-    			add_location(p0, file$5, 121, 36, 3602);
+    			add_location(p0, file$5, 121, 36, 3599);
     			attr_dev(h3, "class", "chat-body-messages-item-content-header-name svelte-fjoarm");
-    			add_location(h3, file$5, 118, 32, 3440);
+    			add_location(h3, file$5, 118, 32, 3437);
     			attr_dev(div0, "class", "chat-body-messages-item-content-header svelte-fjoarm");
-    			add_location(div0, file$5, 117, 28, 3355);
+    			add_location(div0, file$5, 117, 28, 3352);
     			attr_dev(p1, "class", "svelte-fjoarm");
-    			add_location(p1, file$5, 125, 32, 3808);
+    			add_location(p1, file$5, 125, 32, 3805);
     			attr_dev(div1, "class", "chat-body-messages-item-content-body svelte-fjoarm");
-    			add_location(div1, file$5, 124, 28, 3725);
+    			add_location(div1, file$5, 124, 28, 3722);
     			attr_dev(div2, "class", "chat-body-messages-item-content svelte-fjoarm");
-    			add_location(div2, file$5, 116, 24, 3281);
+    			add_location(div2, file$5, 116, 24, 3278);
     			attr_dev(div3, "class", "chat-body-messages-item svelte-fjoarm");
-    			add_location(div3, file$5, 114, 20, 3153);
+    			add_location(div3, file$5, 114, 20, 3150);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div3, anchor);
@@ -20440,53 +20440,53 @@ var app = (function () {
     			if (!src_url_equal(script.src, script_src_value = "https://kit.fontawesome.com/8dc570c5d4.js")) attr_dev(script, "src", script_src_value);
     			attr_dev(script, "crossorigin", "anonymous");
     			attr_dev(script, "class", "svelte-fjoarm");
-    			add_location(script, file$5, 95, 4, 2502);
+    			add_location(script, file$5, 95, 4, 2499);
     			attr_dev(meta, "name", "viewport");
     			attr_dev(meta, "content", "width=device-width, initial-scale=1");
     			attr_dev(meta, "class", "svelte-fjoarm");
-    			add_location(meta, file$5, 99, 4, 2617);
+    			add_location(meta, file$5, 99, 4, 2614);
     			attr_dev(h3, "class", "channel-name  svelte-fjoarm");
-    			add_location(h3, file$5, 106, 12, 2859);
+    			add_location(h3, file$5, 106, 12, 2856);
     			attr_dev(div0, "class", "vl svelte-fjoarm");
-    			add_location(div0, file$5, 107, 12, 2913);
+    			add_location(div0, file$5, 107, 12, 2910);
     			attr_dev(p, "class", "channel-info svelte-fjoarm");
-    			add_location(p, file$5, 108, 12, 2944);
+    			add_location(p, file$5, 108, 12, 2941);
     			attr_dev(div1, "class", "top-nav svelte-fjoarm");
-    			add_location(div1, file$5, 105, 8, 2825);
+    			add_location(div1, file$5, 105, 8, 2822);
     			attr_dev(hr, "class", "svelte-fjoarm");
-    			add_location(hr, file$5, 110, 8, 3003);
+    			add_location(hr, file$5, 110, 8, 3000);
     			attr_dev(div2, "class", "chat-body-messages svelte-fjoarm");
-    			add_location(div2, file$5, 112, 12, 3054);
+    			add_location(div2, file$5, 112, 12, 3051);
     			attr_dev(input0, "class", "userinfo-input-username svelte-fjoarm");
     			attr_dev(input0, "id", "username");
     			attr_dev(input0, "type", "text");
     			attr_dev(input0, "placeholder", "Username");
     			attr_dev(input0, "maxlength", "15");
-    			add_location(input0, file$5, 132, 16, 4023);
+    			add_location(input0, file$5, 132, 16, 4020);
     			attr_dev(input1, "class", "userinfo-input-pfp svelte-fjoarm");
     			attr_dev(input1, "id", "userpfp");
     			attr_dev(input1, "type", "text");
     			attr_dev(input1, "placeholder", "User PFP");
-    			add_location(input1, file$5, 140, 16, 4303);
+    			add_location(input1, file$5, 140, 16, 4300);
     			attr_dev(button0, "class", "userinfo-input-button fa fa-check svelte-fjoarm");
-    			add_location(button0, file$5, 147, 16, 4541);
+    			add_location(button0, file$5, 147, 16, 4538);
     			attr_dev(div3, "class", "userinfo-input svelte-fjoarm");
-    			add_location(div3, file$5, 131, 12, 3978);
+    			add_location(div3, file$5, 131, 12, 3975);
     			attr_dev(input2, "type", "text");
     			attr_dev(input2, "class", "chat-input-text svelte-fjoarm");
     			attr_dev(input2, "placeholder", "Type a message");
     			attr_dev(input2, "maxlength", "50");
-    			add_location(input2, file$5, 153, 16, 4741);
+    			add_location(input2, file$5, 153, 16, 4738);
     			attr_dev(button1, "class", "chat-input-send fas fa-paper-plane svelte-fjoarm");
-    			add_location(button1, file$5, 160, 16, 4984);
+    			add_location(button1, file$5, 160, 16, 4981);
     			attr_dev(div4, "class", "chat-input svelte-fjoarm");
-    			add_location(div4, file$5, 152, 12, 4700);
+    			add_location(div4, file$5, 152, 12, 4697);
     			attr_dev(div5, "class", "chat-body svelte-fjoarm");
-    			add_location(div5, file$5, 111, 8, 3018);
+    			add_location(div5, file$5, 111, 8, 3015);
     			attr_dev(div6, "class", "mainarea svelte-fjoarm");
-    			add_location(div6, file$5, 100, 4, 2692);
+    			add_location(div6, file$5, 100, 4, 2689);
     			attr_dev(main, "class", "svelte-fjoarm");
-    			add_location(main, file$5, 94, 0, 2491);
+    			add_location(main, file$5, 94, 0, 2488);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -20647,7 +20647,7 @@ var app = (function () {
     		}
     	}
 
-    	const socket = lookup("https://dev-kurizu.kurizu.repl.co");
+    	const socket = lookup("https://kurchat.kurizu.repl.co");
     	let messages = [];
     	let message = "";
     	let username = "";

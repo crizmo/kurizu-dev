@@ -21,7 +21,7 @@
 
     import io from "socket.io-client";
 
-    const socket = io("https://dev-kurizu.kurizu.repl.co");
+    const socket = io("https://kurchat.kurizu.repl.co");
 
     let messages = [];
     let message = "";
