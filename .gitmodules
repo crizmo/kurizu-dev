@@ -1,4 +1,4 @@
 [submodule "dev-server"]
 	path = dev-server
-	url = https://github.com/crizmo/dev-server
+	url = https://github.com/crizmo/kurizu-dev/tree/main/dev-server
 	ignore = dirty

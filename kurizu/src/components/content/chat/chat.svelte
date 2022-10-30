@@ -60,6 +60,9 @@
 
         if (message == "") {
             alert("Please enter a message");
+        } else if (!message.match(/^[a-zA-Z0-9!/*@#$%^&()-+=_<>?:;]/)) {
+            alert("Please enter a valid message");
+            message = "";
         } else {
             socket.emit("chat message", user, userpfp, message);
             message = "";

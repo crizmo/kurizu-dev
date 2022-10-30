@@ -20247,7 +20247,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (109:16) {#each messages as msgObject}
+    // (112:16) {#each messages as msgObject}
     function create_each_block(ctx) {
     	let div3;
     	let user;
@@ -20290,19 +20290,19 @@ var app = (function () {
     			t3 = text(t3_value);
     			t4 = space();
     			attr_dev(p0, "class", "svelte-fjoarm");
-    			add_location(p0, file$5, 116, 36, 3395);
+    			add_location(p0, file$5, 119, 36, 3557);
     			attr_dev(h3, "class", "chat-body-messages-item-content-header-name svelte-fjoarm");
-    			add_location(h3, file$5, 113, 32, 3233);
+    			add_location(h3, file$5, 116, 32, 3395);
     			attr_dev(div0, "class", "chat-body-messages-item-content-header svelte-fjoarm");
-    			add_location(div0, file$5, 112, 28, 3148);
+    			add_location(div0, file$5, 115, 28, 3310);
     			attr_dev(p1, "class", "svelte-fjoarm");
-    			add_location(p1, file$5, 120, 32, 3601);
+    			add_location(p1, file$5, 123, 32, 3763);
     			attr_dev(div1, "class", "chat-body-messages-item-content-body svelte-fjoarm");
-    			add_location(div1, file$5, 119, 28, 3518);
+    			add_location(div1, file$5, 122, 28, 3680);
     			attr_dev(div2, "class", "chat-body-messages-item-content svelte-fjoarm");
-    			add_location(div2, file$5, 111, 24, 3074);
+    			add_location(div2, file$5, 114, 24, 3236);
     			attr_dev(div3, "class", "chat-body-messages-item svelte-fjoarm");
-    			add_location(div3, file$5, 109, 20, 2946);
+    			add_location(div3, file$5, 112, 20, 3108);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div3, anchor);
@@ -20346,7 +20346,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(109:16) {#each messages as msgObject}",
+    		source: "(112:16) {#each messages as msgObject}",
     		ctx
     	});
 
@@ -20440,53 +20440,53 @@ var app = (function () {
     			if (!src_url_equal(script.src, script_src_value = "https://kit.fontawesome.com/8dc570c5d4.js")) attr_dev(script, "src", script_src_value);
     			attr_dev(script, "crossorigin", "anonymous");
     			attr_dev(script, "class", "svelte-fjoarm");
-    			add_location(script, file$5, 90, 4, 2295);
+    			add_location(script, file$5, 93, 4, 2457);
     			attr_dev(meta, "name", "viewport");
     			attr_dev(meta, "content", "width=device-width, initial-scale=1");
     			attr_dev(meta, "class", "svelte-fjoarm");
-    			add_location(meta, file$5, 94, 4, 2410);
+    			add_location(meta, file$5, 97, 4, 2572);
     			attr_dev(h3, "class", "channel-name  svelte-fjoarm");
-    			add_location(h3, file$5, 101, 12, 2652);
+    			add_location(h3, file$5, 104, 12, 2814);
     			attr_dev(div0, "class", "vl svelte-fjoarm");
-    			add_location(div0, file$5, 102, 12, 2706);
+    			add_location(div0, file$5, 105, 12, 2868);
     			attr_dev(p, "class", "channel-info svelte-fjoarm");
-    			add_location(p, file$5, 103, 12, 2737);
+    			add_location(p, file$5, 106, 12, 2899);
     			attr_dev(div1, "class", "top-nav svelte-fjoarm");
-    			add_location(div1, file$5, 100, 8, 2618);
+    			add_location(div1, file$5, 103, 8, 2780);
     			attr_dev(hr, "class", "svelte-fjoarm");
-    			add_location(hr, file$5, 105, 8, 2796);
+    			add_location(hr, file$5, 108, 8, 2958);
     			attr_dev(div2, "class", "chat-body-messages svelte-fjoarm");
-    			add_location(div2, file$5, 107, 12, 2847);
+    			add_location(div2, file$5, 110, 12, 3009);
     			attr_dev(input0, "class", "userinfo-input-username svelte-fjoarm");
     			attr_dev(input0, "id", "username");
     			attr_dev(input0, "type", "text");
     			attr_dev(input0, "placeholder", "Username");
     			attr_dev(input0, "maxlength", "15");
-    			add_location(input0, file$5, 127, 16, 3816);
+    			add_location(input0, file$5, 130, 16, 3978);
     			attr_dev(input1, "class", "userinfo-input-pfp svelte-fjoarm");
     			attr_dev(input1, "id", "userpfp");
     			attr_dev(input1, "type", "text");
     			attr_dev(input1, "placeholder", "User PFP");
-    			add_location(input1, file$5, 135, 16, 4096);
+    			add_location(input1, file$5, 138, 16, 4258);
     			attr_dev(button0, "class", "userinfo-input-button fa fa-check svelte-fjoarm");
-    			add_location(button0, file$5, 142, 16, 4334);
+    			add_location(button0, file$5, 145, 16, 4496);
     			attr_dev(div3, "class", "userinfo-input svelte-fjoarm");
-    			add_location(div3, file$5, 126, 12, 3771);
+    			add_location(div3, file$5, 129, 12, 3933);
     			attr_dev(input2, "type", "text");
     			attr_dev(input2, "class", "chat-input-text svelte-fjoarm");
     			attr_dev(input2, "placeholder", "Type a message");
     			attr_dev(input2, "maxlength", "50");
-    			add_location(input2, file$5, 148, 16, 4534);
+    			add_location(input2, file$5, 151, 16, 4696);
     			attr_dev(button1, "class", "chat-input-send fas fa-paper-plane svelte-fjoarm");
-    			add_location(button1, file$5, 155, 16, 4777);
+    			add_location(button1, file$5, 158, 16, 4939);
     			attr_dev(div4, "class", "chat-input svelte-fjoarm");
-    			add_location(div4, file$5, 147, 12, 4493);
+    			add_location(div4, file$5, 150, 12, 4655);
     			attr_dev(div5, "class", "chat-body svelte-fjoarm");
-    			add_location(div5, file$5, 106, 8, 2811);
+    			add_location(div5, file$5, 109, 8, 2973);
     			attr_dev(div6, "class", "mainarea svelte-fjoarm");
-    			add_location(div6, file$5, 95, 4, 2485);
+    			add_location(div6, file$5, 98, 4, 2647);
     			attr_dev(main, "class", "svelte-fjoarm");
-    			add_location(main, file$5, 89, 0, 2284);
+    			add_location(main, file$5, 92, 0, 2446);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -20647,7 +20647,7 @@ var app = (function () {
     		}
     	}
 
-    	const socket = lookup("http://localhost:3000");
+    	const socket = lookup("https://dev-kurizu.kurizu.repl.co");
     	let messages = [];
     	let message = "";
     	let username = "";
@@ -20683,6 +20683,9 @@ var app = (function () {
 
     		if (message == "") {
     			alert("Please enter a message");
+    		} else if (!message.match(/^[a-zA-Z0-9!/*@#$%^&()-+=_<>?:;]/)) {
+    			alert("Please enter a valid message");
+    			$$invalidate(1, message = "");
     		} else {
     			socket.emit("chat message", user, userpfp, message);
     			$$invalidate(1, message = "");
