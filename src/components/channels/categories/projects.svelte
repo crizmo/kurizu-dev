@@ -56,10 +56,10 @@
         cursor: pointer;
     }
 
-    .channels-list a {
+    /* .channels-list a {
         color: rgb(158, 158, 158);
         text-decoration: none;
-    }
+    } */
 
     .channels-list a:hover {
         color: rgb(255, 255, 255);
@@ -81,6 +81,22 @@
         transform: rotate(90deg);
     }
 
+    .anyanime-cn,
+    .elina-cn,
+    .stream-savers-cn,
+    .pixit-cn,
+    .breeze-cn,
+    .minikey-cn,
+    .type3d-cn,
+    .timely-cn {
+        color: rgb(158, 158, 158);
+        border-right: 5px none white;
+        box-sizing: border-box;
+        display: block;
+        border-radius: 3px;
+        padding: 3px;
+    }
+    
     .anyanime-cn:hover,
     .elina-cn:hover,
     .stream-savers-cn:hover,
@@ -89,13 +105,13 @@
     .minikey-cn:hover,
     .type3d-cn:hover,
     .timely-cn:hover {
-        background: rgb(104, 104, 104) none repeat scroll 0 0;
+        background: #232529;
+        color: rgb(255, 255, 255);
         border-right: 5px none white;
         box-sizing: border-box;
         display: block;
         border-radius: 3px;
         padding: 3px;
-        color: rgb(255, 255, 255);
     }
     
 </style>

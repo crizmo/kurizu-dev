@@ -28,13 +28,7 @@ main a {
     overflow: fixed;
 }
 
-.top-nav {
-    align-items: left;
-    text-align: left;
-    margin-left: 20px;
-    margin-top: 60px;
-    background-color: aqua;
-}
+
 
 .vl {
     border-left: 2px solid gray;
@@ -129,13 +123,7 @@ main a {
         font-size: small;
     }
 
-    .top-nav {
-        align-items: left;
-        text-align: left;
-        margin-left: 0px;
-        margin-top: 60px;
-        background-color: aqua;
-    }
+    
 
     .vl {
         border-left: 2px solid gray;

@@ -1,6 +1,6 @@
 <script>
-    import './style/home.css'
-    
+    import "./style/home.css";
+
     const serverWidth = "50px";
     import User from "../../-comp/user.svelte";
 
@@ -20,11 +20,14 @@
             }
         }
     }
-
 </script>
 
 <main>
-    <div class="mainarea" use:swipe={{ timeframe: 500, minSwipeDistance: 0.1 }} on:swipe={handler}>
+    <div
+        class="mainarea"
+        use:swipe={{ timeframe: 500, minSwipeDistance: 0.1 }}
+        on:swipe={handler}
+    >
         <div class="top-nav">
             <h3 class="channel-name"># Kurizu's Page</h3>
             <div class="vl" />
@@ -49,8 +52,8 @@
                                 Oi mate ! I'm <span style="color: aqua;"
                                     >Kurizu</span
                                 >
-                                and this is my website showcasing my projects
-                                and links to my social media accounts ! <br />
+                                and this is my website showcasing my projects and
+                                links to my social media accounts ! <br />
                                 As you might have already noticed this website looks
                                 similar to the discord application and thats what
                                 i was aiming for. <br /> <br />

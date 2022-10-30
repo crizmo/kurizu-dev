@@ -5,13 +5,16 @@
     export function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
         document.getElementById("mySidenav").style.transition = "width 0.5s";
+
+        document.querySelector(".categories").style.opacity = "0";
     }
     
     export function openNav() {
         document.getElementById("mySidenav").style.width = null;
         document.getElementById("mySidenav").style.transition = "width 0.5s";
-    }
 
+        document.querySelector(".categories").style.opacity = "1";
+    }
     import { swipe } from "svelte-gestures";
     let direction;
 
@@ -91,6 +94,7 @@
         top: 0%;
         color: rgb(255, 255, 255);
         z-index: 0;
+        overflow: scroll;
     }
 
     .server-template-icon {
@@ -139,10 +143,10 @@
         cursor: pointer;
     }
 
-    .channels-list a {
+    /* .channels-list a {
         color: rgb(158, 158, 158);
         text-decoration: none;
-    }
+    } */ 
 
     .channels-list a:hover {
         color: rgb(255, 255, 255);
@@ -165,21 +169,25 @@
     }
 
     .home-cn {
-        background: rgb(104, 104, 104) none repeat scroll 0 0;
-        border-right: 5px none white;
-        box-sizing: border-box;
-        display: block;
-        border-radius: 3px;
-        padding: 5px;
+        background: #232529;
+        color: rgb(255, 255, 255);
     }
 
-    .about-cn:hover {
-        background: rgb(104, 104, 104) none repeat scroll 0 0;
+    .about-cn {
+        color: rgb(158, 158, 158);
+    }
+
+    .home-cn,
+    .about-cn {
         border-right: 5px none white;
         box-sizing: border-box;
         display: block;
         border-radius: 3px;
         padding: 3px;
+    }
+
+    .about-cn:hover {
+        background: #232529;
         color: rgb(255, 255, 255);
     }
 

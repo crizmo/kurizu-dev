@@ -38,7 +38,7 @@ main a {
 .vl {
     border-left: 2px solid gray;
     height: 25px;
-    position: absolute;
+    position: fixed;
     left: 11%;
     top: 1.7%;
 }
@@ -46,11 +46,11 @@ main a {
 .channel-name {
     top: 0%;
     left: 1%;
-    position: absolute;
+    position: fixed;
 }
 
 .channel-info {
-    position: absolute;
+    position: fixed;
     top: 0.5%;
     left: 14%;
 }

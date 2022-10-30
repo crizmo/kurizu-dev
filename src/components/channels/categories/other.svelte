@@ -38,10 +38,10 @@
         cursor: pointer;
     }
 
-    .channels-list a {
+    /* .channels-list a {
         color: rgb(158, 158, 158);
         text-decoration: none;
-    }
+    } */
 
     .channels-list a:hover {
         color: rgb(255, 255, 255);
@@ -63,23 +63,24 @@
         transform: rotate(90deg);
     }
 
-    .blogs:hover {
-        background: rgb(104, 104, 104) none repeat scroll 0 0;
+    .blogs,
+    .to-do {
+        color: rgb(158, 158, 158);
         border-right: 5px none white;
         box-sizing: border-box;
         display: block;
         border-radius: 3px;
         padding: 3px;
-        color: rgb(255, 255, 255);
     }
 
+    .blogs:hover ,
     .to-do:hover {
-        background: rgb(104, 104, 104) none repeat scroll 0 0;
+        background: #232529;
+        color: rgb(255, 255, 255);
         border-right: 5px none white;
         box-sizing: border-box;
         display: block;
         border-radius: 3px;
         padding: 3px;
-        color: rgb(255, 255, 255);
     }
 </style>

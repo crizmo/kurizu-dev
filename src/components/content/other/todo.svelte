@@ -30,9 +30,9 @@
     <script src="https://kit.fontawesome.com/8dc570c5d4.js" crossorigin="anonymous"></script>
     <div class="mainarea" use:swipe={{ timeframe: 500, minSwipeDistance: 0.1 }} on:swipe={handler}>
         <div class="top-nav">
-            <h3 class="channel-name"># Kurizu's ToDo list</h3>
+            <h3 class="channel-name"># ToDo</h3>
             <div class="vl" />
-            <p class="channel-info">To Do list</p>
+            <p class="channel-info">Stuff i plan on doing someday lol</p>
             <!-- <span class="open-btn" on:click="{openNav}">&#9776;</span> -->
         </div>
         <hr />

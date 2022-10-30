@@ -19,10 +19,10 @@
         position: absolute;
         top: 0;
         left: 0;
-        z-index: 2;
+        z-index: 5;
     }
 
-    @media screen and (max-width: 1500px) {
+    @media screen and (max-width: 1900px) {
         .sidebar {
             width: 65px;
         }

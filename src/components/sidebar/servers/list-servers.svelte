@@ -1,9 +1,29 @@
 <script>
     const serverWidth = "50px";
     
-    function openNav() {
+    export function openNav() {
         document.getElementById("mySidenav").style.width = null;
         document.getElementById("mySidenav").style.transition = "width 0.5s";
+
+        document.querySelector(".categories").style.opacity = "1";
+    }
+
+    export function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("mySidenav").style.transition = "width 0.5s";
+
+        document.querySelector(".categories").style.opacity = "0";
+    }
+
+    function check(){
+        setTimeout(() => {
+            if (document.getElementById("mySidenav").style.width != "0" && document.getElementById("mySidenav").style.width != "0px") {
+                closeNav();
+                console.log("closed");
+            } else {
+                openNav();
+            }
+        }, 10);
     }
 
 </script>
@@ -22,6 +42,19 @@
                                 on:click="{openNav}"
                             />
                             <h3 class="hovertext">Kurizu</h3>
+                        </div>
+                    </div>
+                    <div class="sidebar-content-servers-list-item">
+                        <div class="sidebar-content-servers-list-item-icon">
+                            <a href="/chat">
+                                <img
+                                    src="https://media.tenor.com/wSBrGHQKQZ4AAAAM/panda-girl.gif"
+                                    alt=""
+                                    width={serverWidth}
+                                    on:click={check}
+                                />
+                            </a>
+                            <h3 class="hovertext">Chat</h3>
                         </div>
                     </div>
                     <div class="sidebar-content-servers-list-item">
@@ -131,7 +164,7 @@
         top: -5px;
         left: 110%;
         /* transition: opacity 0.3s; */
-        z-index: 1;
+        z-index: 5;
     }
 
     .sidebar-content-servers-list-item-icon .hovertext::after {
