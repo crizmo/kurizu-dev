@@ -2,7 +2,7 @@
 
 Discord desktop app themed portfolio website made using svelte ! 
 
-![Kurizu-dev](https://user-images.githubusercontent.com/83665497/177132064-36991c91-3c5b-4971-9cd8-785a04134d42.png)
+![Kurizu-dev](https://cdn.discordapp.com/attachments/977949070893125632/1036335322486816788/kurizu.png)
 
 ## Code
 Just clone the repo and run `npm install` to install all the dependencies
@@ -21,6 +21,10 @@ My discord username is `Criz#1270` !
 ## Links 
 - [Website](https://kurizu.vercel.app/)
 - [Discord](https://discord.gg/VcMPV8vc2x)
+
+## Update
+- Added chat to the website https://kurizu.vercel.app/chat
+- Better responsiveness and channel bar
 
 ## Assets 
 - Thanks to Pinterest for the banner and server logo images
