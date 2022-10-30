@@ -73,7 +73,9 @@
         if (username != "") {
             let userdiv = document.querySelector(".userinfo-input");
             userdiv.style.opacity = 0;
+            userdiv.style.display = "none";
             isSet = true;
+
         } else {
             alert("Please enter a username");
         }
