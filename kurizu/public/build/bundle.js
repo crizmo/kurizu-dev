@@ -20563,19 +20563,19 @@ var app = (function () {
     			p1 = element("p");
     			t3 = text(t3_value);
     			t4 = space();
-    			attr_dev(p0, "class", "svelte-1o9dlas");
+    			attr_dev(p0, "class", "svelte-ydd2df");
     			add_location(p0, file$5, 162, 36, 4693);
-    			attr_dev(h3, "class", "chat-body-messages-item-content-header-name svelte-1o9dlas");
+    			attr_dev(h3, "class", "chat-body-messages-item-content-header-name svelte-ydd2df");
     			add_location(h3, file$5, 159, 32, 4531);
-    			attr_dev(div0, "class", "chat-body-messages-item-content-header svelte-1o9dlas");
+    			attr_dev(div0, "class", "chat-body-messages-item-content-header svelte-ydd2df");
     			add_location(div0, file$5, 158, 28, 4446);
-    			attr_dev(p1, "class", "svelte-1o9dlas");
+    			attr_dev(p1, "class", "svelte-ydd2df");
     			add_location(p1, file$5, 166, 32, 4899);
-    			attr_dev(div1, "class", "chat-body-messages-item-content-body svelte-1o9dlas");
+    			attr_dev(div1, "class", "chat-body-messages-item-content-body svelte-ydd2df");
     			add_location(div1, file$5, 165, 28, 4816);
-    			attr_dev(div2, "class", "chat-body-messages-item-content svelte-1o9dlas");
+    			attr_dev(div2, "class", "chat-body-messages-item-content svelte-ydd2df");
     			add_location(div2, file$5, 157, 24, 4372);
-    			attr_dev(div3, "class", "chat-body-messages-item svelte-1o9dlas");
+    			attr_dev(div3, "class", "chat-body-messages-item svelte-ydd2df");
     			add_location(div3, file$5, 155, 20, 4244);
     		},
     		m: function mount(target, anchor) {
@@ -20739,12 +20739,12 @@ var app = (function () {
     			}
 
     			attr_dev(div0, "id", "closer-icon");
-    			attr_dev(div0, "class", "svelte-1o9dlas");
+    			attr_dev(div0, "class", "svelte-ydd2df");
     			add_location(div0, file$5, 216, 32, 6883);
-    			attr_dev(header, "class", "svelte-1o9dlas");
+    			attr_dev(header, "class", "svelte-ydd2df");
     			add_location(header, file$5, 212, 24, 6638);
     			attr_dev(div1, "id", "emoji-cont");
-    			attr_dev(div1, "class", "svelte-1o9dlas");
+    			attr_dev(div1, "class", "svelte-ydd2df");
     			add_location(div1, file$5, 211, 20, 6564);
     		},
     		m: function mount(target, anchor) {
@@ -20868,7 +20868,7 @@ var app = (function () {
     			div = element("div");
     			t = text(t_value);
     			attr_dev(div, "data-id", /*i*/ ctx[33]);
-    			attr_dev(div, "class", "svelte-1o9dlas");
+    			attr_dev(div, "class", "svelte-ydd2df");
     			add_location(div, file$5, 214, 32, 6735);
     		},
     		m: function mount(target, anchor) {
@@ -20911,7 +20911,7 @@ var app = (function () {
     		c: function create() {
     			span = element("span");
     			t = text(t_value);
-    			attr_dev(span, "class", "svelte-1o9dlas");
+    			attr_dev(span, "class", "svelte-ydd2df");
     			add_location(span, file$5, 220, 28, 7059);
     		},
     		m: function mount(target, anchor) {
@@ -21040,57 +21040,57 @@ var app = (function () {
     			if (if_block) if_block.c();
     			if (!src_url_equal(script.src, script_src_value = "https://kit.fontawesome.com/8dc570c5d4.js")) attr_dev(script, "src", script_src_value);
     			attr_dev(script, "crossorigin", "anonymous");
-    			attr_dev(script, "class", "svelte-1o9dlas");
+    			attr_dev(script, "class", "svelte-ydd2df");
     			add_location(script, file$5, 136, 4, 3593);
     			attr_dev(meta, "name", "viewport");
     			attr_dev(meta, "content", "width=device-width, initial-scale=1");
-    			attr_dev(meta, "class", "svelte-1o9dlas");
+    			attr_dev(meta, "class", "svelte-ydd2df");
     			add_location(meta, file$5, 140, 4, 3708);
-    			attr_dev(h3, "class", "channel-name  svelte-1o9dlas");
+    			attr_dev(h3, "class", "channel-name  svelte-ydd2df");
     			add_location(h3, file$5, 147, 12, 3950);
-    			attr_dev(div0, "class", "vl svelte-1o9dlas");
+    			attr_dev(div0, "class", "vl svelte-ydd2df");
     			add_location(div0, file$5, 148, 12, 4004);
-    			attr_dev(p, "class", "channel-info svelte-1o9dlas");
+    			attr_dev(p, "class", "channel-info svelte-ydd2df");
     			add_location(p, file$5, 149, 12, 4035);
-    			attr_dev(div1, "class", "top-nav svelte-1o9dlas");
+    			attr_dev(div1, "class", "top-nav svelte-ydd2df");
     			add_location(div1, file$5, 146, 8, 3916);
-    			attr_dev(hr, "class", "svelte-1o9dlas");
+    			attr_dev(hr, "class", "svelte-ydd2df");
     			add_location(hr, file$5, 151, 8, 4094);
-    			attr_dev(div2, "class", "chat-body-messages svelte-1o9dlas");
+    			attr_dev(div2, "class", "chat-body-messages svelte-ydd2df");
     			add_location(div2, file$5, 153, 12, 4145);
-    			attr_dev(input0, "class", "userinfo-input-username svelte-1o9dlas");
+    			attr_dev(input0, "class", "userinfo-input-username svelte-ydd2df");
     			attr_dev(input0, "id", "username");
     			attr_dev(input0, "type", "text");
     			attr_dev(input0, "placeholder", "Username");
     			attr_dev(input0, "maxlength", "15");
     			add_location(input0, file$5, 173, 16, 5114);
-    			attr_dev(input1, "class", "userinfo-input-pfp svelte-1o9dlas");
+    			attr_dev(input1, "class", "userinfo-input-pfp svelte-ydd2df");
     			attr_dev(input1, "id", "userpfp");
     			attr_dev(input1, "type", "text");
     			attr_dev(input1, "placeholder", "User PFP");
     			add_location(input1, file$5, 181, 16, 5394);
-    			attr_dev(button0, "class", "userinfo-input-button fa fa-check svelte-1o9dlas");
+    			attr_dev(button0, "class", "userinfo-input-button fa fa-check svelte-ydd2df");
     			add_location(button0, file$5, 188, 16, 5632);
-    			attr_dev(div3, "class", "userinfo-input svelte-1o9dlas");
+    			attr_dev(div3, "class", "userinfo-input svelte-ydd2df");
     			add_location(div3, file$5, 172, 12, 5069);
     			attr_dev(input2, "type", "text");
-    			attr_dev(input2, "class", "chat-input-text svelte-1o9dlas");
+    			attr_dev(input2, "class", "chat-input-text svelte-ydd2df");
     			attr_dev(input2, "placeholder", "Type a message");
     			attr_dev(input2, "maxlength", "50");
     			add_location(input2, file$5, 194, 16, 5857);
-    			attr_dev(div4, "class", "chat-input-emotes svelte-1o9dlas");
+    			attr_dev(div4, "class", "chat-input-emotes svelte-ydd2df");
     			attr_dev(div4, "id", "emoji-opener-icon");
     			add_location(div4, file$5, 203, 16, 6214);
-    			attr_dev(button1, "class", "chat-input-send fas fa-paper-plane svelte-1o9dlas");
+    			attr_dev(button1, "class", "chat-input-send fas fa-paper-plane svelte-ydd2df");
     			add_location(button1, file$5, 204, 16, 6336);
-    			attr_dev(div5, "class", "chat-input svelte-1o9dlas");
+    			attr_dev(div5, "class", "chat-input svelte-ydd2df");
     			attr_dev(div5, "id", "btn-emoji-icon-cont");
     			add_location(div5, file$5, 193, 12, 5791);
-    			attr_dev(div6, "class", "chat-body svelte-1o9dlas");
+    			attr_dev(div6, "class", "chat-body svelte-ydd2df");
     			add_location(div6, file$5, 152, 8, 4109);
-    			attr_dev(div7, "class", "mainarea svelte-1o9dlas");
+    			attr_dev(div7, "class", "mainarea svelte-ydd2df");
     			add_location(div7, file$5, 141, 4, 3783);
-    			attr_dev(main, "class", "svelte-1o9dlas");
+    			attr_dev(main, "class", "svelte-ydd2df");
     			add_location(main, file$5, 135, 0, 3582);
     		},
     		l: function claim(nodes) {
@@ -21557,28 +21557,39 @@ var app = (function () {
 
     // (10:4) <Route path="/chat">
     function create_default_slot$1(ctx) {
+    	let chatcn;
+    	let t;
     	let chat;
     	let current;
+    	chatcn = new Chat_cn({ $$inline: true });
     	chat = new Chat({ $$inline: true });
 
     	const block = {
     		c: function create() {
+    			create_component(chatcn.$$.fragment);
+    			t = space();
     			create_component(chat.$$.fragment);
     		},
     		m: function mount(target, anchor) {
+    			mount_component(chatcn, target, anchor);
+    			insert_dev(target, t, anchor);
     			mount_component(chat, target, anchor);
     			current = true;
     		},
     		i: function intro(local) {
     			if (current) return;
+    			transition_in(chatcn.$$.fragment, local);
     			transition_in(chat.$$.fragment, local);
     			current = true;
     		},
     		o: function outro(local) {
+    			transition_out(chatcn.$$.fragment, local);
     			transition_out(chat.$$.fragment, local);
     			current = false;
     		},
     		d: function destroy(detaching) {
+    			destroy_component(chatcn, detaching);
+    			if (detaching) detach_dev(t);
     			destroy_component(chat, detaching);
     		}
     	};

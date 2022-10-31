@@ -445,6 +445,18 @@
 		background: transparent;
 	}
 
+    @media screen and (max-height: 900px){
+        #emoji-cont {
+            top: 55%;
+        }
+    }
+
+    @media screen and (max-height: 700px){
+        #emoji-cont {
+            top: 40%;
+        }
+    }
+
     @media screen and (max-width: 800px) {
         .mainarea {
             position: absolute;
@@ -489,7 +501,7 @@
             border-radius: 5px;
             top: 88%;
             position: fixed;
-            margin-left: 2%;
+            margin-left: 1%;
         }
 
         .userinfo-input-username {
@@ -538,7 +550,7 @@
             height: 45px;
             border-radius: 5px;
             top: 94%;
-            margin-left: 2%;
+            margin-left: 1%;
             position: fixed;
             /* overflow: scroll; */
         }
@@ -632,6 +644,12 @@
         
         span:active {
             background: transparent;
+        }
+    }
+
+    @media screen and (max-width: 800px) and (max-height: 800px) {
+        #emoji-cont {
+            top: 50%;
         }
     }
 </style>
