@@ -44,6 +44,42 @@
         }, 10);
     });
 
+    import { fly } from 'svelte/transition';
+	
+	let emojiSets = [
+		{ type: "faces", minVal:128512, maxVal: 128580 },
+		{ type: "faces2", minVal:129296, maxVal: 129327},
+		{ type: "body", minVal:128066, maxVal: 128080},
+		{ type: "animals", minVal:129408, maxVal: 129442},
+		{ type: "transport", minVal:128640, maxVal: 128676},
+		{ type: "misc", minVal:129494, maxVal: 129535},
+			
+	];
+	
+	let selectedSet = 0;
+	$: min = emojiSets[selectedSet].minVal;
+	$: max = emojiSets[selectedSet].maxVal;
+	let emojis = [];
+	
+	$: for (let i = min; i <= max; i++) {
+		emojis = [...emojis, String.fromCodePoint(i)]
+	}
+	
+	const clearEmojiMenu = () => emojis = []; 
+	
+	const chooseEmojiSet = (e) => {	
+		selectedSet = Number(e.target.dataset.id);
+		clearEmojiMenu()
+	}
+
+	let setIcons = [128512, 129313, 128074, 129417, 128664, 129504]
+	let emojiIcon = String.fromCodePoint(128571);
+	let modalOpen = false;
+	let textBox; // for bind:this
+	const addEmoji = (e) => {
+		message += e.target.textContent
+	}
+
     function sendMessage() {
         if (!isSet) {
             alert("Please set a username");
@@ -57,15 +93,19 @@
             userpfp =
                 "https://theserialbinger.com/wp-content/uploads/2022/06/Anya-1024x1024.jpg";
         }
-
+    
         if (message == "") {
             alert("Please enter a message");
-        } else if (!message.match(/^[a-zA-Z0-9!/*@#$%^&()-+=_<>?:;]/)) {
+        } else if (message.match(/^[ ]/)) {
             alert("Please enter a valid message");
             message = "";
         } else {
+
             socket.emit("chat message", user, userpfp, message);
+            console.log(`The message: (${message}) has been sent.`);	
+            textBox.value = "";
             message = "";
+            modalOpen = false;
         }
     }
 
@@ -90,6 +130,7 @@
                 }
             });
     }, 1000);
+
 </script>
 
 <main>
@@ -150,26 +191,38 @@
                     class="userinfo-input-button fa fa-check"
                 />
             </div>
-            <div class="chat-input">
+            <div class="chat-input" id="btn-emoji-icon-cont">
                 <input
                     type="text"
                     class="chat-input-text"
                     placeholder="Type a message"
+                    bind:this={textBox}
                     bind:value={message}
                     maxlength="50"
                 />
                 <!-- add a button to send emotes with emoji as screen -->
-                <button 
-                    class="chat-input-emotes fas fa-smile" 
-                    on:click={() => {
-                        alert("Emotes Coming soon!");
-                    }}
-                />
+                <div class="chat-input-emotes" id="emoji-opener-icon" on:click={() => modalOpen = true}>{emojiIcon}</div>
                 <button
                     class="chat-input-send fas fa-paper-plane"
                     on:click={sendMessage}
                 />
             </div>
+            {#if isSet}
+                {#if modalOpen}
+                    <div id="emoji-cont" transition:fly={{ y: -30 }}>
+                        <header>
+                            {#each setIcons as icon, i}
+                                <div data-id={i} on:click={chooseEmojiSet}>{String.fromCodePoint(icon)}</div>		
+                            {/each}
+                                <div id="closer-icon" on:click={() => modalOpen = false}>X</div>
+                        </header>
+
+                        {#each emojis as emoji}
+                            <span on:click={addEmoji}>{emoji}</span>
+                        {/each}
+                    </div>
+                {/if}
+            {/if}   
         </div>
     </div>
 </main>
@@ -307,18 +360,6 @@
         outline: none;
     }
 
-    .chat-input-emotes {
-        width: 5%;
-        height: 100%;
-        border: none;
-        border-radius: 5px;
-        background-color: #7289da;
-        color: #fff;
-        font-size: 1rem;
-        cursor: pointer;
-        outline: none;
-    }
-
     .chat-input-send {
         width: 5%;
         height: 100%;
@@ -332,12 +373,77 @@
     }
 
     .chat-input-send:hover,
-    .chat-input-emotes:hover,
     .userinfo-input-button:hover {
         color: rgb(251, 255, 0);
         background-color: #5f73bc;
         transition: all 0.2s ease-in-out;
     }
+
+    #btn-emoji-icon-cont {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+    #emoji-opener-icon {
+		font-size: 1.5rem;
+		cursor: pointer;
+		transition: all .1s;
+        position: fixed;
+        z-index: 1;
+        left: 92%;
+        top: 94.5%;
+	}
+	
+	#emoji-opener-icon:active {
+        font-size: 2.3rem;
+		transform: rotate(10deg);
+		cursor: pointer;
+	}
+	
+	#emoji-cont {
+        left: 80%;
+        top: 65%;
+		max-width: 300px;
+		max-height: 248px;
+		overflow: scroll;
+		display: flex;
+        position: fixed;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		border: 1px solid #282a2e;
+		background: transparent;
+	}
+
+    #closer-icon {
+		font-size: 1.5rem;
+		font-weight: bold;
+		text-align: right;
+	}
+
+    #emoji-cont header {
+		width: 98%;
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		border: 1px solid gray;
+	}
+	
+	#emoji-cont header div {
+		cursor: pointer;
+	}
+
+    span {
+		font-size: 1.5rem;
+		padding: .3rem;
+		border: 1px solid gray;
+		background: transparent;
+		cursor: pointer;
+	}
+	
+	span:active {
+		background: transparent;
+	}
 
     @media screen and (max-width: 800px) {
         .mainarea {
@@ -449,18 +555,6 @@
             outline: none;
         }
 
-        .chat-input-emotes {
-            width: 15%;
-            height: 100%;
-            border: none;
-            border-radius: 5px;
-            background-color: #7289da;
-            color: #fff;
-            font-size: 0.8rem;
-            cursor: pointer;
-            outline: none;
-        }
-
         .chat-input-send {
             width: 20%;
             height: 100%;
@@ -472,6 +566,72 @@
             cursor: pointer;
             outline: none;
             margin-right: 20px;
+        }
+
+        #btn-emoji-icon-cont {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #emoji-opener-icon {
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all .1s;
+            position: fixed;
+            z-index: 1;
+            left: 75%;
+            top: 94.5%;
+        }
+        
+        #emoji-opener-icon:active {
+            font-size: 2.3rem;
+            transform: rotate(10deg);
+            cursor: pointer;
+        }
+        
+        #emoji-cont {
+            left: 50%;
+            top: 60%;
+            max-width: 300px;
+            max-height: 248px;
+            overflow: scroll;
+            display: flex;
+            position: fixed;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            border: 1px solid #282a2e;
+            background: transparent;
+        }
+
+        #closer-icon {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        #emoji-cont header {
+            width: 98%;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            border: 1px solid gray;
+        }
+        
+        #emoji-cont header div {
+            cursor: pointer;
+        }
+
+        span {
+            font-size: 1.5rem;
+            padding: .3rem;
+            border: 1px solid gray;
+            background: transparent;
+            cursor: pointer;
+        }
+        
+        span:active {
+            background: transparent;
         }
     }
 </style>

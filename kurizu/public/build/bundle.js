@@ -4,6 +4,7 @@ var app = (function () {
     'use strict';
 
     function noop() { }
+    const identity = x => x;
     function assign(tar, src) {
         // @ts-ignore
         for (const k in src)
@@ -90,8 +91,60 @@ var app = (function () {
     function action_destroyer(action_result) {
         return action_result && is_function(action_result.destroy) ? action_result.destroy : noop;
     }
+
+    const is_client = typeof window !== 'undefined';
+    let now = is_client
+        ? () => window.performance.now()
+        : () => Date.now();
+    let raf = is_client ? cb => requestAnimationFrame(cb) : noop;
+
+    const tasks = new Set();
+    function run_tasks(now) {
+        tasks.forEach(task => {
+            if (!task.c(now)) {
+                tasks.delete(task);
+                task.f();
+            }
+        });
+        if (tasks.size !== 0)
+            raf(run_tasks);
+    }
+    /**
+     * Creates a new task that runs on each raf frame
+     * until it returns a falsy value or is aborted
+     */
+    function loop(callback) {
+        let task;
+        if (tasks.size === 0)
+            raf(run_tasks);
+        return {
+            promise: new Promise(fulfill => {
+                tasks.add(task = { c: callback, f: fulfill });
+            }),
+            abort() {
+                tasks.delete(task);
+            }
+        };
+    }
     function append(target, node) {
         target.appendChild(node);
+    }
+    function get_root_for_style(node) {
+        if (!node)
+            return document;
+        const root = node.getRootNode ? node.getRootNode() : node.ownerDocument;
+        if (root && root.host) {
+            return root;
+        }
+        return node.ownerDocument;
+    }
+    function append_empty_stylesheet(node) {
+        const style_element = element('style');
+        append_stylesheet(get_root_for_style(node), style_element);
+        return style_element.sheet;
+    }
+    function append_stylesheet(node, style) {
+        append(node.head || node, style);
     }
     function insert(target, node, anchor) {
         target.insertBefore(node, anchor || null);
@@ -166,6 +219,72 @@ var app = (function () {
         const e = document.createEvent('CustomEvent');
         e.initCustomEvent(type, bubbles, cancelable, detail);
         return e;
+    }
+
+    // we need to store the information for multiple documents because a Svelte application could also contain iframes
+    // https://github.com/sveltejs/svelte/issues/3624
+    const managed_styles = new Map();
+    let active = 0;
+    // https://github.com/darkskyapp/string-hash/blob/master/index.js
+    function hash(str) {
+        let hash = 5381;
+        let i = str.length;
+        while (i--)
+            hash = ((hash << 5) - hash) ^ str.charCodeAt(i);
+        return hash >>> 0;
+    }
+    function create_style_information(doc, node) {
+        const info = { stylesheet: append_empty_stylesheet(node), rules: {} };
+        managed_styles.set(doc, info);
+        return info;
+    }
+    function create_rule(node, a, b, duration, delay, ease, fn, uid = 0) {
+        const step = 16.666 / duration;
+        let keyframes = '{\n';
+        for (let p = 0; p <= 1; p += step) {
+            const t = a + (b - a) * ease(p);
+            keyframes += p * 100 + `%{${fn(t, 1 - t)}}\n`;
+        }
+        const rule = keyframes + `100% {${fn(b, 1 - b)}}\n}`;
+        const name = `__svelte_${hash(rule)}_${uid}`;
+        const doc = get_root_for_style(node);
+        const { stylesheet, rules } = managed_styles.get(doc) || create_style_information(doc, node);
+        if (!rules[name]) {
+            rules[name] = true;
+            stylesheet.insertRule(`@keyframes ${name} ${rule}`, stylesheet.cssRules.length);
+        }
+        const animation = node.style.animation || '';
+        node.style.animation = `${animation ? `${animation}, ` : ''}${name} ${duration}ms linear ${delay}ms 1 both`;
+        active += 1;
+        return name;
+    }
+    function delete_rule(node, name) {
+        const previous = (node.style.animation || '').split(', ');
+        const next = previous.filter(name
+            ? anim => anim.indexOf(name) < 0 // remove specific animation
+            : anim => anim.indexOf('__svelte') === -1 // remove all Svelte animations
+        );
+        const deleted = previous.length - next.length;
+        if (deleted) {
+            node.style.animation = next.join(', ');
+            active -= deleted;
+            if (!active)
+                clear_rules();
+        }
+    }
+    function clear_rules() {
+        raf(() => {
+            if (active)
+                return;
+            managed_styles.forEach(info => {
+                const { stylesheet } = info;
+                let i = stylesheet.cssRules.length;
+                while (i--)
+                    stylesheet.deleteRule(i);
+                info.rules = {};
+            });
+            managed_styles.clear();
+        });
     }
 
     let current_component;
@@ -276,6 +395,20 @@ var app = (function () {
             $$.after_update.forEach(add_render_callback);
         }
     }
+
+    let promise;
+    function wait() {
+        if (!promise) {
+            promise = Promise.resolve();
+            promise.then(() => {
+                promise = null;
+            });
+        }
+        return promise;
+    }
+    function dispatch$1(node, direction, kind) {
+        node.dispatchEvent(custom_event(`${direction ? 'intro' : 'outro'}${kind}`));
+    }
     const outroing = new Set();
     let outros;
     function group_outros() {
@@ -312,6 +445,112 @@ var app = (function () {
             });
             block.o(local);
         }
+    }
+    const null_transition = { duration: 0 };
+    function create_bidirectional_transition(node, fn, params, intro) {
+        let config = fn(node, params);
+        let t = intro ? 0 : 1;
+        let running_program = null;
+        let pending_program = null;
+        let animation_name = null;
+        function clear_animation() {
+            if (animation_name)
+                delete_rule(node, animation_name);
+        }
+        function init(program, duration) {
+            const d = (program.b - t);
+            duration *= Math.abs(d);
+            return {
+                a: t,
+                b: program.b,
+                d,
+                duration,
+                start: program.start,
+                end: program.start + duration,
+                group: program.group
+            };
+        }
+        function go(b) {
+            const { delay = 0, duration = 300, easing = identity, tick = noop, css } = config || null_transition;
+            const program = {
+                start: now() + delay,
+                b
+            };
+            if (!b) {
+                // @ts-ignore todo: improve typings
+                program.group = outros;
+                outros.r += 1;
+            }
+            if (running_program || pending_program) {
+                pending_program = program;
+            }
+            else {
+                // if this is an intro, and there's a delay, we need to do
+                // an initial tick and/or apply CSS animation immediately
+                if (css) {
+                    clear_animation();
+                    animation_name = create_rule(node, t, b, duration, delay, easing, css);
+                }
+                if (b)
+                    tick(0, 1);
+                running_program = init(program, duration);
+                add_render_callback(() => dispatch$1(node, b, 'start'));
+                loop(now => {
+                    if (pending_program && now > pending_program.start) {
+                        running_program = init(pending_program, duration);
+                        pending_program = null;
+                        dispatch$1(node, running_program.b, 'start');
+                        if (css) {
+                            clear_animation();
+                            animation_name = create_rule(node, t, running_program.b, running_program.duration, 0, easing, config.css);
+                        }
+                    }
+                    if (running_program) {
+                        if (now >= running_program.end) {
+                            tick(t = running_program.b, 1 - t);
+                            dispatch$1(node, running_program.b, 'end');
+                            if (!pending_program) {
+                                // we're done
+                                if (running_program.b) {
+                                    // intro — we can tidy up immediately
+                                    clear_animation();
+                                }
+                                else {
+                                    // outro — needs to be coordinated
+                                    if (!--running_program.group.r)
+                                        run_all(running_program.group.c);
+                                }
+                            }
+                            running_program = null;
+                        }
+                        else if (now >= running_program.start) {
+                            const p = now - running_program.start;
+                            t = running_program.a + running_program.d * easing(p / running_program.duration);
+                            tick(t, 1 - t);
+                        }
+                    }
+                    return !!(running_program || pending_program);
+                });
+            }
+        }
+        return {
+            run(b) {
+                if (is_function(config)) {
+                    wait().then(() => {
+                        // @ts-ignore
+                        config = config();
+                        go(b);
+                    });
+                }
+                else {
+                    go(b);
+                }
+            },
+            end() {
+                clear_animation();
+                running_program = pending_program = null;
+            }
+        };
     }
 
     const globals = (typeof window !== 'undefined'
@@ -623,7 +862,7 @@ var app = (function () {
     });
 
     // (33:0) {#if showContent}
-    function create_if_block$1(ctx) {
+    function create_if_block$2(ctx) {
     	let current;
     	const default_slot_template = /*#slots*/ ctx[9].default;
     	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[8], get_default_slot_context);
@@ -671,7 +910,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$1.name,
+    		id: create_if_block$2.name,
     		type: "if",
     		source: "(33:0) {#if showContent}",
     		ctx
@@ -683,7 +922,7 @@ var app = (function () {
     function create_fragment$E(ctx) {
     	let if_block_anchor;
     	let current;
-    	let if_block = /*showContent*/ ctx[0] && create_if_block$1(ctx);
+    	let if_block = /*showContent*/ ctx[0] && create_if_block$2(ctx);
 
     	const block = {
     		c: function create() {
@@ -707,7 +946,7 @@ var app = (function () {
     						transition_in(if_block, 1);
     					}
     				} else {
-    					if_block = create_if_block$1(ctx);
+    					if_block = create_if_block$2(ctx);
     					if_block.c();
     					transition_in(if_block, 1);
     					if_block.m(if_block_anchor.parentNode, if_block_anchor);
@@ -908,13 +1147,13 @@ var app = (function () {
     	return child_ctx;
     }
 
-    function get_each_context_1(ctx, list, i) {
+    function get_each_context_1$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
     	child_ctx[16] = list[i];
     	return child_ctx;
     }
 
-    function get_each_context_2(ctx, list, i) {
+    function get_each_context_2$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
     	child_ctx[21] = list[i];
     	return child_ctx;
@@ -4272,7 +4511,7 @@ var app = (function () {
     	let each_blocks = [];
 
     	for (let i = 0; i < each_value_2.length; i += 1) {
-    		each_blocks[i] = create_each_block_2(get_each_context_2(ctx, each_value_2, i));
+    		each_blocks[i] = create_each_block_2$1(get_each_context_2$1(ctx, each_value_2, i));
     	}
 
     	const block = {
@@ -4297,12 +4536,12 @@ var app = (function () {
     				let i;
 
     				for (i = 0; i < each_value_2.length; i += 1) {
-    					const child_ctx = get_each_context_2(ctx, each_value_2, i);
+    					const child_ctx = get_each_context_2$1(ctx, each_value_2, i);
 
     					if (each_blocks[i]) {
     						each_blocks[i].p(child_ctx, dirty);
     					} else {
-    						each_blocks[i] = create_each_block_2(child_ctx);
+    						each_blocks[i] = create_each_block_2$1(child_ctx);
     						each_blocks[i].c();
     						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
     					}
@@ -4513,7 +4752,7 @@ var app = (function () {
     }
 
     // (241:6) {#each openGraph.videos as video}
-    function create_each_block_2(ctx) {
+    function create_each_block_2$1(ctx) {
     	let meta;
     	let meta_content_value;
     	let t0;
@@ -4648,7 +4887,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block_2.name,
+    		id: create_each_block_2$1.name,
     		type: "each",
     		source: "(241:6) {#each openGraph.videos as video}",
     		ctx
@@ -4730,14 +4969,14 @@ var app = (function () {
     }
 
     // (270:2) {#if additionalMetaTags && additionalMetaTags.length > 0}
-    function create_if_block_1(ctx) {
+    function create_if_block_1$1(ctx) {
     	let each_1_anchor;
     	let each_value_1 = /*additionalMetaTags*/ ctx[9];
     	validate_each_argument(each_value_1);
     	let each_blocks = [];
 
     	for (let i = 0; i < each_value_1.length; i += 1) {
-    		each_blocks[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
+    		each_blocks[i] = create_each_block_1$1(get_each_context_1$1(ctx, each_value_1, i));
     	}
 
     	const block = {
@@ -4762,12 +5001,12 @@ var app = (function () {
     				let i;
 
     				for (i = 0; i < each_value_1.length; i += 1) {
-    					const child_ctx = get_each_context_1(ctx, each_value_1, i);
+    					const child_ctx = get_each_context_1$1(ctx, each_value_1, i);
 
     					if (each_blocks[i]) {
     						each_blocks[i].p(child_ctx, dirty);
     					} else {
-    						each_blocks[i] = create_each_block_1(child_ctx);
+    						each_blocks[i] = create_each_block_1$1(child_ctx);
     						each_blocks[i].c();
     						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
     					}
@@ -4788,7 +5027,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1.name,
+    		id: create_if_block_1$1.name,
     		type: "if",
     		source: "(270:2) {#if additionalMetaTags && additionalMetaTags.length > 0}",
     		ctx
@@ -4798,7 +5037,7 @@ var app = (function () {
     }
 
     // (271:4) {#each additionalMetaTags as tag}
-    function create_each_block_1(ctx) {
+    function create_each_block_1$1(ctx) {
     	let meta;
     	let meta_levels = [/*tag*/ ctx[16]];
     	let meta_data = {};
@@ -4826,7 +5065,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block_1.name,
+    		id: create_each_block_1$1.name,
     		type: "each",
     		source: "(271:4) {#each additionalMetaTags as tag}",
     		ctx
@@ -4836,7 +5075,7 @@ var app = (function () {
     }
 
     // (276:2) {#if additionalLinkTags?.length}
-    function create_if_block(ctx) {
+    function create_if_block$1(ctx) {
     	let each_1_anchor;
     	let each_value = /*additionalLinkTags*/ ctx[10];
     	validate_each_argument(each_value);
@@ -4894,7 +5133,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block.name,
+    		id: create_if_block$1.name,
     		type: "if",
     		source: "(276:2) {#if additionalLinkTags?.length}",
     		ctx
@@ -4964,8 +5203,8 @@ var app = (function () {
     	let if_block4 = /*twitter*/ ctx[5] && create_if_block_47(ctx);
     	let if_block5 = /*facebook*/ ctx[6] && create_if_block_46(ctx);
     	let if_block6 = /*openGraph*/ ctx[7] && create_if_block_2(ctx);
-    	let if_block7 = /*additionalMetaTags*/ ctx[9] && /*additionalMetaTags*/ ctx[9].length > 0 && create_if_block_1(ctx);
-    	let if_block8 = /*additionalLinkTags*/ ctx[10]?.length && create_if_block(ctx);
+    	let if_block7 = /*additionalMetaTags*/ ctx[9] && /*additionalMetaTags*/ ctx[9].length > 0 && create_if_block_1$1(ctx);
+    	let if_block8 = /*additionalLinkTags*/ ctx[10]?.length && create_if_block$1(ctx);
 
     	const block = {
     		c: function create() {
@@ -5129,7 +5368,7 @@ var app = (function () {
     				if (if_block7) {
     					if_block7.p(ctx, dirty);
     				} else {
-    					if_block7 = create_if_block_1(ctx);
+    					if_block7 = create_if_block_1$1(ctx);
     					if_block7.c();
     					if_block7.m(if_block7_anchor.parentNode, if_block7_anchor);
     				}
@@ -5142,7 +5381,7 @@ var app = (function () {
     				if (if_block8) {
     					if_block8.p(ctx, dirty);
     				} else {
-    					if_block8 = create_if_block(ctx);
+    					if_block8 = create_if_block$1(ctx);
     					if_block8.c();
     					if_block8.m(if_block8_anchor.parentNode, if_block8_anchor);
     				}
@@ -5592,7 +5831,7 @@ var app = (function () {
 
     /* src/components/sidebar/servers/list-servers.svelte generated by Svelte v3.48.0 */
 
-    const { console: console_1 } = globals;
+    const { console: console_1$1 } = globals;
     const file$B = "src/components/sidebar/servers/list-servers.svelte";
 
     function create_fragment$B(ctx) {
@@ -5981,7 +6220,7 @@ var app = (function () {
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
-    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1.warn(`<List_servers> was created with unknown prop '${key}'`);
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1$1.warn(`<List_servers> was created with unknown prop '${key}'`);
     	});
 
     	$$self.$capture_state = () => ({ serverWidth: serverWidth$f, openNav: openNav$d, closeNav: closeNav$d, check: check$2 });
@@ -20238,17 +20477,52 @@ var app = (function () {
         connect: lookup,
     });
 
+    function cubicOut(t) {
+        const f = t - 1.0;
+        return f * f * f + 1.0;
+    }
+
+    function fly(node, { delay = 0, duration = 400, easing = cubicOut, x = 0, y = 0, opacity = 0 } = {}) {
+        const style = getComputedStyle(node);
+        const target_opacity = +style.opacity;
+        const transform = style.transform === 'none' ? '' : style.transform;
+        const od = target_opacity * (1 - opacity);
+        return {
+            delay,
+            duration,
+            easing,
+            css: (t, u) => `
+			transform: ${transform} translate(${(1 - t) * x}px, ${(1 - t) * y}px);
+			opacity: ${target_opacity - (od * u)}`
+        };
+    }
+
     /* src/components/content/chat/chat.svelte generated by Svelte v3.48.0 */
+
+    const { console: console_1 } = globals;
     const file$5 = "src/components/content/chat/chat.svelte";
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[14] = list[i];
+    	child_ctx[28] = list[i];
     	return child_ctx;
     }
 
-    // (114:16) {#each messages as msgObject}
-    function create_each_block(ctx) {
+    function get_each_context_1(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[31] = list[i];
+    	child_ctx[33] = i;
+    	return child_ctx;
+    }
+
+    function get_each_context_2(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[34] = list[i];
+    	return child_ctx;
+    }
+
+    // (155:16) {#each messages as msgObject}
+    function create_each_block_2(ctx) {
     	let div3;
     	let user;
     	let t0;
@@ -20256,19 +20530,19 @@ var app = (function () {
     	let div0;
     	let h3;
     	let p0;
-    	let t1_value = /*msgObject*/ ctx[14][0] + "";
+    	let t1_value = /*msgObject*/ ctx[34][0] + "";
     	let t1;
     	let t2;
     	let div1;
     	let p1;
-    	let t3_value = /*msgObject*/ ctx[14][2] + "";
+    	let t3_value = /*msgObject*/ ctx[34][2] + "";
     	let t3;
     	let t4;
     	let current;
 
     	user = new User({
     			props: {
-    				pfp: /*msgObject*/ ctx[14][1],
+    				pfp: /*msgObject*/ ctx[34][1],
     				alt: "userpfp"
     			},
     			$$inline: true
@@ -20289,20 +20563,20 @@ var app = (function () {
     			p1 = element("p");
     			t3 = text(t3_value);
     			t4 = space();
-    			attr_dev(p0, "class", "svelte-1sfhcer");
-    			add_location(p0, file$5, 121, 36, 3599);
-    			attr_dev(h3, "class", "chat-body-messages-item-content-header-name svelte-1sfhcer");
-    			add_location(h3, file$5, 118, 32, 3437);
-    			attr_dev(div0, "class", "chat-body-messages-item-content-header svelte-1sfhcer");
-    			add_location(div0, file$5, 117, 28, 3352);
-    			attr_dev(p1, "class", "svelte-1sfhcer");
-    			add_location(p1, file$5, 125, 32, 3805);
-    			attr_dev(div1, "class", "chat-body-messages-item-content-body svelte-1sfhcer");
-    			add_location(div1, file$5, 124, 28, 3722);
-    			attr_dev(div2, "class", "chat-body-messages-item-content svelte-1sfhcer");
-    			add_location(div2, file$5, 116, 24, 3278);
-    			attr_dev(div3, "class", "chat-body-messages-item svelte-1sfhcer");
-    			add_location(div3, file$5, 114, 20, 3150);
+    			attr_dev(p0, "class", "svelte-1o9dlas");
+    			add_location(p0, file$5, 162, 36, 4693);
+    			attr_dev(h3, "class", "chat-body-messages-item-content-header-name svelte-1o9dlas");
+    			add_location(h3, file$5, 159, 32, 4531);
+    			attr_dev(div0, "class", "chat-body-messages-item-content-header svelte-1o9dlas");
+    			add_location(div0, file$5, 158, 28, 4446);
+    			attr_dev(p1, "class", "svelte-1o9dlas");
+    			add_location(p1, file$5, 166, 32, 4899);
+    			attr_dev(div1, "class", "chat-body-messages-item-content-body svelte-1o9dlas");
+    			add_location(div1, file$5, 165, 28, 4816);
+    			attr_dev(div2, "class", "chat-body-messages-item-content svelte-1o9dlas");
+    			add_location(div2, file$5, 157, 24, 4372);
+    			attr_dev(div3, "class", "chat-body-messages-item svelte-1o9dlas");
+    			add_location(div3, file$5, 155, 20, 4244);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div3, anchor);
@@ -20322,10 +20596,10 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const user_changes = {};
-    			if (dirty & /*messages*/ 1) user_changes.pfp = /*msgObject*/ ctx[14][1];
+    			if (dirty[0] & /*messages*/ 2) user_changes.pfp = /*msgObject*/ ctx[34][1];
     			user.$set(user_changes);
-    			if ((!current || dirty & /*messages*/ 1) && t1_value !== (t1_value = /*msgObject*/ ctx[14][0] + "")) set_data_dev(t1, t1_value);
-    			if ((!current || dirty & /*messages*/ 1) && t3_value !== (t3_value = /*msgObject*/ ctx[14][2] + "")) set_data_dev(t3, t3_value);
+    			if ((!current || dirty[0] & /*messages*/ 2) && t1_value !== (t1_value = /*msgObject*/ ctx[34][0] + "")) set_data_dev(t1, t1_value);
+    			if ((!current || dirty[0] & /*messages*/ 2) && t3_value !== (t3_value = /*msgObject*/ ctx[34][2] + "")) set_data_dev(t3, t3_value);
     		},
     		i: function intro(local) {
     			if (current) return;
@@ -20344,9 +20618,326 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
+    		id: create_each_block_2.name,
+    		type: "each",
+    		source: "(155:16) {#each messages as msgObject}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (210:12) {#if isSet}
+    function create_if_block(ctx) {
+    	let if_block_anchor;
+    	let current;
+    	let if_block = /*modalOpen*/ ctx[6] && create_if_block_1(ctx);
+
+    	const block = {
+    		c: function create() {
+    			if (if_block) if_block.c();
+    			if_block_anchor = empty$1();
+    		},
+    		m: function mount(target, anchor) {
+    			if (if_block) if_block.m(target, anchor);
+    			insert_dev(target, if_block_anchor, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			if (/*modalOpen*/ ctx[6]) {
+    				if (if_block) {
+    					if_block.p(ctx, dirty);
+
+    					if (dirty[0] & /*modalOpen*/ 64) {
+    						transition_in(if_block, 1);
+    					}
+    				} else {
+    					if_block = create_if_block_1(ctx);
+    					if_block.c();
+    					transition_in(if_block, 1);
+    					if_block.m(if_block_anchor.parentNode, if_block_anchor);
+    				}
+    			} else if (if_block) {
+    				group_outros();
+
+    				transition_out(if_block, 1, 1, () => {
+    					if_block = null;
+    				});
+
+    				check_outros();
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(if_block);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(if_block);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (if_block) if_block.d(detaching);
+    			if (detaching) detach_dev(if_block_anchor);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block.name,
+    		type: "if",
+    		source: "(210:12) {#if isSet}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (211:16) {#if modalOpen}
+    function create_if_block_1(ctx) {
+    	let div1;
+    	let header;
+    	let t0;
+    	let div0;
+    	let t2;
+    	let div1_transition;
+    	let current;
+    	let mounted;
+    	let dispose;
+    	let each_value_1 = /*setIcons*/ ctx[10];
+    	validate_each_argument(each_value_1);
+    	let each_blocks_1 = [];
+
+    	for (let i = 0; i < each_value_1.length; i += 1) {
+    		each_blocks_1[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
+    	}
+
+    	let each_value = /*emojis*/ ctx[0];
+    	validate_each_argument(each_value);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value.length; i += 1) {
+    		each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
+    	}
+
+    	const block = {
+    		c: function create() {
+    			div1 = element("div");
+    			header = element("header");
+
+    			for (let i = 0; i < each_blocks_1.length; i += 1) {
+    				each_blocks_1[i].c();
+    			}
+
+    			t0 = space();
+    			div0 = element("div");
+    			div0.textContent = "X";
+    			t2 = space();
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			attr_dev(div0, "id", "closer-icon");
+    			attr_dev(div0, "class", "svelte-1o9dlas");
+    			add_location(div0, file$5, 216, 32, 6883);
+    			attr_dev(header, "class", "svelte-1o9dlas");
+    			add_location(header, file$5, 212, 24, 6638);
+    			attr_dev(div1, "id", "emoji-cont");
+    			attr_dev(div1, "class", "svelte-1o9dlas");
+    			add_location(div1, file$5, 211, 20, 6564);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, header);
+
+    			for (let i = 0; i < each_blocks_1.length; i += 1) {
+    				each_blocks_1[i].m(header, null);
+    			}
+
+    			append_dev(header, t0);
+    			append_dev(header, div0);
+    			append_dev(div1, t2);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].m(div1, null);
+    			}
+
+    			current = true;
+
+    			if (!mounted) {
+    				dispose = listen_dev(div0, "click", /*click_handler_1*/ ctx[23], false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty[0] & /*chooseEmojiSet, setIcons*/ 1536) {
+    				each_value_1 = /*setIcons*/ ctx[10];
+    				validate_each_argument(each_value_1);
+    				let i;
+
+    				for (i = 0; i < each_value_1.length; i += 1) {
+    					const child_ctx = get_each_context_1(ctx, each_value_1, i);
+
+    					if (each_blocks_1[i]) {
+    						each_blocks_1[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks_1[i] = create_each_block_1(child_ctx);
+    						each_blocks_1[i].c();
+    						each_blocks_1[i].m(header, t0);
+    					}
+    				}
+
+    				for (; i < each_blocks_1.length; i += 1) {
+    					each_blocks_1[i].d(1);
+    				}
+
+    				each_blocks_1.length = each_value_1.length;
+    			}
+
+    			if (dirty[0] & /*addEmoji, emojis*/ 4097) {
+    				each_value = /*emojis*/ ctx[0];
+    				validate_each_argument(each_value);
+    				let i;
+
+    				for (i = 0; i < each_value.length; i += 1) {
+    					const child_ctx = get_each_context(ctx, each_value, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks[i] = create_each_block(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(div1, null);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value.length;
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+
+    			add_render_callback(() => {
+    				if (!div1_transition) div1_transition = create_bidirectional_transition(div1, fly, { y: -30 }, true);
+    				div1_transition.run(1);
+    			});
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			if (!div1_transition) div1_transition = create_bidirectional_transition(div1, fly, { y: -30 }, false);
+    			div1_transition.run(0);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div1);
+    			destroy_each(each_blocks_1, detaching);
+    			destroy_each(each_blocks, detaching);
+    			if (detaching && div1_transition) div1_transition.end();
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1.name,
+    		type: "if",
+    		source: "(211:16) {#if modalOpen}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (214:28) {#each setIcons as icon, i}
+    function create_each_block_1(ctx) {
+    	let div;
+    	let t_value = String.fromCodePoint(/*icon*/ ctx[31]) + "";
+    	let t;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			t = text(t_value);
+    			attr_dev(div, "data-id", /*i*/ ctx[33]);
+    			attr_dev(div, "class", "svelte-1o9dlas");
+    			add_location(div, file$5, 214, 32, 6735);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, t);
+
+    			if (!mounted) {
+    				dispose = listen_dev(div, "click", /*chooseEmojiSet*/ ctx[9], false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block_1.name,
+    		type: "each",
+    		source: "(214:28) {#each setIcons as icon, i}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (220:24) {#each emojis as emoji}
+    function create_each_block(ctx) {
+    	let span;
+    	let t_value = /*emoji*/ ctx[28] + "";
+    	let t;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			span = element("span");
+    			t = text(t_value);
+    			attr_dev(span, "class", "svelte-1o9dlas");
+    			add_location(span, file$5, 220, 28, 7059);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, span, anchor);
+    			append_dev(span, t);
+
+    			if (!mounted) {
+    				dispose = listen_dev(span, "click", /*addEmoji*/ ctx[12], false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty[0] & /*emojis*/ 1 && t_value !== (t_value = /*emoji*/ ctx[28] + "")) set_data_dev(t, t_value);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(span);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(114:16) {#each messages as msgObject}",
+    		source: "(220:24) {#each emojis as emoji}",
     		ctx
     	});
 
@@ -20360,7 +20951,7 @@ var app = (function () {
     	let t0;
     	let meta;
     	let t1;
-    	let div6;
+    	let div7;
     	let div1;
     	let h3;
     	let t3;
@@ -20370,7 +20961,7 @@ var app = (function () {
     	let t6;
     	let hr;
     	let t7;
-    	let div5;
+    	let div6;
     	let div2;
     	let t8;
     	let div3;
@@ -20380,26 +20971,29 @@ var app = (function () {
     	let t10;
     	let button0;
     	let t11;
-    	let div4;
+    	let div5;
     	let input2;
     	let t12;
+    	let div4;
+    	let t14;
     	let button1;
-    	let t13;
-    	let button2;
+    	let t15;
     	let current;
     	let mounted;
     	let dispose;
-    	let each_value = /*messages*/ ctx[0];
-    	validate_each_argument(each_value);
+    	let each_value_2 = /*messages*/ ctx[1];
+    	validate_each_argument(each_value_2);
     	let each_blocks = [];
 
-    	for (let i = 0; i < each_value.length; i += 1) {
-    		each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
+    	for (let i = 0; i < each_value_2.length; i += 1) {
+    		each_blocks[i] = create_each_block_2(get_each_context_2(ctx, each_value_2, i));
     	}
 
     	const out = i => transition_out(each_blocks[i], 1, 1, () => {
     		each_blocks[i] = null;
     	});
+
+    	let if_block = /*isSet*/ ctx[5] && create_if_block(ctx);
 
     	const block = {
     		c: function create() {
@@ -20408,7 +21002,7 @@ var app = (function () {
     			t0 = space();
     			meta = element("meta");
     			t1 = space();
-    			div6 = element("div");
+    			div7 = element("div");
     			div1 = element("div");
     			h3 = element("h3");
     			h3.textContent = "# Chatting";
@@ -20420,7 +21014,7 @@ var app = (function () {
     			t6 = space();
     			hr = element("hr");
     			t7 = space();
-    			div5 = element("div");
+    			div6 = element("div");
     			div2 = element("div");
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
@@ -20435,64 +21029,69 @@ var app = (function () {
     			t10 = space();
     			button0 = element("button");
     			t11 = space();
-    			div4 = element("div");
+    			div5 = element("div");
     			input2 = element("input");
     			t12 = space();
+    			div4 = element("div");
+    			div4.textContent = `${/*emojiIcon*/ ctx[11]}`;
+    			t14 = space();
     			button1 = element("button");
-    			t13 = space();
-    			button2 = element("button");
+    			t15 = space();
+    			if (if_block) if_block.c();
     			if (!src_url_equal(script.src, script_src_value = "https://kit.fontawesome.com/8dc570c5d4.js")) attr_dev(script, "src", script_src_value);
     			attr_dev(script, "crossorigin", "anonymous");
-    			attr_dev(script, "class", "svelte-1sfhcer");
-    			add_location(script, file$5, 95, 4, 2499);
+    			attr_dev(script, "class", "svelte-1o9dlas");
+    			add_location(script, file$5, 136, 4, 3593);
     			attr_dev(meta, "name", "viewport");
     			attr_dev(meta, "content", "width=device-width, initial-scale=1");
-    			attr_dev(meta, "class", "svelte-1sfhcer");
-    			add_location(meta, file$5, 99, 4, 2614);
-    			attr_dev(h3, "class", "channel-name  svelte-1sfhcer");
-    			add_location(h3, file$5, 106, 12, 2856);
-    			attr_dev(div0, "class", "vl svelte-1sfhcer");
-    			add_location(div0, file$5, 107, 12, 2910);
-    			attr_dev(p, "class", "channel-info svelte-1sfhcer");
-    			add_location(p, file$5, 108, 12, 2941);
-    			attr_dev(div1, "class", "top-nav svelte-1sfhcer");
-    			add_location(div1, file$5, 105, 8, 2822);
-    			attr_dev(hr, "class", "svelte-1sfhcer");
-    			add_location(hr, file$5, 110, 8, 3000);
-    			attr_dev(div2, "class", "chat-body-messages svelte-1sfhcer");
-    			add_location(div2, file$5, 112, 12, 3051);
-    			attr_dev(input0, "class", "userinfo-input-username svelte-1sfhcer");
+    			attr_dev(meta, "class", "svelte-1o9dlas");
+    			add_location(meta, file$5, 140, 4, 3708);
+    			attr_dev(h3, "class", "channel-name  svelte-1o9dlas");
+    			add_location(h3, file$5, 147, 12, 3950);
+    			attr_dev(div0, "class", "vl svelte-1o9dlas");
+    			add_location(div0, file$5, 148, 12, 4004);
+    			attr_dev(p, "class", "channel-info svelte-1o9dlas");
+    			add_location(p, file$5, 149, 12, 4035);
+    			attr_dev(div1, "class", "top-nav svelte-1o9dlas");
+    			add_location(div1, file$5, 146, 8, 3916);
+    			attr_dev(hr, "class", "svelte-1o9dlas");
+    			add_location(hr, file$5, 151, 8, 4094);
+    			attr_dev(div2, "class", "chat-body-messages svelte-1o9dlas");
+    			add_location(div2, file$5, 153, 12, 4145);
+    			attr_dev(input0, "class", "userinfo-input-username svelte-1o9dlas");
     			attr_dev(input0, "id", "username");
     			attr_dev(input0, "type", "text");
     			attr_dev(input0, "placeholder", "Username");
     			attr_dev(input0, "maxlength", "15");
-    			add_location(input0, file$5, 132, 16, 4020);
-    			attr_dev(input1, "class", "userinfo-input-pfp svelte-1sfhcer");
+    			add_location(input0, file$5, 173, 16, 5114);
+    			attr_dev(input1, "class", "userinfo-input-pfp svelte-1o9dlas");
     			attr_dev(input1, "id", "userpfp");
     			attr_dev(input1, "type", "text");
     			attr_dev(input1, "placeholder", "User PFP");
-    			add_location(input1, file$5, 140, 16, 4300);
-    			attr_dev(button0, "class", "userinfo-input-button fa fa-check svelte-1sfhcer");
-    			add_location(button0, file$5, 147, 16, 4538);
-    			attr_dev(div3, "class", "userinfo-input svelte-1sfhcer");
-    			add_location(div3, file$5, 131, 12, 3975);
+    			add_location(input1, file$5, 181, 16, 5394);
+    			attr_dev(button0, "class", "userinfo-input-button fa fa-check svelte-1o9dlas");
+    			add_location(button0, file$5, 188, 16, 5632);
+    			attr_dev(div3, "class", "userinfo-input svelte-1o9dlas");
+    			add_location(div3, file$5, 172, 12, 5069);
     			attr_dev(input2, "type", "text");
-    			attr_dev(input2, "class", "chat-input-text svelte-1sfhcer");
+    			attr_dev(input2, "class", "chat-input-text svelte-1o9dlas");
     			attr_dev(input2, "placeholder", "Type a message");
     			attr_dev(input2, "maxlength", "50");
-    			add_location(input2, file$5, 153, 16, 4738);
-    			attr_dev(button1, "class", "chat-input-emotes fas fa-smile svelte-1sfhcer");
-    			add_location(button1, file$5, 161, 16, 5055);
-    			attr_dev(button2, "class", "chat-input-send fas fa-paper-plane svelte-1sfhcer");
-    			add_location(button2, file$5, 167, 16, 5274);
-    			attr_dev(div4, "class", "chat-input svelte-1sfhcer");
-    			add_location(div4, file$5, 152, 12, 4697);
-    			attr_dev(div5, "class", "chat-body svelte-1sfhcer");
-    			add_location(div5, file$5, 111, 8, 3015);
-    			attr_dev(div6, "class", "mainarea svelte-1sfhcer");
-    			add_location(div6, file$5, 100, 4, 2689);
-    			attr_dev(main, "class", "svelte-1sfhcer");
-    			add_location(main, file$5, 94, 0, 2488);
+    			add_location(input2, file$5, 194, 16, 5857);
+    			attr_dev(div4, "class", "chat-input-emotes svelte-1o9dlas");
+    			attr_dev(div4, "id", "emoji-opener-icon");
+    			add_location(div4, file$5, 203, 16, 6214);
+    			attr_dev(button1, "class", "chat-input-send fas fa-paper-plane svelte-1o9dlas");
+    			add_location(button1, file$5, 204, 16, 6336);
+    			attr_dev(div5, "class", "chat-input svelte-1o9dlas");
+    			attr_dev(div5, "id", "btn-emoji-icon-cont");
+    			add_location(div5, file$5, 193, 12, 5791);
+    			attr_dev(div6, "class", "chat-body svelte-1o9dlas");
+    			add_location(div6, file$5, 152, 8, 4109);
+    			attr_dev(div7, "class", "mainarea svelte-1o9dlas");
+    			add_location(div7, file$5, 141, 4, 3783);
+    			attr_dev(main, "class", "svelte-1o9dlas");
+    			add_location(main, file$5, 135, 0, 3582);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -20503,71 +21102,74 @@ var app = (function () {
     			append_dev(main, t0);
     			append_dev(main, meta);
     			append_dev(main, t1);
-    			append_dev(main, div6);
-    			append_dev(div6, div1);
+    			append_dev(main, div7);
+    			append_dev(div7, div1);
     			append_dev(div1, h3);
     			append_dev(div1, t3);
     			append_dev(div1, div0);
     			append_dev(div1, t4);
     			append_dev(div1, p);
-    			append_dev(div6, t6);
-    			append_dev(div6, hr);
-    			append_dev(div6, t7);
-    			append_dev(div6, div5);
-    			append_dev(div5, div2);
+    			append_dev(div7, t6);
+    			append_dev(div7, hr);
+    			append_dev(div7, t7);
+    			append_dev(div7, div6);
+    			append_dev(div6, div2);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].m(div2, null);
     			}
 
-    			append_dev(div5, t8);
-    			append_dev(div5, div3);
+    			append_dev(div6, t8);
+    			append_dev(div6, div3);
     			append_dev(div3, input0);
-    			set_input_value(input0, /*username*/ ctx[2]);
+    			set_input_value(input0, /*username*/ ctx[3]);
     			append_dev(div3, t9);
     			append_dev(div3, input1);
-    			set_input_value(input1, /*userpfp*/ ctx[3]);
+    			set_input_value(input1, /*userpfp*/ ctx[4]);
     			append_dev(div3, t10);
     			append_dev(div3, button0);
-    			append_dev(div5, t11);
+    			append_dev(div6, t11);
+    			append_dev(div6, div5);
+    			append_dev(div5, input2);
+    			/*input2_binding*/ ctx[20](input2);
+    			set_input_value(input2, /*message*/ ctx[2]);
+    			append_dev(div5, t12);
     			append_dev(div5, div4);
-    			append_dev(div4, input2);
-    			set_input_value(input2, /*message*/ ctx[1]);
-    			append_dev(div4, t12);
-    			append_dev(div4, button1);
-    			append_dev(div4, t13);
-    			append_dev(div4, button2);
+    			append_dev(div5, t14);
+    			append_dev(div5, button1);
+    			append_dev(div6, t15);
+    			if (if_block) if_block.m(div6, null);
     			current = true;
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(input0, "input", /*input0_input_handler*/ ctx[7]),
-    					listen_dev(input1, "input", /*input1_input_handler*/ ctx[8]),
-    					listen_dev(button0, "click", /*setInfo*/ ctx[6], false, false, false),
-    					listen_dev(input2, "input", /*input2_input_handler*/ ctx[9]),
-    					listen_dev(button1, "click", /*click_handler*/ ctx[10], false, false, false),
-    					listen_dev(button2, "click", /*sendMessage*/ ctx[5], false, false, false),
-    					action_destroyer(swipe.call(null, div6, { timeframe: 500, minSwipeDistance: 0.5 })),
-    					listen_dev(div6, "swipe", /*handler*/ ctx[4], false, false, false)
+    					listen_dev(input0, "input", /*input0_input_handler*/ ctx[18]),
+    					listen_dev(input1, "input", /*input1_input_handler*/ ctx[19]),
+    					listen_dev(button0, "click", /*setInfo*/ ctx[14], false, false, false),
+    					listen_dev(input2, "input", /*input2_input_handler*/ ctx[21]),
+    					listen_dev(div4, "click", /*click_handler*/ ctx[22], false, false, false),
+    					listen_dev(button1, "click", /*sendMessage*/ ctx[13], false, false, false),
+    					action_destroyer(swipe.call(null, div7, { timeframe: 500, minSwipeDistance: 0.5 })),
+    					listen_dev(div7, "swipe", /*handler*/ ctx[8], false, false, false)
     				];
 
     				mounted = true;
     			}
     		},
-    		p: function update(ctx, [dirty]) {
-    			if (dirty & /*messages*/ 1) {
-    				each_value = /*messages*/ ctx[0];
-    				validate_each_argument(each_value);
+    		p: function update(ctx, dirty) {
+    			if (dirty[0] & /*messages*/ 2) {
+    				each_value_2 = /*messages*/ ctx[1];
+    				validate_each_argument(each_value_2);
     				let i;
 
-    				for (i = 0; i < each_value.length; i += 1) {
-    					const child_ctx = get_each_context(ctx, each_value, i);
+    				for (i = 0; i < each_value_2.length; i += 1) {
+    					const child_ctx = get_each_context_2(ctx, each_value_2, i);
 
     					if (each_blocks[i]) {
     						each_blocks[i].p(child_ctx, dirty);
     						transition_in(each_blocks[i], 1);
     					} else {
-    						each_blocks[i] = create_each_block(child_ctx);
+    						each_blocks[i] = create_each_block_2(child_ctx);
     						each_blocks[i].c();
     						transition_in(each_blocks[i], 1);
     						each_blocks[i].m(div2, null);
@@ -20576,32 +21178,56 @@ var app = (function () {
 
     				group_outros();
 
-    				for (i = each_value.length; i < each_blocks.length; i += 1) {
+    				for (i = each_value_2.length; i < each_blocks.length; i += 1) {
     					out(i);
     				}
 
     				check_outros();
     			}
 
-    			if (dirty & /*username*/ 4 && input0.value !== /*username*/ ctx[2]) {
-    				set_input_value(input0, /*username*/ ctx[2]);
+    			if (dirty[0] & /*username*/ 8 && input0.value !== /*username*/ ctx[3]) {
+    				set_input_value(input0, /*username*/ ctx[3]);
     			}
 
-    			if (dirty & /*userpfp*/ 8 && input1.value !== /*userpfp*/ ctx[3]) {
-    				set_input_value(input1, /*userpfp*/ ctx[3]);
+    			if (dirty[0] & /*userpfp*/ 16 && input1.value !== /*userpfp*/ ctx[4]) {
+    				set_input_value(input1, /*userpfp*/ ctx[4]);
     			}
 
-    			if (dirty & /*message*/ 2 && input2.value !== /*message*/ ctx[1]) {
-    				set_input_value(input2, /*message*/ ctx[1]);
+    			if (dirty[0] & /*message*/ 4 && input2.value !== /*message*/ ctx[2]) {
+    				set_input_value(input2, /*message*/ ctx[2]);
+    			}
+
+    			if (/*isSet*/ ctx[5]) {
+    				if (if_block) {
+    					if_block.p(ctx, dirty);
+
+    					if (dirty[0] & /*isSet*/ 32) {
+    						transition_in(if_block, 1);
+    					}
+    				} else {
+    					if_block = create_if_block(ctx);
+    					if_block.c();
+    					transition_in(if_block, 1);
+    					if_block.m(div6, null);
+    				}
+    			} else if (if_block) {
+    				group_outros();
+
+    				transition_out(if_block, 1, 1, () => {
+    					if_block = null;
+    				});
+
+    				check_outros();
     			}
     		},
     		i: function intro(local) {
     			if (current) return;
 
-    			for (let i = 0; i < each_value.length; i += 1) {
+    			for (let i = 0; i < each_value_2.length; i += 1) {
     				transition_in(each_blocks[i]);
     			}
 
+    			transition_in(if_block);
     			current = true;
     		},
     		o: function outro(local) {
@@ -20611,11 +21237,14 @@ var app = (function () {
     				transition_out(each_blocks[i]);
     			}
 
+    			transition_out(if_block);
     			current = false;
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(main);
     			destroy_each(each_blocks, detaching);
+    			/*input2_binding*/ ctx[20](null);
+    			if (if_block) if_block.d();
     			mounted = false;
     			run_all(dispose);
     		}
@@ -20640,6 +21269,8 @@ var app = (function () {
     }
 
     function instance$5($$self, $$props, $$invalidate) {
+    	let min;
+    	let max;
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Chat', slots, []);
     	let direction;
@@ -20665,7 +21296,7 @@ var app = (function () {
 
     	socket.on("chat message", (user, userpfp, msg) => {
     		let info = [user, userpfp, msg];
-    		$$invalidate(0, messages = [...messages, info]);
+    		$$invalidate(1, messages = [...messages, info]);
 
     		// console.log(messages);
     		setTimeout(
@@ -20676,10 +21307,61 @@ var app = (function () {
     		);
     	});
 
+    	let emojiSets = [
+    		{
+    			type: "faces",
+    			minVal: 128512,
+    			maxVal: 128580
+    		},
+    		{
+    			type: "faces2",
+    			minVal: 129296,
+    			maxVal: 129327
+    		},
+    		{
+    			type: "body",
+    			minVal: 128066,
+    			maxVal: 128080
+    		},
+    		{
+    			type: "animals",
+    			minVal: 129408,
+    			maxVal: 129442
+    		},
+    		{
+    			type: "transport",
+    			minVal: 128640,
+    			maxVal: 128676
+    		},
+    		{
+    			type: "misc",
+    			minVal: 129494,
+    			maxVal: 129535
+    		}
+    	];
+
+    	let selectedSet = 0;
+    	let emojis = [];
+    	const clearEmojiMenu = () => $$invalidate(0, emojis = []);
+
+    	const chooseEmojiSet = e => {
+    		$$invalidate(15, selectedSet = Number(e.target.dataset.id));
+    		clearEmojiMenu();
+    	};
+
+    	let setIcons = [128512, 129313, 128074, 129417, 128664, 129504];
+    	let emojiIcon = String.fromCodePoint(128571);
+    	let modalOpen = false;
+    	let textBox; // for bind:this
+
+    	const addEmoji = e => {
+    		$$invalidate(2, message += e.target.textContent);
+    	};
+
     	function sendMessage() {
     		if (!isSet) {
     			alert("Please set a username");
-    			$$invalidate(1, message = "");
+    			$$invalidate(2, message = "");
     			return;
     		}
 
@@ -20692,12 +21374,15 @@ var app = (function () {
 
     		if (message == "") {
     			alert("Please enter a message");
-    		} else if (!message.match(/^[a-zA-Z0-9!/*@#$%^&()-+=_<>?:;]/)) {
+    		} else if (message.match(/^[ ]/)) {
     			alert("Please enter a valid message");
-    			$$invalidate(1, message = "");
+    			$$invalidate(2, message = "");
     		} else {
     			socket.emit("chat message", user, userpfp, message);
-    			$$invalidate(1, message = "");
+    			console.log(`The message: (${message}) has been sent.`);
+    			$$invalidate(7, textBox.value = "", textBox);
+    			$$invalidate(2, message = "");
+    			$$invalidate(6, modalOpen = false);
     		}
     	}
 
@@ -20706,7 +21391,7 @@ var app = (function () {
     			let userdiv = document.querySelector(".userinfo-input");
     			userdiv.style.opacity = 0;
     			userdiv.style.display = "none";
-    			isSet = true;
+    			$$invalidate(5, isSet = true);
     		} else {
     			alert("Please enter a username");
     		}
@@ -20726,27 +21411,33 @@ var app = (function () {
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
-    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Chat> was created with unknown prop '${key}'`);
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1.warn(`<Chat> was created with unknown prop '${key}'`);
     	});
 
     	function input0_input_handler() {
     		username = this.value;
-    		$$invalidate(2, username);
+    		$$invalidate(3, username);
     	}
 
     	function input1_input_handler() {
     		userpfp = this.value;
-    		$$invalidate(3, userpfp);
+    		$$invalidate(4, userpfp);
+    	}
+
+    	function input2_binding($$value) {
+    		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
+    			textBox = $$value;
+    			$$invalidate(7, textBox);
+    		});
     	}
 
     	function input2_input_handler() {
     		message = this.value;
-    		$$invalidate(1, message);
+    		$$invalidate(2, message);
     	}
 
-    	const click_handler = () => {
-    		alert("Emotes Coming soon!");
-    	};
+    	const click_handler = () => $$invalidate(6, modalOpen = true);
+    	const click_handler_1 = () => $$invalidate(6, modalOpen = false);
 
     	$$self.$capture_state = () => ({
     		serverWidth: serverWidth$2,
@@ -20764,42 +21455,93 @@ var app = (function () {
     		userpfp,
     		isSet,
     		scrollToBottom,
+    		fly,
+    		emojiSets,
+    		selectedSet,
+    		emojis,
+    		clearEmojiMenu,
+    		chooseEmojiSet,
+    		setIcons,
+    		emojiIcon,
+    		modalOpen,
+    		textBox,
+    		addEmoji,
     		sendMessage,
-    		setInfo
+    		setInfo,
+    		max,
+    		min
     	});
 
     	$$self.$inject_state = $$props => {
     		if ('direction' in $$props) direction = $$props.direction;
-    		if ('messages' in $$props) $$invalidate(0, messages = $$props.messages);
-    		if ('message' in $$props) $$invalidate(1, message = $$props.message);
-    		if ('username' in $$props) $$invalidate(2, username = $$props.username);
-    		if ('userpfp' in $$props) $$invalidate(3, userpfp = $$props.userpfp);
-    		if ('isSet' in $$props) isSet = $$props.isSet;
+    		if ('messages' in $$props) $$invalidate(1, messages = $$props.messages);
+    		if ('message' in $$props) $$invalidate(2, message = $$props.message);
+    		if ('username' in $$props) $$invalidate(3, username = $$props.username);
+    		if ('userpfp' in $$props) $$invalidate(4, userpfp = $$props.userpfp);
+    		if ('isSet' in $$props) $$invalidate(5, isSet = $$props.isSet);
+    		if ('emojiSets' in $$props) $$invalidate(26, emojiSets = $$props.emojiSets);
+    		if ('selectedSet' in $$props) $$invalidate(15, selectedSet = $$props.selectedSet);
+    		if ('emojis' in $$props) $$invalidate(0, emojis = $$props.emojis);
+    		if ('setIcons' in $$props) $$invalidate(10, setIcons = $$props.setIcons);
+    		if ('emojiIcon' in $$props) $$invalidate(11, emojiIcon = $$props.emojiIcon);
+    		if ('modalOpen' in $$props) $$invalidate(6, modalOpen = $$props.modalOpen);
+    		if ('textBox' in $$props) $$invalidate(7, textBox = $$props.textBox);
+    		if ('max' in $$props) $$invalidate(16, max = $$props.max);
+    		if ('min' in $$props) $$invalidate(17, min = $$props.min);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
+    	$$self.$$.update = () => {
+    		if ($$self.$$.dirty[0] & /*selectedSet*/ 32768) {
+    			$$invalidate(17, min = emojiSets[selectedSet].minVal);
+    		}
+
+    		if ($$self.$$.dirty[0] & /*selectedSet*/ 32768) {
+    			$$invalidate(16, max = emojiSets[selectedSet].maxVal);
+    		}
+
+    		if ($$self.$$.dirty[0] & /*min, max, emojis*/ 196609) {
+    			for (let i = min; i <= max; i++) {
+    				$$invalidate(0, emojis = [...emojis, String.fromCodePoint(i)]);
+    			}
+    		}
+    	};
+
     	return [
+    		emojis,
     		messages,
     		message,
     		username,
     		userpfp,
+    		isSet,
+    		modalOpen,
+    		textBox,
     		handler,
+    		chooseEmojiSet,
+    		setIcons,
+    		emojiIcon,
+    		addEmoji,
     		sendMessage,
     		setInfo,
+    		selectedSet,
+    		max,
+    		min,
     		input0_input_handler,
     		input1_input_handler,
+    		input2_binding,
     		input2_input_handler,
-    		click_handler
+    		click_handler,
+    		click_handler_1
     	];
     }
 
     class Chat extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$5, create_fragment$5, safe_not_equal, {});
+    		init(this, options, instance$5, create_fragment$5, safe_not_equal, {}, null, [-1, -1]);
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -20815,39 +21557,28 @@ var app = (function () {
 
     // (10:4) <Route path="/chat">
     function create_default_slot$1(ctx) {
-    	let chatcn;
-    	let t;
     	let chat;
     	let current;
-    	chatcn = new Chat_cn({ $$inline: true });
     	chat = new Chat({ $$inline: true });
 
     	const block = {
     		c: function create() {
-    			create_component(chatcn.$$.fragment);
-    			t = space();
     			create_component(chat.$$.fragment);
     		},
     		m: function mount(target, anchor) {
-    			mount_component(chatcn, target, anchor);
-    			insert_dev(target, t, anchor);
     			mount_component(chat, target, anchor);
     			current = true;
     		},
     		i: function intro(local) {
     			if (current) return;
-    			transition_in(chatcn.$$.fragment, local);
     			transition_in(chat.$$.fragment, local);
     			current = true;
     		},
     		o: function outro(local) {
-    			transition_out(chatcn.$$.fragment, local);
     			transition_out(chat.$$.fragment, local);
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			destroy_component(chatcn, detaching);
-    			if (detaching) detach_dev(t);
     			destroy_component(chat, detaching);
     		}
     	};
