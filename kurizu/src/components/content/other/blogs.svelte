@@ -1,6 +1,4 @@
 <script>
-    import './style/oth.css';
-
     const serverWidth = "50px";
     import User from '../../-comp/user.svelte';
 
@@ -31,7 +29,7 @@
             <p class="channel-info">Kurizu Blog</p>
             <!-- <span class="open-btn" on:click="{openNav}">&#9776;</span> -->
         </div>
-        <hr />
+        <hr class="channel-division" />
         <div class="chat-body">
             <div class="chat-body-messages">
                 <div class="chat-body-messages-item">

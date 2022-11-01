@@ -1,6 +1,4 @@
 <script>
-    import "./style/home.css";
-
     const serverWidth = "50px";
     import User from "../../-comp/user.svelte";
 
@@ -34,7 +32,7 @@
             <p class="channel-info">Kurizu Home page</p>
             <!-- <span class="open-btn" on:click="{openNav}">&#9776;</span> -->
         </div>
-        <hr />
+        <hr class="channel-division" />
         <div class="chat-body">
             <div class="chat-body-messages">
                 <div class="chat-body-messages-item">
@@ -94,7 +92,7 @@
                                 Thank you for checking out my website ! <br />
                                 <br />
                                 <img
-                                    class="show-img"
+                                    class="msg-img"
                                     src="https://cdn.discordapp.com/attachments/970974282681307187/980030164719263754/green-grass.jpg"
                                     alt="hi"
                                     width="60%"

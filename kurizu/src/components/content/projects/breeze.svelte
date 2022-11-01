@@ -1,5 +1,5 @@
 <script>
-    import './style/proj.css';
+    
 
     const serverWidth = "50px";
     import User from '../../-comp/user.svelte'; 
@@ -30,7 +30,7 @@
             <p class="channel-info">Breeze api + website</p>
             <!-- <span class="open-btn" on:click="{openNav}">&#9776;</span> -->
         </div>
-        <hr>
+        <hr class="channel-division" />
         <div class="chat-body">
             <div class="chat-body-messages">
                 <div class="chat-body-messages-item">
@@ -44,7 +44,7 @@
                                 Breeze helps you display your discord activity as a epik card which you can use anywhere you want.
                                 <br><br>
                                 <img class="msg-img" src="https://cdn.discordapp.com/attachments/988140784807202886/992759894627340298/breeze-stats.png" alt="homepgimg" height="300px" width="auto" style="border-radius: 10px;"> <br>
-                                <img class="api-img" src="https://api-breeze.herokuapp.com/api/compact/784141856426033233?banner=https://wallpaperaccess.com/full/6276627.jpg" alt="api"/>
+                                <img class="msg-img" src="https://api-breeze.herokuapp.com/api/compact/784141856426033233?banner=https://wallpaperaccess.com/full/6276627.jpg" alt="api"/>
                                 <br>
                                 Breeze also offers and api for you to use <br>
                                 So you can use the cards in your github repo or anywhere you want.

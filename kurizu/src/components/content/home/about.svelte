@@ -1,6 +1,4 @@
 <script>
-    import "./style/home.css";
-
     const serverWidth = "50px";
     import User from "../../-comp/user.svelte";
 
@@ -34,7 +32,7 @@
             <p class="channel-info">Little about criz</p>
             <!-- <span class="open-btn" on:click="{openNav}">&#9776;</span> -->
         </div>
-        <hr />
+        <hr class="channel-division" />
         <div class="chat-body">
             <div class="chat-body-messages">
                 <div class="chat-body-messages-item">
@@ -99,7 +97,6 @@
                                 <img
                                     class="msg-img"
                                     src="https://images.hdqwalls.com/download/child-of-earth-on-journey-5t-2560x1440.jpg"
-                                    style="border-radius: 10px;"
                                     alt="homepgimg"
                                     height="300px"
                                     width="auto"

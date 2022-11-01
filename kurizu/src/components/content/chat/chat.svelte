@@ -293,12 +293,12 @@
         top: 85%;
         position: fixed;
         margin-left: 3%;
+        z-index: 3;
     }
     
     .userinfo-input-username {
         width: 40%;
         height: 100%;
-        /* padding: 0 10px; */
         border: none;
         border-radius: 5px;
         background-color: #212225;
@@ -311,7 +311,6 @@
     .userinfo-input-pfp {
         width: 55%;
         height: 100%;
-        padding: 0 10px;
         border: none;
         border-radius: 5px;
         background-color: #212225;
@@ -351,7 +350,6 @@
     .chat-input-text {
         width: 95%;
         height: 100%;
-        padding: 0 10px;
         border: none;
         border-radius: 5px;
         background-color: #36393f;
@@ -492,114 +490,52 @@
         }
 
         .userinfo-input {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
             width: 88%;
             height: 40px;
-            border-radius: 5px;
             top: 88%;
-            position: fixed;
-            margin-left: 1%;
+            margin-left: 2%;
         }
 
         .userinfo-input-username {
             width: 30%;
-            height: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
             font-size: 0.8rem;
-            background-color: #212225;
-            color: #fff;
-            outline: none;
+            border: #7289da 1px solid;
         }
 
         .userinfo-input-pfp {
             width: 40%;
-            height: 100%;
-            padding: 0 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #212225;
-            color: #fff;
             font-size: 0.8rem;
-            outline: none;
+            border: #7289da 1px solid;
         }
 
         .userinfo-input-button {
             width: 30%;
-            height: 100%;
-            border: none;
-            border-radius: 5px;
-            background-color: #7289da;
-            color: #fff;
             font-size: 0.8rem;
-            cursor: pointer;
-            outline: none;
             margin-right: 20px;
         }
 
         .chat-input {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
             width: 88%;
             height: 45px;
-            border-radius: 5px;
             top: 94%;
-            margin-left: 1%;
-            position: fixed;
-            /* overflow: scroll; */
+            margin-left: 2%;
         }
 
         .chat-input-text {
             width: 90%;
-            height: 100%;
-            padding: 0 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #36393f;
-            color: #fff;
             font-size: 0.8rem;
-            outline: none;
         }
 
         .chat-input-send {
             width: 20%;
-            height: 100%;
-            border: none;
-            border-radius: 5px;
-            background-color: #7289da;
-            color: #fff;
             font-size: 0.8rem;
-            cursor: pointer;
-            outline: none;
             margin-right: 20px;
-        }
-
-        #btn-emoji-icon-cont {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
         }
 
         #emoji-opener-icon {
             font-size: 1.5rem;
-            cursor: pointer;
-            transition: all .1s;
-            position: fixed;
-            z-index: 1;
             left: 75%;
             top: 94.5%;
-        }
-        
-        #emoji-opener-icon:active {
-            font-size: 2.3rem;
-            transform: rotate(10deg);
-            cursor: pointer;
         }
         
         #emoji-cont {
@@ -607,44 +543,8 @@
             top: 60%;
             max-width: 300px;
             max-height: 248px;
-            overflow: scroll;
-            display: flex;
-            position: fixed;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            border: 1px solid #282a2e;
-            background: transparent;
         }
-
-        #closer-icon {
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-align: right;
-        }
-
-        #emoji-cont header {
-            width: 98%;
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            border: 1px solid gray;
-        }
-        
-        #emoji-cont header div {
-            cursor: pointer;
-        }
-
-        span {
-            font-size: 1.5rem;
-            padding: .3rem;
-            border: 1px solid gray;
-            background: transparent;
-            cursor: pointer;
-        }
-        
-        span:active {
-            background: transparent;
-        }
+    
     }
 
     @media screen and (max-width: 800px) and (max-height: 800px) {

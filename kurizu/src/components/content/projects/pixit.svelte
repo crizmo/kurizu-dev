@@ -1,5 +1,5 @@
 <script>
-    import './style/proj.css';
+    
 
     const serverWidth = "50px";
     import User from '../../-comp/user.svelte'; 
@@ -30,7 +30,7 @@
             <p class="channel-info">Pixel art website</p>
             <!-- <span class="open-btn" on:click="{openNav}">&#9776;</span> -->
         </div>
-        <hr>
+        <hr class="channel-division" />
         <div class="chat-body">
             <div class="chat-body-messages">
                 <div class="chat-body-messages-item">

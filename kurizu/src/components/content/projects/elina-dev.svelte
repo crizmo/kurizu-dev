@@ -1,5 +1,5 @@
 <script>
-    import './style/proj.css';
+    
 
     const serverWidth = "50px";
     import User from '../../-comp/user.svelte';
@@ -27,10 +27,10 @@
         <div class="top-nav">
             <h3 class="channel-name"># Elina</h3>
             <div class="vl" />
-            <p class="channel-info">Elina :- yet another discord bot</p>
+            <p class="channel-info">Yet another discord bot</p>
             <!-- <span class="open-btn" on:click="{openNav}">&#9776;</span> -->
         </div>
-        <hr>
+        <hr class="channel-division" />
         <div class="chat-body">
             <div class="chat-body-messages">
                 <div class="chat-body-messages-item">

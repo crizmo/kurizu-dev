@@ -1,10 +1,6 @@
 <script>
     const serverWidth = "50px";
-
-    function openNav() {
-        document.getElementById("mySidenav").style.width = null;
-        document.getElementById("mySidenav").style.transition = "width 0.5s";
-    }
+    import { openNav } from "../../channels/home/home-cn.svelte";
 </script>
 
 <main>
@@ -18,7 +14,7 @@
                     on:click="{openNav}"
                 />
             </div>
-            <hr>
+            <hr style="color: #282a2e;">
         </div>
     </div>
 </main>
