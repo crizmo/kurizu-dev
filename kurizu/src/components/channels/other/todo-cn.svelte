@@ -191,7 +191,7 @@
         color: rgb(255, 255, 255);
     }
 
-    @media screen and (max-width: 1910px) {
+    @media screen and (max-width: 1900px) {
         .channels {
             position: absolute;
             width: 15.7%;
@@ -212,7 +212,7 @@
         }
     }
 
-    @media screen and (max-width: 1500px) {
+    @media screen and (max-width: 1700px) {
         .channels {
             position: absolute;
             width: 20%;
