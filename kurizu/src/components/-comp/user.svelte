@@ -15,10 +15,9 @@
 </main>
 
 <style>
-    .chat-body-messages-item-avatar {
+    .chat-body-messages-item-avatar img {
         margin-left: 20px;
         position: absolute;
-        overflow: hidden;
         width: 50px;
         height: 50px;
         border-radius: 50%;
@@ -28,6 +27,14 @@
         .chat-body-messages-item-avatar img {
             width: 45px;
             height: 45px;
+            border-radius: 50%;
+        }
+    }
+
+    @media screen and (max-width: 800px) {
+        .chat-body-messages-item-avatar img {
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
         }
     }
