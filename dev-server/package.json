@@ -11,8 +11,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "dotenv": "^16.0.3",
-    "mongoose": "^6.7.0",
+    "fs": "^0.0.1-security",
     "socket.io": "^4.5.3"
   }
 }
