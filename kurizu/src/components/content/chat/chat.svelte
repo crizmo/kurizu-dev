@@ -44,6 +44,13 @@
         }, 10);
     });
 
+    socket.on('previous messages', (msgs) => {
+        messages = msgs;
+        setTimeout(() => {
+            scrollToBottom();
+        }, 10);
+    });
+
     import { fly } from 'svelte/transition';
 	
 	let emojiSets = [
@@ -102,7 +109,7 @@
         } else {
 
             socket.emit("chat message", user, userpfp, message);
-            console.log(`The message: (${message}) has been sent.`);	
+            // console.log(`The message: (${message}) has been sent.`);	
             textBox.value = "";
             message = "";
             modalOpen = false;
