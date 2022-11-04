@@ -11,10 +11,9 @@
         direction = event.detail.direction;
 
         if (window.innerWidth < 2000) {
-            if (direction == "left") {
+            if (direction == "left" && document.querySelector(".categories").style.opacity != "0") {
                 closeNav();
-            } else if (direction == "right") {
-                openNav();
+                console.log("left");
             }
         }
     }
