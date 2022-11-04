@@ -10,9 +10,9 @@ const io = new Server({
 
 io.on('connection', (socket) => {
   socket.emit('previous messages', require("./msg.json") || []);
-  socket.on('chat message', (usr, pfp, msg, time) => {
-    
-    let data = [usr,pfp,msg,time]
+  socket.on('chat message', (usr, pfp, msg) => {
+
+    let data = [usr,pfp,msg];
     msgs.push(data);
     if (msgs.length == 11) msgs.splice(0, 1); 
 
@@ -20,7 +20,7 @@ io.on('connection', (socket) => {
       if (err) throw err;
     }); 
 
-    io.emit('chat message', usr, pfp, msg,time);
+    io.emit('chat message', usr, pfp, msg);
   });
 
 });
