@@ -15871,24 +15871,24 @@ var app = (function () {
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[29] = list[i];
+    	child_ctx[28] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[32] = list[i];
-    	child_ctx[34] = i;
+    	child_ctx[31] = list[i];
+    	child_ctx[33] = i;
     	return child_ctx;
     }
 
     function get_each_context_2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[35] = list[i];
+    	child_ctx[34] = list[i];
     	return child_ctx;
     }
 
-    // (169:16) {#each messages as msgObject}
+    // (160:16) {#each messages as msgObject}
     function create_each_block_2(ctx) {
     	let div3;
     	let user;
@@ -15897,24 +15897,19 @@ var app = (function () {
     	let div0;
     	let h3;
     	let p0;
-    	let t1_value = /*msgObject*/ ctx[35][0] + "";
+    	let t1_value = /*msgObject*/ ctx[34][0] + "";
     	let t1;
     	let t2;
-    	let p1;
-    	let t3;
-    	let t4_value = /*msgObject*/ ctx[35][3] + "";
-    	let t4;
-    	let t5;
     	let div1;
-    	let p2;
-    	let t6_value = /*msgObject*/ ctx[35][2] + "";
-    	let t6;
-    	let t7;
+    	let p1;
+    	let t3_value = /*msgObject*/ ctx[34][2] + "";
+    	let t3;
+    	let t4;
     	let current;
 
     	user = new User({
     			props: {
-    				pfp: /*msgObject*/ ctx[35][1],
+    				pfp: /*msgObject*/ ctx[34][1],
     				alt: "userpfp"
     			},
     			$$inline: true
@@ -15930,34 +15925,25 @@ var app = (function () {
     			h3 = element("h3");
     			p0 = element("p");
     			t1 = text(t1_value);
-    			t2 = text("    ");
-    			p1 = element("p");
-    			t3 = text("Today at ");
-    			t4 = text(t4_value);
-    			t5 = space();
+    			t2 = space();
     			div1 = element("div");
-    			p2 = element("p");
-    			t6 = text(t6_value);
-    			t7 = space();
-    			set_style(p0, "display", "inline");
-    			attr_dev(p0, "class", "svelte-1y6jdxk");
-    			add_location(p0, file$5, 176, 36, 5138);
-    			set_style(p1, "display", "inline");
-    			attr_dev(p1, "id", "message-time");
-    			attr_dev(p1, "class", "svelte-1y6jdxk");
-    			add_location(p1, file$5, 176, 99, 5201);
-    			attr_dev(h3, "class", "chat-body-messages-item-content-header-name svelte-1y6jdxk");
-    			add_location(h3, file$5, 173, 32, 4976);
-    			attr_dev(div0, "class", "chat-body-messages-item-content-header svelte-1y6jdxk");
-    			add_location(div0, file$5, 172, 28, 4891);
-    			attr_dev(p2, "class", "svelte-1y6jdxk");
-    			add_location(p2, file$5, 180, 32, 5458);
-    			attr_dev(div1, "class", "chat-body-messages-item-content-body svelte-1y6jdxk");
-    			add_location(div1, file$5, 179, 28, 5375);
-    			attr_dev(div2, "class", "chat-body-messages-item-content svelte-1y6jdxk");
-    			add_location(div2, file$5, 171, 24, 4817);
-    			attr_dev(div3, "class", "chat-body-messages-item svelte-1y6jdxk");
-    			add_location(div3, file$5, 169, 20, 4689);
+    			p1 = element("p");
+    			t3 = text(t3_value);
+    			t4 = space();
+    			attr_dev(p0, "class", "svelte-ar8tbf");
+    			add_location(p0, file$5, 167, 36, 4838);
+    			attr_dev(h3, "class", "chat-body-messages-item-content-header-name svelte-ar8tbf");
+    			add_location(h3, file$5, 164, 32, 4676);
+    			attr_dev(div0, "class", "chat-body-messages-item-content-header svelte-ar8tbf");
+    			add_location(div0, file$5, 163, 28, 4591);
+    			attr_dev(p1, "class", "svelte-ar8tbf");
+    			add_location(p1, file$5, 171, 32, 5044);
+    			attr_dev(div1, "class", "chat-body-messages-item-content-body svelte-ar8tbf");
+    			add_location(div1, file$5, 170, 28, 4961);
+    			attr_dev(div2, "class", "chat-body-messages-item-content svelte-ar8tbf");
+    			add_location(div2, file$5, 162, 24, 4517);
+    			attr_dev(div3, "class", "chat-body-messages-item svelte-ar8tbf");
+    			add_location(div3, file$5, 160, 20, 4389);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div3, anchor);
@@ -15968,24 +15954,19 @@ var app = (function () {
     			append_dev(div0, h3);
     			append_dev(h3, p0);
     			append_dev(p0, t1);
-    			append_dev(p0, t2);
-    			append_dev(h3, p1);
-    			append_dev(p1, t3);
-    			append_dev(p1, t4);
-    			append_dev(div2, t5);
+    			append_dev(div2, t2);
     			append_dev(div2, div1);
-    			append_dev(div1, p2);
-    			append_dev(p2, t6);
-    			append_dev(div3, t7);
+    			append_dev(div1, p1);
+    			append_dev(p1, t3);
+    			append_dev(div3, t4);
     			current = true;
     		},
     		p: function update(ctx, dirty) {
     			const user_changes = {};
-    			if (dirty[0] & /*messages*/ 2) user_changes.pfp = /*msgObject*/ ctx[35][1];
+    			if (dirty[0] & /*messages*/ 2) user_changes.pfp = /*msgObject*/ ctx[34][1];
     			user.$set(user_changes);
-    			if ((!current || dirty[0] & /*messages*/ 2) && t1_value !== (t1_value = /*msgObject*/ ctx[35][0] + "")) set_data_dev(t1, t1_value);
-    			if ((!current || dirty[0] & /*messages*/ 2) && t4_value !== (t4_value = /*msgObject*/ ctx[35][3] + "")) set_data_dev(t4, t4_value);
-    			if ((!current || dirty[0] & /*messages*/ 2) && t6_value !== (t6_value = /*msgObject*/ ctx[35][2] + "")) set_data_dev(t6, t6_value);
+    			if ((!current || dirty[0] & /*messages*/ 2) && t1_value !== (t1_value = /*msgObject*/ ctx[34][0] + "")) set_data_dev(t1, t1_value);
+    			if ((!current || dirty[0] & /*messages*/ 2) && t3_value !== (t3_value = /*msgObject*/ ctx[34][2] + "")) set_data_dev(t3, t3_value);
     		},
     		i: function intro(local) {
     			if (current) return;
@@ -16006,14 +15987,14 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(169:16) {#each messages as msgObject}",
+    		source: "(160:16) {#each messages as msgObject}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (224:12) {#if isSet}
+    // (215:12) {#if isSet}
     function create_if_block(ctx) {
     	let if_block_anchor;
     	let current;
@@ -16072,14 +16053,14 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(224:12) {#if isSet}",
+    		source: "(215:12) {#if isSet}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (225:16) {#if modalOpen}
+    // (216:16) {#if modalOpen}
     function create_if_block_1(ctx) {
     	let div1;
     	let header;
@@ -16125,13 +16106,13 @@ var app = (function () {
     			}
 
     			attr_dev(div0, "id", "closer-icon");
-    			attr_dev(div0, "class", "svelte-1y6jdxk");
-    			add_location(div0, file$5, 230, 32, 7442);
-    			attr_dev(header, "class", "svelte-1y6jdxk");
-    			add_location(header, file$5, 226, 24, 7197);
+    			attr_dev(div0, "class", "svelte-ar8tbf");
+    			add_location(div0, file$5, 221, 32, 7028);
+    			attr_dev(header, "class", "svelte-ar8tbf");
+    			add_location(header, file$5, 217, 24, 6783);
     			attr_dev(div1, "id", "emoji-cont");
-    			attr_dev(div1, "class", "svelte-1y6jdxk");
-    			add_location(div1, file$5, 225, 20, 7123);
+    			attr_dev(div1, "class", "svelte-ar8tbf");
+    			add_location(div1, file$5, 216, 20, 6709);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -16234,17 +16215,17 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(225:16) {#if modalOpen}",
+    		source: "(216:16) {#if modalOpen}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (228:28) {#each setIcons as icon, i}
+    // (219:28) {#each setIcons as icon, i}
     function create_each_block_1(ctx) {
     	let div;
-    	let t_value = String.fromCodePoint(/*icon*/ ctx[32]) + "";
+    	let t_value = String.fromCodePoint(/*icon*/ ctx[31]) + "";
     	let t;
     	let mounted;
     	let dispose;
@@ -16253,9 +16234,9 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			t = text(t_value);
-    			attr_dev(div, "data-id", /*i*/ ctx[34]);
-    			attr_dev(div, "class", "svelte-1y6jdxk");
-    			add_location(div, file$5, 228, 32, 7294);
+    			attr_dev(div, "data-id", /*i*/ ctx[33]);
+    			attr_dev(div, "class", "svelte-ar8tbf");
+    			add_location(div, file$5, 219, 32, 6880);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -16278,17 +16259,17 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(228:28) {#each setIcons as icon, i}",
+    		source: "(219:28) {#each setIcons as icon, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (234:24) {#each emojis as emoji}
+    // (225:24) {#each emojis as emoji}
     function create_each_block(ctx) {
     	let span;
-    	let t_value = /*emoji*/ ctx[29] + "";
+    	let t_value = /*emoji*/ ctx[28] + "";
     	let t;
     	let mounted;
     	let dispose;
@@ -16297,8 +16278,8 @@ var app = (function () {
     		c: function create() {
     			span = element("span");
     			t = text(t_value);
-    			attr_dev(span, "class", "svelte-1y6jdxk");
-    			add_location(span, file$5, 234, 28, 7618);
+    			attr_dev(span, "class", "svelte-ar8tbf");
+    			add_location(span, file$5, 225, 28, 7204);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
@@ -16310,7 +16291,7 @@ var app = (function () {
     			}
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*emojis*/ 1 && t_value !== (t_value = /*emoji*/ ctx[29] + "")) set_data_dev(t, t_value);
+    			if (dirty[0] & /*emojis*/ 1 && t_value !== (t_value = /*emoji*/ ctx[28] + "")) set_data_dev(t, t_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(span);
@@ -16323,7 +16304,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(234:24) {#each emojis as emoji}",
+    		source: "(225:24) {#each emojis as emoji}",
     		ctx
     	});
 
@@ -16426,58 +16407,58 @@ var app = (function () {
     			if (if_block) if_block.c();
     			if (!src_url_equal(script.src, script_src_value = "https://kit.fontawesome.com/8dc570c5d4.js")) attr_dev(script, "src", script_src_value);
     			attr_dev(script, "crossorigin", "anonymous");
-    			attr_dev(script, "class", "svelte-1y6jdxk");
-    			add_location(script, file$5, 150, 4, 4038);
+    			attr_dev(script, "class", "svelte-ar8tbf");
+    			add_location(script, file$5, 141, 4, 3738);
     			attr_dev(meta, "name", "viewport");
     			attr_dev(meta, "content", "width=device-width, initial-scale=1");
-    			attr_dev(meta, "class", "svelte-1y6jdxk");
-    			add_location(meta, file$5, 154, 4, 4153);
-    			attr_dev(h3, "class", "channel-name  svelte-1y6jdxk");
-    			add_location(h3, file$5, 161, 12, 4395);
-    			attr_dev(div0, "class", "vl svelte-1y6jdxk");
-    			add_location(div0, file$5, 162, 12, 4449);
-    			attr_dev(p, "class", "channel-info svelte-1y6jdxk");
-    			add_location(p, file$5, 163, 12, 4480);
-    			attr_dev(div1, "class", "top-nav svelte-1y6jdxk");
-    			add_location(div1, file$5, 160, 8, 4361);
-    			attr_dev(hr, "class", "svelte-1y6jdxk");
-    			add_location(hr, file$5, 165, 8, 4539);
-    			attr_dev(div2, "class", "chat-body-messages svelte-1y6jdxk");
-    			add_location(div2, file$5, 167, 12, 4590);
-    			attr_dev(input0, "class", "userinfo-input-username svelte-1y6jdxk");
+    			attr_dev(meta, "class", "svelte-ar8tbf");
+    			add_location(meta, file$5, 145, 4, 3853);
+    			attr_dev(h3, "class", "channel-name  svelte-ar8tbf");
+    			add_location(h3, file$5, 152, 12, 4095);
+    			attr_dev(div0, "class", "vl svelte-ar8tbf");
+    			add_location(div0, file$5, 153, 12, 4149);
+    			attr_dev(p, "class", "channel-info svelte-ar8tbf");
+    			add_location(p, file$5, 154, 12, 4180);
+    			attr_dev(div1, "class", "top-nav svelte-ar8tbf");
+    			add_location(div1, file$5, 151, 8, 4061);
+    			attr_dev(hr, "class", "svelte-ar8tbf");
+    			add_location(hr, file$5, 156, 8, 4239);
+    			attr_dev(div2, "class", "chat-body-messages svelte-ar8tbf");
+    			add_location(div2, file$5, 158, 12, 4290);
+    			attr_dev(input0, "class", "userinfo-input-username svelte-ar8tbf");
     			attr_dev(input0, "id", "username");
     			attr_dev(input0, "type", "text");
     			attr_dev(input0, "placeholder", "Username");
     			attr_dev(input0, "maxlength", "15");
-    			add_location(input0, file$5, 187, 16, 5673);
-    			attr_dev(input1, "class", "userinfo-input-pfp svelte-1y6jdxk");
+    			add_location(input0, file$5, 178, 16, 5259);
+    			attr_dev(input1, "class", "userinfo-input-pfp svelte-ar8tbf");
     			attr_dev(input1, "id", "userpfp");
     			attr_dev(input1, "type", "text");
     			attr_dev(input1, "placeholder", "User PFP");
-    			add_location(input1, file$5, 195, 16, 5953);
-    			attr_dev(button0, "class", "userinfo-input-button fa fa-check svelte-1y6jdxk");
-    			add_location(button0, file$5, 202, 16, 6191);
-    			attr_dev(div3, "class", "userinfo-input svelte-1y6jdxk");
-    			add_location(div3, file$5, 186, 12, 5628);
+    			add_location(input1, file$5, 186, 16, 5539);
+    			attr_dev(button0, "class", "userinfo-input-button fa fa-check svelte-ar8tbf");
+    			add_location(button0, file$5, 193, 16, 5777);
+    			attr_dev(div3, "class", "userinfo-input svelte-ar8tbf");
+    			add_location(div3, file$5, 177, 12, 5214);
     			attr_dev(input2, "type", "text");
-    			attr_dev(input2, "class", "chat-input-text svelte-1y6jdxk");
+    			attr_dev(input2, "class", "chat-input-text svelte-ar8tbf");
     			attr_dev(input2, "placeholder", "Type a message");
     			attr_dev(input2, "maxlength", "50");
-    			add_location(input2, file$5, 208, 16, 6416);
-    			attr_dev(div4, "class", "chat-input-emotes svelte-1y6jdxk");
+    			add_location(input2, file$5, 199, 16, 6002);
+    			attr_dev(div4, "class", "chat-input-emotes svelte-ar8tbf");
     			attr_dev(div4, "id", "emoji-opener-icon");
-    			add_location(div4, file$5, 217, 16, 6773);
-    			attr_dev(button1, "class", "chat-input-send fas fa-paper-plane svelte-1y6jdxk");
-    			add_location(button1, file$5, 218, 16, 6895);
-    			attr_dev(div5, "class", "chat-input svelte-1y6jdxk");
+    			add_location(div4, file$5, 208, 16, 6359);
+    			attr_dev(button1, "class", "chat-input-send fas fa-paper-plane svelte-ar8tbf");
+    			add_location(button1, file$5, 209, 16, 6481);
+    			attr_dev(div5, "class", "chat-input svelte-ar8tbf");
     			attr_dev(div5, "id", "btn-emoji-icon-cont");
-    			add_location(div5, file$5, 207, 12, 6350);
-    			attr_dev(div6, "class", "chat-body svelte-1y6jdxk");
-    			add_location(div6, file$5, 166, 8, 4554);
-    			attr_dev(div7, "class", "mainarea svelte-1y6jdxk");
-    			add_location(div7, file$5, 155, 4, 4228);
-    			attr_dev(main, "class", "svelte-1y6jdxk");
-    			add_location(main, file$5, 149, 0, 4027);
+    			add_location(div5, file$5, 198, 12, 5936);
+    			attr_dev(div6, "class", "chat-body svelte-ar8tbf");
+    			add_location(div6, file$5, 157, 8, 4254);
+    			attr_dev(div7, "class", "mainarea svelte-ar8tbf");
+    			add_location(div7, file$5, 146, 4, 3928);
+    			attr_dev(main, "class", "svelte-ar8tbf");
+    			add_location(main, file$5, 140, 0, 3727);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -16671,16 +16652,15 @@ var app = (function () {
     		}
     	}
 
-    	const socket = lookup("http://localhost:3000");
+    	const socket = lookup("https://kurchat.kurizu.repl.co");
     	let messages = [];
     	let message = "";
     	let username = "";
     	let userpfp = "";
-    	let time = "";
     	let isSet = false;
 
-    	socket.on("chat message", (user, userpfp, msg, time) => {
-    		let info = [user, userpfp, msg, time];
+    	socket.on("chat message", (user, userpfp, msg) => {
+    		let info = [user, userpfp, msg];
     		$$invalidate(1, messages = [...messages, info]);
 
     		// console.log(messages);
@@ -16768,22 +16748,13 @@ var app = (function () {
     			userpfp = "https://theserialbinger.com/wp-content/uploads/2022/06/Anya-1024x1024.jpg";
     		}
 
-    		time = new Date().toLocaleTimeString();
-    		let hours = time.split(":")[0];
-    		let minutes = time.split(":")[1];
-    		time = `${hours}:${minutes} ${time.split(":")[2].split(" ")[1]}`;
-
-    		if (time == "") {
-    			time = "00:00:00";
-    		}
-
     		if (message == "") {
     			alert("Please enter a message");
     		} else if (message.match(/^[ ]/)) {
     			alert("Please enter a valid message");
     			$$invalidate(2, message = "");
     		} else {
-    			socket.emit("chat message", user, userpfp, message, time);
+    			socket.emit("chat message", user, userpfp, message);
 
     			// console.log(`The message: (${message}) has been sent.`);	
     			$$invalidate(7, textBox.value = "", textBox);
@@ -16860,7 +16831,6 @@ var app = (function () {
     		message,
     		username,
     		userpfp,
-    		time,
     		isSet,
     		scrollToBottom,
     		fly,
@@ -16886,9 +16856,8 @@ var app = (function () {
     		if ('message' in $$props) $$invalidate(2, message = $$props.message);
     		if ('username' in $$props) $$invalidate(3, username = $$props.username);
     		if ('userpfp' in $$props) $$invalidate(4, userpfp = $$props.userpfp);
-    		if ('time' in $$props) time = $$props.time;
     		if ('isSet' in $$props) $$invalidate(5, isSet = $$props.isSet);
-    		if ('emojiSets' in $$props) $$invalidate(27, emojiSets = $$props.emojiSets);
+    		if ('emojiSets' in $$props) $$invalidate(26, emojiSets = $$props.emojiSets);
     		if ('selectedSet' in $$props) $$invalidate(15, selectedSet = $$props.selectedSet);
     		if ('emojis' in $$props) $$invalidate(0, emojis = $$props.emojis);
     		if ('setIcons' in $$props) $$invalidate(10, setIcons = $$props.setIcons);
