@@ -13,7 +13,6 @@
         if (window.innerWidth < 2000) {
             if (direction == "left" && document.querySelector(".categories").style.opacity != "0") {
                 closeNav();
-                console.log("left");
             }
         }
     }
@@ -26,6 +25,7 @@
     let message = "";
     let username = "";
     let userpfp = "";
+    let time = "";
 
     let isSet = false;
 
@@ -34,8 +34,8 @@
         el.scrollTop = el.scrollHeight;
     }
 
-    socket.on("chat message", (user, userpfp, msg) => {
-        let info = [user, userpfp, msg];
+    socket.on("chat message", (user, userpfp, msg, time) => {
+        let info = [user, userpfp, msg, time];
         messages = [...messages, info];
         // console.log(messages);
         setTimeout(() => {
@@ -99,6 +99,14 @@
             userpfp =
                 "https://theserialbinger.com/wp-content/uploads/2022/06/Anya-1024x1024.jpg";
         }
+
+        time = new Date().toLocaleTimeString();
+        let hours = time.split(":")[0];
+        let minutes = time.split(":")[1];
+        time = `${hours}:${minutes} ${time.split(":")[2].split(" ")[1]}`;
+        if (time == "") {
+            time = "00:00:00";
+        }
     
         if (message == "") {
             alert("Please enter a message");
@@ -107,7 +115,7 @@
             message = "";
         } else {
 
-            socket.emit("chat message", user, userpfp, message);
+            socket.emit("chat message", user, userpfp, message, time);
             // console.log(`The message: (${message}) has been sent.`);	
             textBox.value = "";
             message = "";
@@ -166,7 +174,7 @@
                                 <h3
                                     class="chat-body-messages-item-content-header-name"
                                 >
-                                    <p>{msgObject[0]}</p>
+                                    <p style="display:inline">{msgObject[0]} &nbsp;&nbsp;&nbsp;</p><p style="display:inline" id="message-time"> Today at {msgObject[3]}</p>
                                 </h3>
                             </div>
                             <div class="chat-body-messages-item-content-body">
@@ -276,6 +284,12 @@
         position: fixed;
         top: 0.5%;
         left: 18%;
+    }
+
+    #message-time {
+        font-weight: 300;
+        font-size: 0.8em;
+        color: rgb(179, 179, 179);
     }
 
     .chat-body {
