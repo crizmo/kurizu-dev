@@ -50,7 +50,7 @@
                     </div>
                 </div>
                 <div class="chat-body-messages-item">
-                    <User pfp = "https://cdn.discordapp.com/avatars/626618189450838027/bfb3228d1a394361af00c0aa9a7de14b.webp"/>
+                    <User pfp = "https://cdn.discordapp.com/attachments/977949070893125632/1038727869221843024/coding.jpg"/>
                     <div class="chat-body-messages-item-content">
                         <div class="chat-body-messages-item-content-header">
                             <h3 class="chat-body-messages-item-content-header-name">Coding398</h3>
