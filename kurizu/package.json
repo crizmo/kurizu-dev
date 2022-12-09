@@ -5,7 +5,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public --no-clear --single --host",
+    "start": "sirv public --no-clear --single",
     "preview": "sirv public --no-clear --single --port 3000"
   },
   "devDependencies": {

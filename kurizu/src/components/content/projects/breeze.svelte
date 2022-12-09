@@ -45,7 +45,6 @@
                                 <br><br>
                                 <img class="msg-img" src="https://cdn.discordapp.com/attachments/988140784807202886/992759894627340298/breeze-stats.png" alt="homepgimg" height="300px" width="auto" style="border-radius: 10px;"> <br>
                                 <img class="msg-img" src="https://breeze-api.kurizu.repl.co/api/card/784141856426033233?banner=https://wallpaperaccess.com/full/6276627.jpg" alt="api"/>
-                                <img class="msg-img" src="https://api-breeze.herokuapp.com/api/compact/784141856426033233?banner=https://wallpaperaccess.com/full/6276627.jpg" alt="api"/>
                                 <br>
                                 Breeze also offers and api for you to use <br>
                                 So you can use the cards in your github repo or anywhere you want.
@@ -70,7 +69,7 @@
 
                                 GitHub: <a href="https://github.com/crizmo/breeze" alt="breeze github" target="_blank">Breeze</a> <br>
                                 Website: <a href="https://breeze-stats.netlify.app" alt="breeze website" target="_blank">Breeze</a> <br>
-                                API: <a href="https://api-breeze.herokuapp.com/" alt="breeze api" target="_blank">Breeze API</a> <br>
+                                API: <a href="https://breeze-api.kurizu.repl.co/" alt="breeze api" target="_blank">Breeze API</a> <br>
                                 <br>
                                 Thanks for reading ! 
                             </p>
