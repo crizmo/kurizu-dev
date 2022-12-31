@@ -61,6 +61,9 @@
                         <a class="anyanime-cn" href="/anyanime"># AnyAnime</a>
                     </button>
                     <button class="channelbtn">
+                        <a class="image2url-cn" href="/image2url"># Image2url</a>
+                    </button>
+                    <button class="channelbtn">
                         <a class="elina-cn" href="/elina"># Elina-dev</a>
                     </button>
                     <button class="channelbtn">
@@ -192,6 +195,7 @@
         color: rgb(255, 255, 255);
     }
 
+    .image2url-cn,
     .elina-cn,
     .stream-savers-cn,
     .pixit-cn,
@@ -203,6 +207,7 @@
     }
 
     .anyanime-cn,
+    .image2url-cn,
     .elina-cn,
     .stream-savers-cn,
     .pixit-cn,
@@ -218,6 +223,7 @@
     }
 
     .elina-cn:hover ,
+    .image2url-cn:hover,
     .stream-savers-cn:hover ,
     .pixit-cn:hover,
     .breeze-cn:hover,

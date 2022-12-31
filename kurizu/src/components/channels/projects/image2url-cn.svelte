@@ -16,6 +16,7 @@
 
         document.querySelector(".categories").style.opacity = "1";
     }
+    
     import { swipe } from "svelte-gestures";
     let direction;
 
@@ -189,24 +190,24 @@
         transform: rotate(90deg);
     }
 
-    .minikey-cn {
+    .image2url-cn {
         background: #232529;
         color: rgb(255, 255, 255);
     }
 
-    .image2url-cn,
     .anyanime-cn,
     .elina-cn,
     .stream-savers-cn,
     .pixit-cn,
     .breeze-cn,
+    .minikey-cn,
     .type3d-cn,
     .timely-cn {
         color: rgb(158, 158, 158);
     }
 
-    .image2url-cn,
     .anyanime-cn,
+    .image2url-cn,
     .elina-cn,
     .stream-savers-cn,
     .pixit-cn,
@@ -221,13 +222,12 @@
         padding: 3px;
     }
 
-    .image2url-cn:hover,
-    .anyanime-cn:hover ,    
     .elina-cn:hover ,
-    .stream-savers-cn:hover,
-    .breeze-cn:hover,
+    .stream-savers-cn:hover ,
     .pixit-cn:hover,
+    .breeze-cn:hover,
     .minikey-cn:hover,
+    .type3d-cn:hover,
     .timely-cn:hover {
         background: #232529;
         color: rgb(255, 255, 255);
@@ -283,6 +283,8 @@
             color: orangered;
             display: block;
         }
+
+
     }
 
     @media screen and (max-width: 1000px) {
