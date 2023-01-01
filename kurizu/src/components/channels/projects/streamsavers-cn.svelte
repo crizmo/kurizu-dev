@@ -221,7 +221,7 @@
         padding: 3px;
     }
 
-    .image2url-cn,
+    .image2url-cn:hover,
     .anyanime-cn:hover ,    
     .elina-cn:hover ,
     .pixit-cn:hover,
