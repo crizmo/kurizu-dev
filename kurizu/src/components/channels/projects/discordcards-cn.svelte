@@ -72,7 +72,7 @@
                         <a class="pixit-cn" href="/pixit"># Pixit</a>
                     </button>
                     <button class="channelbtn">
-                        <a class="breeze-cn" href="/breeze"># Breeze</a>
+                        <a class="discordcards-cn" href="/discordcards"># Discord Cards</a>
                     </button>
                     <button class="channelbtn">
                         <a class="minikey-cn" href="/minikey"># Minikey</a>
@@ -189,7 +189,7 @@
         transform: rotate(90deg);
     }
 
-    .breeze-cn {
+    .discordcards-cn {
         background: #232529;
         color: rgb(255, 255, 255);
     }
@@ -210,7 +210,7 @@
     .elina-cn,
     .stream-savers-cn,
     .pixit-cn,
-    .breeze-cn,
+    .discordcards-cn,
     .minikey-cn,
     .type3d-cn,
     .timely-cn {

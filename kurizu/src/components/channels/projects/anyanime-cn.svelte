@@ -73,7 +73,7 @@
                         <a class="pixit-cn" href="/pixit"># Pixit</a>
                     </button>
                     <button class="channelbtn">
-                        <a class="breeze-cn" href="/breeze"># Breeze</a>
+                        <a class="discordcards-cn" href="/discordcards"># Discord Cards</a>
                     </button>
                     <button class="channelbtn">
                         <a class="minikey-cn" href="/minikey"># Minikey</a>
@@ -199,7 +199,7 @@
     .elina-cn,
     .stream-savers-cn,
     .pixit-cn,
-    .breeze-cn,
+    .discordcards-cn,
     .minikey-cn,
     .type3d-cn,
     .timely-cn {
@@ -211,7 +211,7 @@
     .elina-cn,
     .stream-savers-cn,
     .pixit-cn,
-    .breeze-cn,
+    .discordcards-cn,
     .minikey-cn,
     .type3d-cn,
     .timely-cn {
@@ -226,7 +226,7 @@
     .image2url-cn:hover,
     .stream-savers-cn:hover ,
     .pixit-cn:hover,
-    .breeze-cn:hover,
+    .discordcards-cn:hover,
     .minikey-cn:hover,
     .type3d-cn:hover,
     .timely-cn:hover {

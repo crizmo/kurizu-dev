@@ -5,7 +5,7 @@
 	import Image2urlCn from '../../channels/projects/image2url-cn.svelte';
 	import StreamSaversCn from '../../channels/projects/streamsavers-cn.svelte';
 	import PixitCn from '../../channels/projects/pixit-cn.svelte';
-	import BreezeCn from '../../channels/projects/breeze-cn.svelte';
+	import DiscordCardsCn from '../../channels/projects/discordcards-cn.svelte';
 	import MinikeyCn from '../../channels/projects/minikey-cn.svelte';
 	import Type3dCn from '../../channels/projects/type3d-cn.svelte';
 	import TimelyCn from '../../channels/projects/timely-cn.svelte';
@@ -15,7 +15,7 @@
 	import ElinaDev from '../projects/elina-dev.svelte';
 	import StreamSavers from '../projects/streamsavers.svelte';
 	import Pixit from '../projects/pixit.svelte';
-	import Breeze from '../projects/breeze.svelte';
+	import DiscordCards from '../projects/discordcards.svelte';
 	import Minikey from '../projects/minikey.svelte';
 	import Type3d from '../projects/type3d.svelte';
 	import Timely from '../projects/timely.svelte';
@@ -47,9 +47,9 @@
 		<Pixit />
 	</Route>
 
-	<Route path="/breeze">
-		<BreezeCn />
-		<Breeze />
+	<Route path="/discordcards">
+		<DiscordCardsCn />
+		<DiscordCards />
 	</Route>
 
 	<Route path="/minikey">
