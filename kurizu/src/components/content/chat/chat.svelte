@@ -58,7 +58,6 @@
 		{ type: "animals", minVal:129408, maxVal: 129442},
 		{ type: "transport", minVal:128640, maxVal: 128676},
 		{ type: "misc", minVal:129494, maxVal: 129535},
-			
 	];
 	
 	let selectedSet = 0;

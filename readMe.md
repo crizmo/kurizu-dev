@@ -18,6 +18,12 @@ If you want to use this project to make your own website feel free to do so :)
 If you have any feedback / bugs / suggestions, feel free to open an issue on github or contact me on discord.
 My discord username is `Criz#1270` !
 
+## Chat
+If you dont want to manually add pfp link everytime u want to chat do this:
+- Go to `dev-server/users.json` and add your Username and pfp link in the json file
+
+That's it ! Now you can continue chatting on the website !
+
 ## Links 
 - [Website](https://kurizu.vercel.app/)
 - [Discord](https://discord.gg/VcMPV8vc2x)
