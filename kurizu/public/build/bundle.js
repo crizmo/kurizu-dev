@@ -266,6 +266,75 @@ var app = (function () {
         });
     }
 
+    function create_animation(node, from, fn, params) {
+        if (!from)
+            return noop;
+        const to = node.getBoundingClientRect();
+        if (from.left === to.left && from.right === to.right && from.top === to.top && from.bottom === to.bottom)
+            return noop;
+        const { delay = 0, duration = 300, easing = identity, 
+        // @ts-ignore todo: should this be separated from destructuring? Or start/end added to public api and documentation?
+        start: start_time = now() + delay, 
+        // @ts-ignore todo:
+        end = start_time + duration, tick = noop, css } = fn(node, { from, to }, params);
+        let running = true;
+        let started = false;
+        let name;
+        function start() {
+            if (css) {
+                name = create_rule(node, 0, 1, duration, delay, easing, css);
+            }
+            if (!delay) {
+                started = true;
+            }
+        }
+        function stop() {
+            if (css)
+                delete_rule(node, name);
+            running = false;
+        }
+        loop(now => {
+            if (!started && now >= start_time) {
+                started = true;
+            }
+            if (started && now >= end) {
+                tick(1, 0);
+                stop();
+            }
+            if (!running) {
+                return false;
+            }
+            if (started) {
+                const p = now - start_time;
+                const t = 0 + 1 * easing(p / duration);
+                tick(t, 1 - t);
+            }
+            return true;
+        });
+        start();
+        tick(0, 1);
+        return stop;
+    }
+    function fix_position(node) {
+        const style = getComputedStyle(node);
+        if (style.position !== 'absolute' && style.position !== 'fixed') {
+            const { width, height } = style;
+            const a = node.getBoundingClientRect();
+            node.style.position = 'absolute';
+            node.style.width = width;
+            node.style.height = height;
+            add_transform(node, a);
+        }
+    }
+    function add_transform(node, a) {
+        const b = node.getBoundingClientRect();
+        if (a.left !== b.left || a.top !== b.top) {
+            const style = getComputedStyle(node);
+            const transform = style.transform === 'none' ? '' : style.transform;
+            node.style.transform = `${transform} translate(${a.left - b.left}px, ${a.top - b.top}px)`;
+        }
+    }
+
     let current_component;
     function set_current_component(component) {
         current_component = component;
@@ -426,6 +495,125 @@ var app = (function () {
         }
     }
     const null_transition = { duration: 0 };
+    function create_in_transition(node, fn, params) {
+        let config = fn(node, params);
+        let running = false;
+        let animation_name;
+        let task;
+        let uid = 0;
+        function cleanup() {
+            if (animation_name)
+                delete_rule(node, animation_name);
+        }
+        function go() {
+            const { delay = 0, duration = 300, easing = identity, tick = noop, css } = config || null_transition;
+            if (css)
+                animation_name = create_rule(node, 0, 1, duration, delay, easing, css, uid++);
+            tick(0, 1);
+            const start_time = now() + delay;
+            const end_time = start_time + duration;
+            if (task)
+                task.abort();
+            running = true;
+            add_render_callback(() => dispatch$1(node, true, 'start'));
+            task = loop(now => {
+                if (running) {
+                    if (now >= end_time) {
+                        tick(1, 0);
+                        dispatch$1(node, true, 'end');
+                        cleanup();
+                        return running = false;
+                    }
+                    if (now >= start_time) {
+                        const t = easing((now - start_time) / duration);
+                        tick(t, 1 - t);
+                    }
+                }
+                return running;
+            });
+        }
+        let started = false;
+        return {
+            start() {
+                if (started)
+                    return;
+                started = true;
+                delete_rule(node);
+                if (is_function(config)) {
+                    config = config();
+                    wait().then(go);
+                }
+                else {
+                    go();
+                }
+            },
+            invalidate() {
+                started = false;
+            },
+            end() {
+                if (running) {
+                    cleanup();
+                    running = false;
+                }
+            }
+        };
+    }
+    function create_out_transition(node, fn, params) {
+        let config = fn(node, params);
+        let running = true;
+        let animation_name;
+        const group = outros;
+        group.r += 1;
+        function go() {
+            const { delay = 0, duration = 300, easing = identity, tick = noop, css } = config || null_transition;
+            if (css)
+                animation_name = create_rule(node, 1, 0, duration, delay, easing, css);
+            const start_time = now() + delay;
+            const end_time = start_time + duration;
+            add_render_callback(() => dispatch$1(node, false, 'start'));
+            loop(now => {
+                if (running) {
+                    if (now >= end_time) {
+                        tick(0, 1);
+                        dispatch$1(node, false, 'end');
+                        if (!--group.r) {
+                            // this will result in `end()` being called,
+                            // so we don't need to clean up here
+                            run_all(group.c);
+                        }
+                        return false;
+                    }
+                    if (now >= start_time) {
+                        const t = easing((now - start_time) / duration);
+                        tick(1 - t, t);
+                    }
+                }
+                return running;
+            });
+        }
+        if (is_function(config)) {
+            wait().then(() => {
+                // @ts-ignore
+                config = config();
+                go();
+            });
+        }
+        else {
+            go();
+        }
+        return {
+            end(reset) {
+                if (reset && config.tick) {
+                    config.tick(1, 0);
+                }
+                if (running) {
+                    if (animation_name)
+                        delete_rule(node, animation_name);
+                    running = false;
+                }
+            }
+        };
+    }
     function create_bidirectional_transition(node, fn, params, intro) {
         let config = fn(node, params);
         let t = intro ? 0 : 1;
@@ -537,6 +725,100 @@ var app = (function () {
         : typeof globalThis !== 'undefined'
             ? globalThis
             : global);
+    function outro_and_destroy_block(block, lookup) {
+        transition_out(block, 1, 1, () => {
+            lookup.delete(block.key);
+        });
+    }
+    function fix_and_outro_and_destroy_block(block, lookup) {
+        block.f();
+        outro_and_destroy_block(block, lookup);
+    }
+    function update_keyed_each(old_blocks, dirty, get_key, dynamic, ctx, list, lookup, node, destroy, create_each_block, next, get_context) {
+        let o = old_blocks.length;
+        let n = list.length;
+        let i = o;
+        const old_indexes = {};
+        while (i--)
+            old_indexes[old_blocks[i].key] = i;
+        const new_blocks = [];
+        const new_lookup = new Map();
+        const deltas = new Map();
+        i = n;
+        while (i--) {
+            const child_ctx = get_context(ctx, list, i);
+            const key = get_key(child_ctx);
+            let block = lookup.get(key);
+            if (!block) {
+                block = create_each_block(key, child_ctx);
+                block.c();
+            }
+            else if (dynamic) {
+                block.p(child_ctx, dirty);
+            }
+            new_lookup.set(key, new_blocks[i] = block);
+            if (key in old_indexes)
+                deltas.set(key, Math.abs(i - old_indexes[key]));
+        }
+        const will_move = new Set();
+        const did_move = new Set();
+        function insert(block) {
+            transition_in(block, 1);
+            block.m(node, next);
+            lookup.set(block.key, block);
+            next = block.first;
+            n--;
+        }
+        while (o && n) {
+            const new_block = new_blocks[n - 1];
+            const old_block = old_blocks[o - 1];
+            const new_key = new_block.key;
+            const old_key = old_block.key;
+            if (new_block === old_block) {
+                // do nothing
+                next = new_block.first;
+                o--;
+                n--;
+            }
+            else if (!new_lookup.has(old_key)) {
+                // remove old block
+                destroy(old_block, lookup);
+                o--;
+            }
+            else if (!lookup.has(new_key) || will_move.has(new_key)) {
+                insert(new_block);
+            }
+            else if (did_move.has(old_key)) {
+                o--;
+            }
+            else if (deltas.get(new_key) > deltas.get(old_key)) {
+                did_move.add(new_key);
+                insert(new_block);
+            }
+            else {
+                will_move.add(old_key);
+                o--;
+            }
+        }
+        while (o--) {
+            const old_block = old_blocks[o];
+            if (!new_lookup.has(old_block.key))
+                destroy(old_block, lookup);
+        }
+        while (n)
+            insert(new_blocks[n - 1]);
+        return new_blocks;
+    }
+    function validate_each_keys(ctx, list, get_context, get_key) {
+        const keys = new Set();
+        for (let i = 0; i < list.length; i++) {
+            const key = get_key(get_context(ctx, list, i));
+            if (keys.has(key)) {
+                throw new Error('Cannot have duplicate keys in a keyed each');
+            }
+            keys.add(key);
+        }
+    }
     function create_component(block) {
         block && block.c();
     }
@@ -12201,168 +12483,553 @@ var app = (function () {
     	}
     }
 
+    function cubicOut(t) {
+        const f = t - 1.0;
+        return f * f * f + 1.0;
+    }
+    function quintOut(t) {
+        return --t * t * t * t * t + 1;
+    }
+
+    /*! *****************************************************************************
+    Copyright (c) Microsoft Corporation.
+
+    Permission to use, copy, modify, and/or distribute this software for any
+    purpose with or without fee is hereby granted.
+
+    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+    REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+    AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+    INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+    LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+    OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+    PERFORMANCE OF THIS SOFTWARE.
+    ***************************************************************************** */
+
+    function __rest(s, e) {
+        var t = {};
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+            t[p] = s[p];
+        if (s != null && typeof Object.getOwnPropertySymbols === "function")
+            for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+                if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                    t[p[i]] = s[p[i]];
+            }
+        return t;
+    }
+    function fly(node, { delay = 0, duration = 400, easing = cubicOut, x = 0, y = 0, opacity = 0 } = {}) {
+        const style = getComputedStyle(node);
+        const target_opacity = +style.opacity;
+        const transform = style.transform === 'none' ? '' : style.transform;
+        const od = target_opacity * (1 - opacity);
+        return {
+            delay,
+            duration,
+            easing,
+            css: (t, u) => `
+			transform: ${transform} translate(${(1 - t) * x}px, ${(1 - t) * y}px);
+			opacity: ${target_opacity - (od * u)}`
+        };
+    }
+    function crossfade(_a) {
+        var { fallback } = _a, defaults = __rest(_a, ["fallback"]);
+        const to_receive = new Map();
+        const to_send = new Map();
+        function crossfade(from, node, params) {
+            const { delay = 0, duration = d => Math.sqrt(d) * 30, easing = cubicOut } = assign(assign({}, defaults), params);
+            const to = node.getBoundingClientRect();
+            const dx = from.left - to.left;
+            const dy = from.top - to.top;
+            const dw = from.width / to.width;
+            const dh = from.height / to.height;
+            const d = Math.sqrt(dx * dx + dy * dy);
+            const style = getComputedStyle(node);
+            const transform = style.transform === 'none' ? '' : style.transform;
+            const opacity = +style.opacity;
+            return {
+                delay,
+                duration: is_function(duration) ? duration(d) : duration,
+                easing,
+                css: (t, u) => `
+				opacity: ${t * opacity};
+				transform-origin: top left;
+				transform: ${transform} translate(${u * dx}px,${u * dy}px) scale(${t + (1 - t) * dw}, ${t + (1 - t) * dh});
+			`
+            };
+        }
+        function transition(items, counterparts, intro) {
+            return (node, params) => {
+                items.set(params.key, {
+                    rect: node.getBoundingClientRect()
+                });
+                return () => {
+                    if (counterparts.has(params.key)) {
+                        const { rect } = counterparts.get(params.key);
+                        counterparts.delete(params.key);
+                        return crossfade(rect, node, params);
+                    }
+                    // if the node is disappearing altogether
+                    // (i.e. wasn't claimed by the other list)
+                    // then we need to supply an outro
+                    items.delete(params.key);
+                    return fallback && fallback(node, params, intro);
+                };
+            };
+        }
+        return [
+            transition(to_send, to_receive, false),
+            transition(to_receive, to_send, true)
+        ];
+    }
+
+    function flip(node, { from, to }, params = {}) {
+        const style = getComputedStyle(node);
+        const transform = style.transform === 'none' ? '' : style.transform;
+        const [ox, oy] = style.transformOrigin.split(' ').map(parseFloat);
+        const dx = (from.left + from.width * ox / to.width) - (to.left + ox);
+        const dy = (from.top + from.height * oy / to.height) - (to.top + oy);
+        const { delay = 0, duration = (d) => Math.sqrt(d) * 120, easing = cubicOut } = params;
+        return {
+            delay,
+            duration: is_function(duration) ? duration(Math.sqrt(dx * dx + dy * dy)) : duration,
+            easing,
+            css: (t, u) => {
+                const x = u * dx;
+                const y = u * dy;
+                const sx = t + u * from.width / to.width;
+                const sy = t + u * from.height / to.height;
+                return `transform: ${transform} translate(${x}px, ${y}px) scale(${sx}, ${sy});`;
+            }
+        };
+    }
+
     /* src/components/content/other/todo.svelte generated by Svelte v3.48.0 */
     const file$a = "src/components/content/other/todo.svelte";
+
+    function get_each_context$1(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[15] = list[i];
+    	child_ctx[16] = list;
+    	child_ctx[17] = i;
+    	return child_ctx;
+    }
+
+    function get_each_context_1$1(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[15] = list[i];
+    	child_ctx[18] = list;
+    	child_ctx[19] = i;
+    	return child_ctx;
+    }
+
+    // (135:36) {#each todos.filter((t) => !t.done) as todo (todo.id)}
+    function create_each_block_1$1(key_1, ctx) {
+    	let label;
+    	let input;
+    	let t0;
+    	let t1_value = /*todo*/ ctx[15].description + "";
+    	let t1;
+    	let t2;
+    	let button;
+    	let t4;
+    	let label_intro;
+    	let label_outro;
+    	let rect;
+    	let stop_animation = noop;
+    	let current;
+    	let mounted;
+    	let dispose;
+
+    	function input_change_handler() {
+    		/*input_change_handler*/ ctx[7].call(input, /*each_value_1*/ ctx[18], /*todo_index_1*/ ctx[19]);
+    	}
+
+    	function click_handler() {
+    		return /*click_handler*/ ctx[8](/*todo*/ ctx[15]);
+    	}
+
+    	const block = {
+    		key: key_1,
+    		first: null,
+    		c: function create() {
+    			label = element("label");
+    			input = element("input");
+    			t0 = space();
+    			t1 = text(t1_value);
+    			t2 = space();
+    			button = element("button");
+    			button.textContent = "x";
+    			t4 = space();
+    			attr_dev(input, "type", "checkbox");
+    			add_location(input, file$a, 141, 44, 4813);
+    			attr_dev(button, "class", "btn-todo svelte-1tgs7kk");
+    			add_location(button, file$a, 143, 44, 4971);
+    			attr_dev(label, "class", "label-todo svelte-1tgs7kk");
+    			add_location(label, file$a, 135, 40, 4454);
+    			this.first = label;
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, label, anchor);
+    			append_dev(label, input);
+    			input.checked = /*todo*/ ctx[15].done;
+    			append_dev(label, t0);
+    			append_dev(label, t1);
+    			append_dev(label, t2);
+    			append_dev(label, button);
+    			append_dev(label, t4);
+    			current = true;
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(input, "change", input_change_handler),
+    					listen_dev(button, "click", click_handler, false, false, false)
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: function update(new_ctx, dirty) {
+    			ctx = new_ctx;
+
+    			if (dirty & /*todos*/ 1) {
+    				input.checked = /*todo*/ ctx[15].done;
+    			}
+
+    			if ((!current || dirty & /*todos*/ 1) && t1_value !== (t1_value = /*todo*/ ctx[15].description + "")) set_data_dev(t1, t1_value);
+    		},
+    		r: function measure() {
+    			rect = label.getBoundingClientRect();
+    		},
+    		f: function fix() {
+    			fix_position(label);
+    			stop_animation();
+    			add_transform(label, rect);
+    		},
+    		a: function animate() {
+    			stop_animation();
+    			stop_animation = create_animation(label, rect, flip, {});
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+
+    			add_render_callback(() => {
+    				if (label_outro) label_outro.end(1);
+    				label_intro = create_in_transition(label, /*receive*/ ctx[3], { key: /*todo*/ ctx[15].id });
+    				label_intro.start();
+    			});
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			if (label_intro) label_intro.invalidate();
+    			label_outro = create_out_transition(label, /*send*/ ctx[2], { key: /*todo*/ ctx[15].id });
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(label);
+    			if (detaching && label_outro) label_outro.end();
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block_1$1.name,
+    		type: "each",
+    		source: "(135:36) {#each todos.filter((t) => !t.done) as todo (todo.id)}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (151:36) {#each todos.filter((t) => t.done) as todo (todo.id)}
+    function create_each_block$1(key_1, ctx) {
+    	let label;
+    	let input;
+    	let t0;
+    	let t1_value = /*todo*/ ctx[15].description + "";
+    	let t1;
+    	let t2;
+    	let button;
+    	let t4;
+    	let label_intro;
+    	let label_outro;
+    	let rect;
+    	let stop_animation = noop;
+    	let current;
+    	let mounted;
+    	let dispose;
+
+    	function input_change_handler_1() {
+    		/*input_change_handler_1*/ ctx[9].call(input, /*each_value*/ ctx[16], /*todo_index*/ ctx[17]);
+    	}
+
+    	function click_handler_1() {
+    		return /*click_handler_1*/ ctx[10](/*todo*/ ctx[15]);
+    	}
+
+    	const block = {
+    		key: key_1,
+    		first: null,
+    		c: function create() {
+    			label = element("label");
+    			input = element("input");
+    			t0 = space();
+    			t1 = text(t1_value);
+    			t2 = space();
+    			button = element("button");
+    			button.textContent = "x";
+    			t4 = space();
+    			attr_dev(input, "type", "checkbox");
+    			add_location(input, file$a, 157, 44, 5801);
+    			attr_dev(button, "class", "btn-todo svelte-1tgs7kk");
+    			add_location(button, file$a, 159, 44, 5959);
+    			attr_dev(label, "class", "label-todo svelte-1tgs7kk");
+    			add_location(label, file$a, 151, 40, 5442);
+    			this.first = label;
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, label, anchor);
+    			append_dev(label, input);
+    			input.checked = /*todo*/ ctx[15].done;
+    			append_dev(label, t0);
+    			append_dev(label, t1);
+    			append_dev(label, t2);
+    			append_dev(label, button);
+    			append_dev(label, t4);
+    			current = true;
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(input, "change", input_change_handler_1),
+    					listen_dev(button, "click", click_handler_1, false, false, false)
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: function update(new_ctx, dirty) {
+    			ctx = new_ctx;
+
+    			if (dirty & /*todos*/ 1) {
+    				input.checked = /*todo*/ ctx[15].done;
+    			}
+
+    			if ((!current || dirty & /*todos*/ 1) && t1_value !== (t1_value = /*todo*/ ctx[15].description + "")) set_data_dev(t1, t1_value);
+    		},
+    		r: function measure() {
+    			rect = label.getBoundingClientRect();
+    		},
+    		f: function fix() {
+    			fix_position(label);
+    			stop_animation();
+    			add_transform(label, rect);
+    		},
+    		a: function animate() {
+    			stop_animation();
+    			stop_animation = create_animation(label, rect, flip, {});
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+
+    			add_render_callback(() => {
+    				if (label_outro) label_outro.end(1);
+    				label_intro = create_in_transition(label, /*receive*/ ctx[3], { key: /*todo*/ ctx[15].id });
+    				label_intro.start();
+    			});
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			if (label_intro) label_intro.invalidate();
+    			label_outro = create_out_transition(label, /*send*/ ctx[2], { key: /*todo*/ ctx[15].id });
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(label);
+    			if (detaching && label_outro) label_outro.end();
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block$1.name,
+    		type: "each",
+    		source: "(151:36) {#each todos.filter((t) => t.done) as todo (todo.id)}",
+    		ctx
+    	});
+
+    	return block;
+    }
 
     function create_fragment$a(ctx) {
     	let main;
     	let script;
     	let script_src_value;
     	let t0;
-    	let div8;
+    	let div11;
     	let div1;
     	let h30;
     	let t2;
     	let div0;
     	let t3;
-    	let p0;
+    	let p;
     	let t5;
     	let hr;
     	let t6;
-    	let div7;
-    	let div6;
-    	let div5;
+    	let div10;
+    	let div9;
+    	let div8;
     	let user;
     	let t7;
-    	let div4;
+    	let div7;
     	let div2;
     	let h31;
     	let t9;
-    	let div3;
+    	let div6;
     	let h32;
     	let t11;
-    	let p1;
-    	let i0;
+    	let div5;
+    	let input;
     	let t12;
-    	let br0;
-    	let t13;
-    	let i1;
+    	let div3;
+    	let h20;
     	let t14;
-    	let br1;
+    	let each_blocks_1 = [];
+    	let each0_lookup = new Map();
     	let t15;
-    	let i2;
-    	let t16;
-    	let br2;
+    	let div4;
+    	let h21;
     	let t17;
-    	let i3;
-    	let t18;
-    	let br3;
-    	let t19;
-    	let i4;
-    	let t20;
-    	let br4;
-    	let t21;
-    	let i5;
-    	let t22;
+    	let each_blocks = [];
+    	let each1_lookup = new Map();
     	let current;
     	let mounted;
     	let dispose;
     	user = new User({ $$inline: true });
+    	let each_value_1 = /*todos*/ ctx[0].filter(func);
+    	validate_each_argument(each_value_1);
+    	const get_key = ctx => /*todo*/ ctx[15].id;
+    	validate_each_keys(ctx, each_value_1, get_each_context_1$1, get_key);
+
+    	for (let i = 0; i < each_value_1.length; i += 1) {
+    		let child_ctx = get_each_context_1$1(ctx, each_value_1, i);
+    		let key = get_key(child_ctx);
+    		each0_lookup.set(key, each_blocks_1[i] = create_each_block_1$1(key, child_ctx));
+    	}
+
+    	let each_value = /*todos*/ ctx[0].filter(func_1);
+    	validate_each_argument(each_value);
+    	const get_key_1 = ctx => /*todo*/ ctx[15].id;
+    	validate_each_keys(ctx, each_value, get_each_context$1, get_key_1);
+
+    	for (let i = 0; i < each_value.length; i += 1) {
+    		let child_ctx = get_each_context$1(ctx, each_value, i);
+    		let key = get_key_1(child_ctx);
+    		each1_lookup.set(key, each_blocks[i] = create_each_block$1(key, child_ctx));
+    	}
 
     	const block = {
     		c: function create() {
     			main = element("main");
     			script = element("script");
     			t0 = space();
-    			div8 = element("div");
+    			div11 = element("div");
     			div1 = element("div");
     			h30 = element("h3");
     			h30.textContent = "# ToDo";
     			t2 = space();
     			div0 = element("div");
     			t3 = space();
-    			p0 = element("p");
-    			p0.textContent = "Stuff i plan on doing someday lol";
+    			p = element("p");
+    			p.textContent = "Stuff i plan on doing someday lol";
     			t5 = space();
     			hr = element("hr");
     			t6 = space();
-    			div7 = element("div");
-    			div6 = element("div");
-    			div5 = element("div");
+    			div10 = element("div");
+    			div9 = element("div");
+    			div8 = element("div");
     			create_component(user.$$.fragment);
     			t7 = space();
-    			div4 = element("div");
+    			div7 = element("div");
     			div2 = element("div");
     			h31 = element("h3");
     			h31.textContent = "Kurizu";
     			t9 = space();
-    			div3 = element("div");
+    			div6 = element("div");
     			h32 = element("h3");
-    			h32.textContent = "Plans / To-do regarding this site";
+    			h32.textContent = "Plans / To-do List";
     			t11 = space();
-    			p1 = element("p");
-    			i0 = element("i");
-    			t12 = text(" | More better view for mobile devices\n                                ");
-    			br0 = element("br");
-    			t13 = space();
-    			i1 = element("i");
-    			t14 = text(" | Add more channels\n                                ");
-    			br1 = element("br");
+    			div5 = element("div");
+    			input = element("input");
+    			t12 = space();
+    			div3 = element("div");
+    			h20 = element("h2");
+    			h20.textContent = "Todo";
+    			t14 = space();
+
+    			for (let i = 0; i < each_blocks_1.length; i += 1) {
+    				each_blocks_1[i].c();
+    			}
+
     			t15 = space();
-    			i2 = element("i");
-    			t16 = text(" | Git posts \n                                ");
-    			br2 = element("br");
+    			div4 = element("div");
+    			h21 = element("h2");
+    			h21.textContent = "Done";
     			t17 = space();
-    			i3 = element("i");
-    			t18 = text(" | Change color to original app color \n                                ");
-    			br3 = element("br");
-    			t19 = space();
-    			i4 = element("i");
-    			t20 = text(" | Add elina user in /elina-bot\n                                ");
-    			br4 = element("br");
-    			t21 = space();
-    			i5 = element("i");
-    			t22 = text(" | Change to a better image host");
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
     			if (!src_url_equal(script.src, script_src_value = "https://kit.fontawesome.com/8dc570c5d4.js")) attr_dev(script, "src", script_src_value);
     			attr_dev(script, "crossorigin", "anonymous");
-    			add_location(script, file$a, 27, 4, 635);
+    			add_location(script, file$a, 102, 4, 2646);
     			attr_dev(h30, "class", "channel-name");
-    			add_location(h30, file$a, 30, 12, 867);
+    			add_location(h30, file$a, 105, 12, 2878);
     			attr_dev(div0, "class", "vl");
-    			add_location(div0, file$a, 31, 12, 916);
-    			attr_dev(p0, "class", "channel-info");
-    			add_location(p0, file$a, 32, 12, 947);
+    			add_location(div0, file$a, 106, 12, 2927);
+    			attr_dev(p, "class", "channel-info");
+    			add_location(p, file$a, 107, 12, 2958);
     			attr_dev(div1, "class", "top-nav");
-    			add_location(div1, file$a, 29, 8, 833);
+    			add_location(div1, file$a, 104, 8, 2844);
     			attr_dev(hr, "class", "channel-division");
-    			add_location(hr, file$a, 35, 8, 1112);
+    			add_location(hr, file$a, 110, 8, 3123);
     			attr_dev(h31, "class", "chat-body-messages-item-content-header-name");
-    			add_location(h31, file$a, 42, 28, 1475);
+    			add_location(h31, file$a, 117, 28, 3486);
     			attr_dev(div2, "class", "chat-body-messages-item-content-header");
-    			add_location(div2, file$a, 41, 24, 1394);
-    			set_style(h32, "color", "yellow");
-    			add_location(h32, file$a, 49, 28, 1800);
-    			attr_dev(i0, "class", check$1);
-    			add_location(i0, file$a, 51, 32, 1930);
-    			add_location(br0, file$a, 52, 32, 2024);
-    			attr_dev(i1, "class", uncheck$1);
-    			add_location(i1, file$a, 53, 32, 2063);
-    			add_location(br1, file$a, 54, 32, 2141);
-    			attr_dev(i2, "class", check$1);
-    			add_location(i2, file$a, 55, 32, 2180);
-    			add_location(br2, file$a, 56, 32, 2249);
-    			attr_dev(i3, "class", check$1);
-    			add_location(i3, file$a, 57, 32, 2286);
-    			add_location(br3, file$a, 58, 32, 2380);
-    			attr_dev(i4, "class", check$1);
-    			add_location(i4, file$a, 59, 32, 2417);
-    			add_location(br4, file$a, 60, 32, 2504);
-    			attr_dev(i5, "class", uncheck$1);
-    			add_location(i5, file$a, 61, 32, 2541);
-    			add_location(p1, file$a, 50, 28, 1894);
-    			attr_dev(div3, "class", "chat-body-messages-item-content-body");
-    			add_location(div3, file$a, 48, 24, 1721);
-    			attr_dev(div4, "class", "chat-body-messages-item-content");
-    			add_location(div4, file$a, 40, 20, 1324);
-    			attr_dev(div5, "class", "chat-body-messages-item");
-    			add_location(div5, file$a, 38, 16, 1237);
-    			attr_dev(div6, "class", "chat-body-messages");
-    			add_location(div6, file$a, 37, 12, 1188);
-    			attr_dev(div7, "class", "chat-body");
-    			add_location(div7, file$a, 36, 8, 1152);
-    			attr_dev(div8, "class", "mainarea");
-    			add_location(div8, file$a, 28, 4, 729);
-    			add_location(main, file$a, 26, 0, 624);
+    			add_location(div2, file$a, 116, 24, 3405);
+    			add_location(h32, file$a, 124, 28, 3811);
+    			attr_dev(input, "class", "todo-input svelte-1tgs7kk");
+    			attr_dev(input, "placeholder", "Any Plans ?");
+    			add_location(input, file$a, 126, 32, 3919);
+    			attr_dev(h20, "class", "todo-h2 svelte-1tgs7kk");
+    			add_location(h20, file$a, 133, 36, 4293);
+    			attr_dev(div3, "class", "left svelte-1tgs7kk");
+    			add_location(div3, file$a, 132, 32, 4238);
+    			attr_dev(h21, "class", "todo-h2 svelte-1tgs7kk");
+    			add_location(h21, file$a, 149, 36, 5282);
+    			attr_dev(div4, "class", "right svelte-1tgs7kk");
+    			add_location(div4, file$a, 148, 32, 5226);
+    			attr_dev(div5, "class", "board svelte-1tgs7kk");
+    			add_location(div5, file$a, 125, 28, 3867);
+    			attr_dev(div6, "class", "chat-body-messages-item-content-body");
+    			add_location(div6, file$a, 123, 24, 3732);
+    			attr_dev(div7, "class", "chat-body-messages-item-content");
+    			add_location(div7, file$a, 115, 20, 3335);
+    			attr_dev(div8, "class", "chat-body-messages-item");
+    			add_location(div8, file$a, 113, 16, 3248);
+    			attr_dev(div9, "class", "chat-body-messages");
+    			add_location(div9, file$a, 112, 12, 3199);
+    			attr_dev(div10, "class", "chat-body");
+    			add_location(div10, file$a, 111, 8, 3163);
+    			attr_dev(div11, "class", "mainarea");
+    			add_location(div11, file$a, 103, 4, 2740);
+    			add_location(main, file$a, 101, 0, 2635);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -12371,75 +13038,122 @@ var app = (function () {
     			insert_dev(target, main, anchor);
     			append_dev(main, script);
     			append_dev(main, t0);
-    			append_dev(main, div8);
-    			append_dev(div8, div1);
+    			append_dev(main, div11);
+    			append_dev(div11, div1);
     			append_dev(div1, h30);
     			append_dev(div1, t2);
     			append_dev(div1, div0);
     			append_dev(div1, t3);
-    			append_dev(div1, p0);
-    			append_dev(div8, t5);
-    			append_dev(div8, hr);
-    			append_dev(div8, t6);
+    			append_dev(div1, p);
+    			append_dev(div11, t5);
+    			append_dev(div11, hr);
+    			append_dev(div11, t6);
+    			append_dev(div11, div10);
+    			append_dev(div10, div9);
+    			append_dev(div9, div8);
+    			mount_component(user, div8, null);
+    			append_dev(div8, t7);
     			append_dev(div8, div7);
-    			append_dev(div7, div6);
-    			append_dev(div6, div5);
-    			mount_component(user, div5, null);
-    			append_dev(div5, t7);
-    			append_dev(div5, div4);
-    			append_dev(div4, div2);
+    			append_dev(div7, div2);
     			append_dev(div2, h31);
-    			append_dev(div4, t9);
-    			append_dev(div4, div3);
-    			append_dev(div3, h32);
-    			append_dev(div3, t11);
-    			append_dev(div3, p1);
-    			append_dev(p1, i0);
-    			append_dev(p1, t12);
-    			append_dev(p1, br0);
-    			append_dev(p1, t13);
-    			append_dev(p1, i1);
-    			append_dev(p1, t14);
-    			append_dev(p1, br1);
-    			append_dev(p1, t15);
-    			append_dev(p1, i2);
-    			append_dev(p1, t16);
-    			append_dev(p1, br2);
-    			append_dev(p1, t17);
-    			append_dev(p1, i3);
-    			append_dev(p1, t18);
-    			append_dev(p1, br3);
-    			append_dev(p1, t19);
-    			append_dev(p1, i4);
-    			append_dev(p1, t20);
-    			append_dev(p1, br4);
-    			append_dev(p1, t21);
-    			append_dev(p1, i5);
-    			append_dev(p1, t22);
+    			append_dev(div7, t9);
+    			append_dev(div7, div6);
+    			append_dev(div6, h32);
+    			append_dev(div6, t11);
+    			append_dev(div6, div5);
+    			append_dev(div5, input);
+    			append_dev(div5, t12);
+    			append_dev(div5, div3);
+    			append_dev(div3, h20);
+    			append_dev(div3, t14);
+
+    			for (let i = 0; i < each_blocks_1.length; i += 1) {
+    				each_blocks_1[i].m(div3, null);
+    			}
+
+    			append_dev(div5, t15);
+    			append_dev(div5, div4);
+    			append_dev(div4, h21);
+    			append_dev(div4, t17);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].m(div4, null);
+    			}
+
     			current = true;
 
     			if (!mounted) {
     				dispose = [
-    					action_destroyer(swipe.call(null, div8, { timeframe: 500, minSwipeDistance: 0.1 })),
-    					listen_dev(div8, "swipe", /*handler*/ ctx[0], false, false, false)
+    					listen_dev(input, "keydown", /*keydown_handler*/ ctx[6], false, false, false),
+    					action_destroyer(swipe.call(null, div11, { timeframe: 500, minSwipeDistance: 0.1 })),
+    					listen_dev(div11, "swipe", /*handler*/ ctx[1], false, false, false)
     				];
 
     				mounted = true;
     			}
     		},
-    		p: noop,
+    		p: function update(ctx, [dirty]) {
+    			if (dirty & /*todos, remove*/ 33) {
+    				each_value_1 = /*todos*/ ctx[0].filter(func);
+    				validate_each_argument(each_value_1);
+    				group_outros();
+    				for (let i = 0; i < each_blocks_1.length; i += 1) each_blocks_1[i].r();
+    				validate_each_keys(ctx, each_value_1, get_each_context_1$1, get_key);
+    				each_blocks_1 = update_keyed_each(each_blocks_1, dirty, get_key, 1, ctx, each_value_1, each0_lookup, div3, fix_and_outro_and_destroy_block, create_each_block_1$1, null, get_each_context_1$1);
+    				for (let i = 0; i < each_blocks_1.length; i += 1) each_blocks_1[i].a();
+    				check_outros();
+    			}
+
+    			if (dirty & /*todos, remove*/ 33) {
+    				each_value = /*todos*/ ctx[0].filter(func_1);
+    				validate_each_argument(each_value);
+    				group_outros();
+    				for (let i = 0; i < each_blocks.length; i += 1) each_blocks[i].r();
+    				validate_each_keys(ctx, each_value, get_each_context$1, get_key_1);
+    				each_blocks = update_keyed_each(each_blocks, dirty, get_key_1, 1, ctx, each_value, each1_lookup, div4, fix_and_outro_and_destroy_block, create_each_block$1, null, get_each_context$1);
+    				for (let i = 0; i < each_blocks.length; i += 1) each_blocks[i].a();
+    				check_outros();
+    			}
+    		},
     		i: function intro(local) {
     			if (current) return;
     			transition_in(user.$$.fragment, local);
+
+    			for (let i = 0; i < each_value_1.length; i += 1) {
+    				transition_in(each_blocks_1[i]);
+    			}
+
+    			for (let i = 0; i < each_value.length; i += 1) {
+    				transition_in(each_blocks[i]);
+    			}
+
     			current = true;
     		},
     		o: function outro(local) {
     			transition_out(user.$$.fragment, local);
+
+    			for (let i = 0; i < each_blocks_1.length; i += 1) {
+    				transition_out(each_blocks_1[i]);
+    			}
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				transition_out(each_blocks[i]);
+    			}
+
     			current = false;
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(main);
     			destroy_component(user);
+
+    			for (let i = 0; i < each_blocks_1.length; i += 1) {
+    				each_blocks_1[i].d();
+    			}
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].d();
+    			}
+
     			mounted = false;
     			run_all(dispose);
     		}
@@ -12459,6 +13173,8 @@ var app = (function () {
     const serverWidth$4 = "50px";
     const uncheck$1 = "fas fa-solid fa-square";
     const check$1 = "fas fa-solid fa-check";
+    const func = t => !t.done;
+    const func_1 = t => t.done;
 
     function instance$a($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
@@ -12477,11 +13193,128 @@ var app = (function () {
     		}
     	}
 
+    	const [send, receive] = crossfade({
+    		fallback(node, params) {
+    			const style = getComputedStyle(node);
+    			const transform = style.transform === "none" ? "" : style.transform;
+
+    			return {
+    				duration: 600,
+    				easing: quintOut,
+    				css: t => `
+					transform: ${transform} scale(${t});
+					opacity: ${t}
+					`
+    			};
+    		}
+    	});
+
+    	let todos;
+
+    	if (document.cookie) {
+    		todos = JSON.parse(document.cookie.split('=')[1].split(';')[0]);
+    	} else {
+    		todos = [
+    			{
+    				id: 1,
+    				done: false,
+    				description: "Responsive Design"
+    			},
+    			{
+    				id: 2,
+    				done: false,
+    				description: "Anyanime -> Vercel"
+    			},
+    			{
+    				id: 3,
+    				done: false,
+    				description: "SS Redo UI"
+    			},
+    			{
+    				id: 4,
+    				done: false,
+    				description: "AnyAnime gif [ + ]"
+    			},
+    			{
+    				id: 5,
+    				done: false,
+    				description: "DiscordCards Optimize"
+    			},
+    			{
+    				id: 6,
+    				done: false,
+    				description: "Image2URL MP4 Support"
+    			},
+    			{
+    				id: 7,
+    				done: true,
+    				description: "Breeze -> Discord Cards"
+    			}
+    		];
+    	}
+
+    	const setCookie = (cookiename, cookievalue, time) => {
+    		let date = new Date();
+    		date.setTime(date.getTime() * Number(time) * 36000 * 1000);
+    		document.cookie = `${cookiename}=${cookievalue};path=/;expires=${date.toUTCString()};SameSite=None;Secure`;
+    	};
+
+    	const saveState = () => {
+    		let todosString = JSON.stringify(todos);
+    		setCookie('info', todosString, 99999);
+    	};
+
+    	let uid = todos.length + 1;
+
+    	function add(input) {
+    		const todo = {
+    			id: uid++,
+    			done: false,
+    			description: input.value
+    		};
+
+    		if (todo.description) {
+    			$$invalidate(0, todos = [todo, ...todos]);
+    			input.value = "";
+    		} else {
+    			alert("Please enter a todo");
+    		}
+
+    		if (todo.description.length > 25) {
+    			todo.description = todo.description.slice(0, 25) + "...";
+    		} else {
+    			todo.description = todo.description;
+    		}
+
+    		saveState();
+    	}
+
+    	function remove(todo) {
+    		$$invalidate(0, todos = todos.filter(t => t !== todo));
+    		saveState();
+    	}
+
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Todo> was created with unknown prop '${key}'`);
     	});
+
+    	const keydown_handler = event => event.key === "Enter" && add(event.target);
+
+    	function input_change_handler(each_value_1, todo_index_1) {
+    		each_value_1[todo_index_1].done = this.checked;
+    		$$invalidate(0, todos);
+    	}
+
+    	const click_handler = todo => remove(todo);
+
+    	function input_change_handler_1(each_value, todo_index) {
+    		each_value[todo_index].done = this.checked;
+    		$$invalidate(0, todos);
+    	}
+
+    	const click_handler_1 = todo => remove(todo);
 
     	$$self.$capture_state = () => ({
     		serverWidth: serverWidth$4,
@@ -12492,18 +13325,43 @@ var app = (function () {
     		direction,
     		handler,
     		uncheck: uncheck$1,
-    		check: check$1
+    		check: check$1,
+    		quintOut,
+    		crossfade,
+    		flip,
+    		send,
+    		receive,
+    		todos,
+    		setCookie,
+    		saveState,
+    		uid,
+    		add,
+    		remove
     	});
 
     	$$self.$inject_state = $$props => {
     		if ('direction' in $$props) direction = $$props.direction;
+    		if ('todos' in $$props) $$invalidate(0, todos = $$props.todos);
+    		if ('uid' in $$props) uid = $$props.uid;
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [handler];
+    	return [
+    		todos,
+    		handler,
+    		send,
+    		receive,
+    		add,
+    		remove,
+    		keydown_handler,
+    		input_change_handler,
+    		click_handler,
+    		input_change_handler_1,
+    		click_handler_1
+    	];
     }
 
     class Todo extends SvelteComponentDev {
@@ -16911,26 +17769,6 @@ var app = (function () {
         io: lookup,
         connect: lookup,
     });
-
-    function cubicOut(t) {
-        const f = t - 1.0;
-        return f * f * f + 1.0;
-    }
-
-    function fly(node, { delay = 0, duration = 400, easing = cubicOut, x = 0, y = 0, opacity = 0 } = {}) {
-        const style = getComputedStyle(node);
-        const target_opacity = +style.opacity;
-        const transform = style.transform === 'none' ? '' : style.transform;
-        const od = target_opacity * (1 - opacity);
-        return {
-            delay,
-            duration,
-            easing,
-            css: (t, u) => `
-			transform: ${transform} translate(${(1 - t) * x}px, ${(1 - t) * y}px);
-			opacity: ${target_opacity - (od * u)}`
-        };
-    }
 
     /* src/components/content/chat/chat.svelte generated by Svelte v3.48.0 */
     const file$5 = "src/components/content/chat/chat.svelte";
