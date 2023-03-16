@@ -68,7 +68,7 @@
                                 Also feel free to contribute to the project if u got any better code / idea in mind ! <br> <br>
 
                                 GitHub: <a href="https://github.com/crizmo/DiscordCards" alt="Discord Cards github" target="_blank">Discord Cards</a> <br>
-                                Website: <a href="https://discord-cards.netlify.app/" alt="Discord Cards website" target="_blank">Discord Cards</a> <br>
+                                Website: <a href="https://discord-cards.vercel.app/" alt="Discord Cards website" target="_blank">Discord Cards</a> <br>
                                 API: <a href="https://discord-cards.kurizu.repl.co/" alt="Discord Cards api" target="_blank">Discord Cards API</a> <br>
                                 <br>
                                 Thanks for reading ! 
