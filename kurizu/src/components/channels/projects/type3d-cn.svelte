@@ -83,6 +83,9 @@
                     <button class="channelbtn">
                         <a class="timely-cn" href="/timely"># Timely</a>
                     </button>
+                    <button class="channelbtn">
+                        <a class="cordle-cn" href="/cordle"># Cordle</a>
+                    </button>
                 </div>
             </details>
             <br />
@@ -195,6 +198,7 @@
     }
 
     .image2url-cn,
+    .cordle-cn,
     .anyanime-cn,
     .elina-cn,
     .stream-savers-cn,
@@ -206,6 +210,7 @@
     }
 
     .image2url-cn,
+    .cordle-cn,
     .anyanime-cn,
     .elina-cn,
     .stream-savers-cn,
@@ -221,7 +226,8 @@
         padding: 3px;
     }
 
-    .image2url-cn:hover,        
+    .image2url-cn:hover,   
+    .cordle-cn:hover,     
     .anyanime-cn:hover ,    
     .elina-cn:hover ,
     .pixit-cn:hover,

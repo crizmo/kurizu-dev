@@ -9,6 +9,7 @@
 	import MinikeyCn from '../../channels/projects/minikey-cn.svelte';
 	import Type3dCn from '../../channels/projects/type3d-cn.svelte';
 	import TimelyCn from '../../channels/projects/timely-cn.svelte';
+	import CordleCn from '../../channels/projects/cordle-cn.svelte';
 
 	import Anyanime from '../projects/anyanime.svelte';
 	import Image2url from '../projects/image2url.svelte';
@@ -19,6 +20,7 @@
 	import Minikey from '../projects/minikey.svelte';
 	import Type3d from '../projects/type3d.svelte';
 	import Timely from '../projects/timely.svelte';
+	import Cordle from '../projects/cordle.svelte';
 </script>
 
 <main>
@@ -65,5 +67,10 @@
 	<Route path="/timely">
 		<TimelyCn />
 		<Timely />
+	</Route>
+
+	<Route path="/cordle">
+		<CordleCn />
+		<Cordle />
 	</Route>
 </main>

@@ -16,6 +16,7 @@
 
         document.querySelector(".categories").style.opacity = "1";
     }
+    
     import { swipe } from "svelte-gestures";
     let direction;
 
@@ -192,15 +193,16 @@
         transform: rotate(90deg);
     }
 
-    .stream-savers-cn {
+    .cordle-cn {
         background: #232529;
         color: rgb(255, 255, 255);
     }
 
-    .image2url-cn,
-    .cordle-cn,
     .anyanime-cn,
+    .cordle-cn,
+    .image2url-cn,
     .elina-cn,
+    .stream-savers-cn,
     .pixit-cn,
     .discordcards-cn,
     .minikey-cn,
@@ -209,9 +211,9 @@
         color: rgb(158, 158, 158);
     }
 
-    .image2url-cn,
-    .cordle-cn,
     .anyanime-cn,
+    .cordle-cn,
+    .image2url-cn,
     .elina-cn,
     .stream-savers-cn,
     .pixit-cn,
@@ -226,10 +228,9 @@
         padding: 3px;
     }
 
-    .image2url-cn:hover,
-    .cordle-cn:hover,
-    .anyanime-cn:hover ,    
     .elina-cn:hover ,
+    .image2url-cn:hover,
+    .stream-savers-cn:hover ,
     .pixit-cn:hover,
     .discordcards-cn:hover,
     .minikey-cn:hover,
@@ -289,6 +290,8 @@
             color: orangered;
             display: block;
         }
+
+
     }
 
     @media screen and (max-width: 1000px) {
