@@ -29,7 +29,7 @@
         <div class="top-nav">
             <h3 class="channel-name"># About Me</h3>
             <div class="vl" />
-            <p class="channel-info">Little about criz</p>
+            <p class="channel-info">Little about Kurizu</p>
             <!-- <span class="open-btn" on:click="{openNav}">&#9776;</span> -->
         </div>
         <hr class="channel-division" />

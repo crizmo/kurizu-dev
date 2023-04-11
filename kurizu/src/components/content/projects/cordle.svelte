@@ -71,7 +71,7 @@
                                 <br> <br>
                                 If you want to contribute to the project, feel free to open a pull request on Github. <br>
 
-                                If you have any suggestions or feedback, feel free to contact me on Discord (Criz#1270) or 
+                                If you have any suggestions or feedback, feel free to contact me on Discord (Kurizu#1270) or 
                                 <a href="https://discord.gg/drunkbetch-782646778347388959" target="_blank">Join the Discord Server</a> <br>
                             </p>
                         </div>
