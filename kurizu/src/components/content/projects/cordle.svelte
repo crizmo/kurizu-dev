@@ -66,7 +66,8 @@
                                 <a href="https://cordle.vercel.app/" target="_blank">Website</a> <br>
                                 <a href="https://github.com/crizmo/Cordle">
                                     <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/crizmo/cordle?style=social">
-                                </a>
+                                </a> <br>
+                                <a href="https://www.producthunt.com/posts/cordle?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-cordle" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=393137&theme=dark" alt="Cordle - Wordle&#0032;for&#0032;programmers&#0032;&#0033; | Product Hunt" style="width: 150px; height: auto;" width="150" height="auto" /></a>
 
                                 <br> <br>
                                 If you want to contribute to the project, feel free to open a pull request on Github. <br>
