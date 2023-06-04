@@ -1,6 +1,7 @@
 <script>
-    import Main from "../categories/main.svelte";
-    import Projects from "../categories/projects.svelte";
+    import Projects from '../categories/projects.svelte'
+    import Links from '../categories/other.svelte'
+    import Main from '../categories/main.svelte';
 
     export function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
@@ -15,6 +16,7 @@
 
         document.querySelector(".categories").style.opacity = "1";
     }
+    
     import { swipe } from "svelte-gestures";
     let direction;
 
@@ -50,21 +52,48 @@
         </div>
         <div class="categories">
             <Main />
-            <br>
-            <Projects />
-            <br>
-            <details class="links" open>
-                <summary>Other</summary>
+            <br />
+            <details class="projects" open>
+                <summary>Projects</summary>
                 <hr width="50%">
                 <div class="channels-list">
                     <button class="channelbtn">
-                        <a class="blogs" href="/blogs"># Blogs</a>
+                        <a class="anyanime-cn" href="/anyanime"># AnyAnime</a>
                     </button>
                     <button class="channelbtn">
-                        <a class="to-do" href="/to-do"># To-do</a>
+                        <a class="image2url-cn" href="/image2url"># Image2url</a>
+                    </button>
+                    <button class="channelbtn">
+                        <a class="elina-cn" href="/elina"># Elina-dev</a>
+                    </button>
+                    <button class="channelbtn">
+                        <a class="stream-savers-cn" href="/stream-savers"># Stream-Savers</a>
+                    </button>
+                    <button class="channelbtn">
+                        <a class="pixit-cn" href="/pixit"># Pixit</a>
+                    </button>
+                    <button class="channelbtn">
+                        <a class="discordcards-cn" href="/discordcards"># Discord Cards</a>
+                    </button>
+                    <button class="channelbtn">
+                        <a class="minikey-cn" href="/minikey"># Minikey</a>
+                    </button>
+                    <button class="channelbtn">
+                        <a class="type3d-cn" href="/type3d"># Type3D</a>
+                    </button>
+                    <button class="channelbtn">
+                        <a class="timely-cn" href="/timely"># Timely</a>
+                    </button>
+                    <button class="channelbtn">
+                        <a class="cordle-cn" href="/cordle"># Cordle</a>
+                    </button>
+                    <button class="channelbtn">
+                        <a class="emogit-cn" href="/emogit"># EmoGit</a>
                     </button>
                 </div>
             </details>
+            <br />
+            <Links />
         </div>
     </div>
 </main>
@@ -83,7 +112,7 @@
         background: #555; 
     }
 
-        .channels {
+    .channels {
         position: absolute;
         width: 14.1%;
         height: 100%;
@@ -167,17 +196,36 @@
         transform: rotate(90deg);
     }
 
-    .blogs {
+    .emogit-cn {
         background: #232529;
         color: rgb(255, 255, 255);
     }
 
-    .to-do {
+    .anyanime-cn,
+    .cordle-cn,
+    .image2url-cn,
+    .elina-cn,
+    .stream-savers-cn,
+    .pixit-cn,
+    .discordcards-cn,
+    .minikey-cn,
+    .type3d-cn,
+    .cordle-cn,
+    .timely-cn {
         color: rgb(158, 158, 158);
     }
 
-    .blogs,
-    .to-do {
+    .anyanime-cn,
+    .cordle-cn,
+    .emogit-cn,
+    .image2url-cn,
+    .elina-cn,
+    .stream-savers-cn,
+    .pixit-cn,
+    .discordcards-cn,
+    .minikey-cn,
+    .type3d-cn,
+    .timely-cn {
         border-right: 5px none white;
         box-sizing: border-box;
         display: block;
@@ -185,7 +233,14 @@
         padding: 3px;
     }
 
-    .to-do:hover {
+    .elina-cn:hover ,
+    .image2url-cn:hover,
+    .stream-savers-cn:hover ,
+    .pixit-cn:hover,
+    .discordcards-cn:hover,
+    .minikey-cn:hover,
+    .type3d-cn:hover,
+    .timely-cn:hover {
         background: #232529;
         color: rgb(255, 255, 255);
     }
@@ -240,6 +295,8 @@
             color: orangered;
             display: block;
         }
+
+
     }
 
     @media screen and (max-width: 1000px) {

@@ -39,12 +39,12 @@
         <div>
             <div class="server-template-icon">
                 <img
-                    src="https://cdn.discordapp.com/attachments/977949070893125632/1010593053410599064/banner.png"
+                    src="https://cdn.discordapp.com/attachments/1103215197713354803/1114834486455193650/banner_top.png"
                     alt=""
                     width="100%"
                     height="100%"
                 />
-                <h3 class="server-name-on-template">Kurizu</h3>
+                <h3 class="server-name-on-template" style="color: #2f3136">Kurizu</h3>
                 <span class="close-btn" on:click="{closeNav}">&times;</span>
             </div>
             <hr />
@@ -85,6 +85,9 @@
                     </button>
                     <button class="channelbtn">
                         <a class="cordle-cn" href="/cordle"># Cordle</a>
+                    </button>
+                    <button class="channelbtn">
+                        <a class="emogit-cn" href="/emogit"># EmoGit</a>
                     </button>
                 </div>
             </details>
@@ -201,6 +204,7 @@
     .cordle-cn,
     .image2url-cn,
     .elina-cn,
+    .emogit-cn,
     .stream-savers-cn,
     .pixit-cn,
     .minikey-cn,
@@ -213,6 +217,7 @@
     .cordle-cn,
     .image2url-cn,
     .elina-cn,
+    .emogit-cn,
     .stream-savers-cn,
     .pixit-cn,
     .discordcards-cn,
@@ -228,7 +233,8 @@
 
     .anyanime-cn:hover ,
     .cordle-cn:hover,
-    .image2url-cn:hover,    
+    .image2url-cn:hover,  
+    .emogit-cn:hover,  
     .elina-cn:hover ,
     .stream-savers-cn:hover,
     .pixit-cn:hover,

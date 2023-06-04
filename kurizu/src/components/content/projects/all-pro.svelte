@@ -10,6 +10,7 @@
 	import Type3dCn from '../../channels/projects/type3d-cn.svelte';
 	import TimelyCn from '../../channels/projects/timely-cn.svelte';
 	import CordleCn from '../../channels/projects/cordle-cn.svelte';
+	import EmoGitCn from '../../channels/projects/emogit-cn.svelte';
 
 	import Anyanime from '../projects/anyanime.svelte';
 	import Image2url from '../projects/image2url.svelte';
@@ -21,6 +22,7 @@
 	import Type3d from '../projects/type3d.svelte';
 	import Timely from '../projects/timely.svelte';
 	import Cordle from '../projects/cordle.svelte';
+	import EmoGit from '../projects/emogit.svelte';
 </script>
 
 <main>
@@ -72,5 +74,10 @@
 	<Route path="/cordle">
 		<CordleCn />
 		<Cordle />
+	</Route>
+
+	<Route path="/emogit">
+		<EmoGitCn />
+		<EmoGit />
 	</Route>
 </main>

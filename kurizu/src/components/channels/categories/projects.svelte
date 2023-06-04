@@ -38,6 +38,9 @@
                     <button class="channelbtn">
                         <a class="cordle-cn" href="/cordle"># Cordle</a>
                     </button>
+                    <button class="channelbtn">
+                        <a class="emogit-cn" href="/emogit"># EmoGit</a>
+                    </button>
                 </div>
             </details>
         </div>
@@ -91,6 +94,7 @@
     .cordle-cn,
     .image2url-cn,
     .elina-cn,
+    .emogit-cn,
     .stream-savers-cn,
     .pixit-cn,
     .discordcards-cn,
@@ -109,6 +113,7 @@
     .cordle-cn:hover,
     .image2url-cn:hover,
     .elina-cn:hover,
+    .emogit-cn:hover,
     .stream-savers-cn:hover,
     .pixit-cn:hover,
     .discordcards-cn:hover,

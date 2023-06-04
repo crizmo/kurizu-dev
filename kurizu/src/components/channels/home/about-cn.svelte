@@ -38,12 +38,12 @@
         <div>
             <div class="server-template-icon">
                 <img
-                    src="https://cdn.discordapp.com/attachments/977949070893125632/1010593053410599064/banner.png"
+                    src="https://cdn.discordapp.com/attachments/1103215197713354803/1114834486455193650/banner_top.png"
                     alt=""
                     width="100%"
                     height="100%"
                 />
-                <h3 class="server-name-on-template">Kurizu</h3>
+                <h3 class="server-name-on-template" style="color: #2f3136">Kurizu</h3>
                 <span class="close-btn" on:click="{closeNav}">&times;</span>
             </div>
             <hr />
