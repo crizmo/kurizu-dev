@@ -95,7 +95,7 @@
                     </div>
                     <div class="sidebar-content-servers-list-item">
                         <div class="sidebar-content-servers-list-item-icon">
-                            <a href="https://twitter.com/Criz_595" target="_blank">
+                            <a href="https://twitter.com/KurizuTaz" target="_blank">
                                 <img
                                     src="https://cdn.discordapp.com/attachments/977949070893125632/999254025302200380/unknown.png"
                                     alt=""
