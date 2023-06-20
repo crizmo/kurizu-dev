@@ -16,7 +16,7 @@ All the code is in the `src/components` folder under 3 main folders:
 If you want to use this project to make your own website feel free to do so :) 
 
 If you have any feedback / bugs / suggestions, feel free to open an issue on github or contact me on discord.
-My discord username is `Kurizu#1270` !
+My discord username is `kurizu.taz` !
 
 ## Chat
 If you dont want to manually add pfp link everytime u want to chat do this:
